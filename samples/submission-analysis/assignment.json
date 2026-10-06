@@ -1,0 +1,45 @@
+{
+  "assignment_id": 10,
+  "course_id": 3,
+  "title": "Validate and store an assignment",
+  "description": "Implement AssignmentRepository.Create using an injected DbConnection. Validate inputs before executing a parameterized INSERT. The caller owns connection opening and disposal; the caller passes the current UTC time. Do not embed credentials or log submitted titles.",
+  "education_level": "University",
+  "grade_level": 1,
+  "requirements": [
+    {
+      "requirement_id": "req-1",
+      "title": "Validate title",
+      "description": "Reject null, empty, and whitespace-only titles before executing SQL."
+    },
+    {
+      "requirement_id": "req-2",
+      "title": "Validate deadline",
+      "description": "Reject dueAtUtc when it is less than or equal to the supplied nowUtc before executing SQL."
+    },
+    {
+      "requirement_id": "req-3",
+      "title": "Parameterize storage",
+      "description": "Insert the title and deadline through database parameters. Do not concatenate submitted values into SQL."
+    }
+  ],
+  "rubric": [
+    {
+      "rubric_id": "rubric-1",
+      "requirement_id": "req-1",
+      "criterion": "Title validation before SQL",
+      "weight": 30
+    },
+    {
+      "rubric_id": "rubric-2",
+      "requirement_id": "req-2",
+      "criterion": "Future deadline validation before SQL",
+      "weight": 30
+    },
+    {
+      "rubric_id": "rubric-3",
+      "requirement_id": "req-3",
+      "criterion": "Parameterized persistence",
+      "weight": 40
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "fixture": "problematic",
+  "kind": "human_authored_expectations_not_model_output",
+  "requirement_statuses": {
+    "req-1": "met",
+    "req-2": "met",
+    "req-3": "not_met"
+  },
+  "expected_findings": [
+    {
+      "agents": [
+        "requirement",
+        "security"
+      ],
+      "requirement_id": "req-3",
+      "category": "sql_injection",
+      "description": "Untrusted title is concatenated into executable SQL instead of bound as a parameter. Judge should merge overlapping requirement/security findings for this same defect while preserving provenance.",
+      "evidence": {
+        "file_path": "AssignmentRepository.cs",
+        "line_start": 26,
+        "line_end": 26,
+        "excerpt": "        command.CommandText = \"INSERT INTO Assignments (Title, DueAtUtc) VALUES ('\" + title + \"', '\" + dueAtUtc.ToString(\"O\") + \"')\";"
+      }
+    },
+    {
+      "agents": [
+        "security"
+      ],
+      "requirement_id": null,
+      "category": "credentials",
+      "description": "Hardcoded credential-shaped value and credential logging pattern. The literal is explicitly synthetic; do not claim an actual leaked or valid credential. Redact its value in returned evidence.",
+      "evidence": {
+        "file_path": "AssignmentRepository.cs",
+        "line_start": 22,
+        "line_end": 22,
+        "excerpt": "        const string apiKey = \"DEMO_ONLY_NOT_A_REAL_SECRET\";"
+      }
+    },
+    {
+      "agents": [
+        "security",
+        "code_review"
+      ],
+      "requirement_id": null,
+      "category": "sensitive_data_exposure",
+      "description": "The method writes raw student-submitted title text to console output. Review this as possible disclosure, not proof that personal data was present.",
+      "evidence": {
+        "file_path": "AssignmentRepository.cs",
+        "line_start": 24,
+        "line_end": 24,
+        "excerpt": "        Console.WriteLine(\"Submitted title: \" + title);"
+      }
+    }
+  ],
+  "must_not_claim": [
+    "Compilation, execution, database persistence, or runtime behavior was verified.",
+    "This fixture is a complete ASP.NET application.",
+    "DEMO_ONLY_NOT_A_REAL_SECRET is a real credential or proves compromise."
+  ]
+}

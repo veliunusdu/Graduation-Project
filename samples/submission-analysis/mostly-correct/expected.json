@@ -1,0 +1,15 @@
+{
+  "fixture": "mostly-correct",
+  "kind": "human_authored_expectations_not_model_output",
+  "requirement_statuses": {
+    "req-1": "met",
+    "req-2": "met",
+    "req-3": "met"
+  },
+  "expected_findings": [],
+  "must_not_claim": [
+    "Compilation, execution, database persistence, or runtime behavior was verified.",
+    "This fixture is a complete ASP.NET application.",
+    "The absence of a local catch, connection opening, or ASP.NET controller violates this assignment; connection lifecycle is explicitly caller-owned and exception propagation is allowed."
+  ]
+}

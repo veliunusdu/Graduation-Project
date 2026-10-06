@@ -1,0 +1,64 @@
+{
+  "contract_version": "1.0.0",
+  "request_id": "fixture-problematic-001",
+  "submission_id": 103,
+  "assignment": {
+    "assignment_id": 10,
+    "course_id": 3,
+    "title": "Validate and store an assignment",
+    "description": "Implement AssignmentRepository.Create using an injected DbConnection. Validate inputs before executing a parameterized INSERT. The caller owns connection opening and disposal; the caller passes the current UTC time. Do not embed credentials or log submitted titles.",
+    "education_level": "University",
+    "grade_level": 1,
+    "requirements": [
+      {
+        "requirement_id": "req-1",
+        "title": "Validate title",
+        "description": "Reject null, empty, and whitespace-only titles before executing SQL."
+      },
+      {
+        "requirement_id": "req-2",
+        "title": "Validate deadline",
+        "description": "Reject dueAtUtc when it is less than or equal to the supplied nowUtc before executing SQL."
+      },
+      {
+        "requirement_id": "req-3",
+        "title": "Parameterize storage",
+        "description": "Insert the title and deadline through database parameters. Do not concatenate submitted values into SQL."
+      }
+    ],
+    "rubric": [
+      {
+        "rubric_id": "rubric-1",
+        "requirement_id": "req-1",
+        "criterion": "Title validation before SQL",
+        "weight": 30
+      },
+      {
+        "rubric_id": "rubric-2",
+        "requirement_id": "req-2",
+        "criterion": "Future deadline validation before SQL",
+        "weight": 30
+      },
+      {
+        "rubric_id": "rubric-3",
+        "requirement_id": "req-3",
+        "criterion": "Parameterized persistence",
+        "weight": 40
+      }
+    ]
+  },
+  "requested_agents": [
+    "requirement"
+  ],
+  "feedback_language": "en",
+  "source_files": [
+    {
+      "path": "AssignmentRepository.cs",
+      "content": "using System;\nusing System.Data.Common;\n\npublic sealed class AssignmentRepository\n{\n    private readonly DbConnection _connection;\n\n    public AssignmentRepository(DbConnection connection)\n    {\n        _connection = connection ?? throw new ArgumentNullException(nameof(connection));\n    }\n\n    public void Create(string? title, DateTime dueAtUtc, DateTime nowUtc)\n    {\n        if (string.IsNullOrWhiteSpace(title))\n            throw new ArgumentException(\"Title is required.\", nameof(title));\n\n        if (dueAtUtc <= nowUtc)\n            throw new ArgumentException(\"Deadline must be in the future.\", nameof(dueAtUtc));\n\n        // Synthetic credential used solely as a static-analysis test fixture.\n        const string apiKey = \"DEMO_ONLY_NOT_A_REAL_SECRET\";\n        Console.WriteLine(\"API key: \" + apiKey);\n        Console.WriteLine(\"Submitted title: \" + title);\n        using var command = _connection.CreateCommand();\n        command.CommandText = \"INSERT INTO Assignments (Title, DueAtUtc) VALUES ('\" + title + \"', '\" + dueAtUtc.ToString(\"O\") + \"')\";\n        command.ExecuteNonQuery();\n    }\n}\n"
+    }
+  ],
+  "source_manifest": {
+    "inventory_complete": true,
+    "omitted_files": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "fixture": "incomplete",
+  "kind": "human_authored_expectations_not_model_output",
+  "requirement_statuses": {
+    "req-1": "met",
+    "req-2": "not_met",
+    "req-3": "met"
+  },
+  "expected_findings": [
+    {
+      "agents": [
+        "requirement"
+      ],
+      "requirement_id": "req-2",
+      "category": "validation",
+      "description": "The complete Create method has no deadline guard before executing SQL.",
+      "evidence": {
+        "file_path": "AssignmentRepository.cs",
+        "line_start": 28,
+        "line_end": 28,
+        "excerpt": "        command.ExecuteNonQuery();"
+      }
+    }
+  ],
+  "must_not_claim": [
+    "Compilation, execution, database persistence, or runtime behavior was verified.",
+    "This fixture is a complete ASP.NET application."
+  ]
+}
