@@ -49,6 +49,13 @@ public class AccountController(UserManager<ApplicationUser> users, SignInManager
         return RedirectToAction("Index", await users.IsInRoleAsync(user!, AppRoles.Teacher) ? "Teacher" : "Student");
     }
 
+    [HttpPost, Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await signIn.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
+
     [HttpGet, AllowAnonymous]
     public IActionResult AccessDenied()
     {
