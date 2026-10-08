@@ -93,6 +93,7 @@ The design-time context factory generates the model without starting the server 
 
 ```powershell
 dotnet test HomeworkPlatform.sln
+dotnet test HomeworkPlatform.sln -c Release
 Push-Location ai-service
 try { & '.\.venv\Scripts\python.exe' -m pytest -q }
 finally { Pop-Location }
@@ -103,10 +104,18 @@ Web tests use real Identity accounts, SQLite migrations, form tokens and cookies
 Verified October 9, 2026:
 
 - Solution restore/build passed with zero build warnings or errors.
-- 27 web tests passed: migration/roles, hashing, invalid/duplicate registration, forged roles, login/lockout, return URLs, provisioning success/refusals/idempotence, role access, cookie flags, antiforgery and logout.
+- All 27 web tests passed in Debug and also in Release with the web Debug output temporarily set aside and restored: migration/roles, hashing, invalid/duplicate registration, forged roles, login/lockout, return URLs, provisioning success/refusals/idempotence, role access, cookie flags, antiforgery and logout.
 - All 8 existing Python tests passed.
 - A live HTTP server using a disposable database passed Student registration/login/logout, Teacher login after provisioning, and both wrong-role checks ending at HTTP 403. Its owned process was stopped. The real local database was unchanged.
 
 ## Milestone boundaries
 
 Email confirmation and email delivery are not implemented; an account's email is not verified. Production Teacher provisioning and production migration orchestration remain later deployment work. Course, assignment and submission ownership enforcement is Step 4 and is still pending. Role-protected dashboard pages do not establish ownership protection for those future resources.
+
+## Independent review and completion
+
+One independent read-only review found no Critical or Minor defects and one Important test defect: provisioning process tests selected a fixed Debug executable. A Release-only regression reproduced the failure, then the helper was changed to run the referenced web assembly from the current test output, alongside its copied runtime configuration and dependencies. All 27 tests then passed in both build configurations. No findings remain unresolved; no second review was used to substitute for regression evidence.
+
+Implementation stayed in Veli's chosen main folder on `feature/authentication`, with local commits only. Native Windows bookkeeping replaced shell-only skill scripts. The EF design-time factory prevents database initialization during migration generation. Supported host options remain usable, including the `--key=value` form passed by MVC Testing; malformed application commands still fail without serving HTTP. Default storage is resolved by DatabaseConfiguration rather than duplicated in appsettings.
+
+The reviewer set aside resource ownership, production account/migration management, and email confirmation/delivery. Those exclusions match the approved milestone and remain explicitly pending. This step completes authentication and role restrictions; it does not complete all Week 2 work.

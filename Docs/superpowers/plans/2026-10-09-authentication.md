@@ -116,7 +116,7 @@ Modify Program.cs, web csproj/appsettings.json, shared layout, .gitignore, desig
 - [x] Write setup docs with quoted PowerShell root paths, automatic local migration behavior, connection override, login/register routes, tests, and controlled Teacher provisioning. Populate PROVISION_TEACHER_PASSWORD from Read-Host -AsSecureString with a narrowly scoped conversion; clear/dispose the temporary password and restore the previous environment setting in finally. No password literal or password CLI argument.
 - [x] State that email confirmation/delivery and production provisioning/migration orchestration are not implemented. Show ownership work as pending, not protected merely by roles.
 - [x] Inspect tracked files and confirm no real database or secrets were added. Update progress only after all checks pass. Commit completed local work on its feature branch.
-- [ ] Obtain one independent read-only review against the spec and plan; fix actionable defects with reproducing tests. Record actual results and any unresolved limitations. No merge/push without a separate integration choice.
+- [x] Obtain one independent read-only review against the spec and plan; fix actionable defects with reproducing tests. Record actual results and any unresolved limitations. No merge/push without a separate integration choice.
 
 ## Execution Recommendation
 

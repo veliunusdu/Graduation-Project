@@ -13,7 +13,7 @@ public static class ProvisioningProcess
             WorkingDirectory = Path.Combine(Root, "web"), RedirectStandardOutput = true, RedirectStandardError = true,
             UseShellExecute = false, CreateNoWindow = true
         };
-        start.ArgumentList.Add(Path.Combine(Root, "web/bin/Debug/net8.0/HomeworkPlatform.Web.dll"));
+        start.ArgumentList.Add(typeof(HomeworkPlatform.Web.Controllers.HomeController).Assembly.Location);
         foreach (var argument in arguments) start.ArgumentList.Add(argument);
         start.Environment["ASPNETCORE_ENVIRONMENT"] = environment;
         start.Environment["DOTNET_ENVIRONMENT"] = environment;
