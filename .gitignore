@@ -6,3 +6,4 @@
 *.pyc
 .env
 .superpowers/
+**/.pytest_cache/
