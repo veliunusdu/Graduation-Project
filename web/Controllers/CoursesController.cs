@@ -59,6 +59,24 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
         catch (DbUpdateException) { return Conflict("This course has dependent records and cannot be deleted."); }
         return RedirectToAction(nameof(Index));
     }
+    [HttpPost] public async Task<IActionResult> Enroll([FromRoute] int id, EnrollmentForm model)
+    {
+        var course = await Owned.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id);
+        if (course == null) return NotFound();
+        if (!ModelState.IsValid) return await DetailsView(course);
+        var student = await users.FindByEmailAsync(model.Email.Trim());
+        if (student == null || !await users.IsInRoleAsync(student, AppRoles.Student))
+        {
+            ModelState.AddModelError("", "Choose an existing Student email.");
+            return await DetailsView(course);
+        }
+        if (await database.StudentCourses.AnyAsync(e => e.CourseId == id && e.StudentId == student.Id))
+            return RedirectToAction(nameof(Details), new { id });
+        database.StudentCourses.Add(new StudentCourse { CourseId = id, StudentId = student.Id });
+        try { await database.SaveChangesAsync(); }
+        catch (DbUpdateException) { return Conflict("Enrollment could not be saved. Reload the course and try again."); }
+        return RedirectToAction(nameof(Details), new { id });
+    }
     private async Task<IActionResult> DetailsView(Course course)
     {
         ViewData["Students"] = await (from enrollment in database.StudentCourses

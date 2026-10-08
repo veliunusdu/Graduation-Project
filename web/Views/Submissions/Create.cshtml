@@ -1,0 +1,3 @@
+@model HomeworkPlatform.Web.Models.Work.SubmissionForm
+@{ ViewData["Title"] = "Create submission"; }
+<h1>Create submission</h1><form asp-action="Create" asp-route-assignmentId="@ViewData["AssignmentId"]" method="post"><partial name="_Form" model="Model" /></form>

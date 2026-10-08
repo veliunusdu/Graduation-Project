@@ -77,4 +77,10 @@ public class AssignmentsController(ApplicationDbContext database) : Controller
         if (!await Owned.AnyAsync(a => a.Id == id)) return NotFound();
         return View(await database.Submissions.AsNoTracking().Where(s => s.AssignmentId == id).OrderBy(s => s.CreatedAt).ToListAsync());
     }
+    [HttpGet] public async Task<IActionResult> Submission([FromRoute] int id)
+    {
+        var submission = await database.Submissions.AsNoTracking().Include(s => s.Assignment)
+            .SingleOrDefaultAsync(s => s.Id == id && s.Assignment.Course.TeacherId == UserId);
+        return submission == null ? NotFound() : View(submission);
+    }
 }

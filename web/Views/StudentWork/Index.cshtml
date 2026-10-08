@@ -1,0 +1,4 @@
+@model IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Assignment>
+@{ ViewData["Title"] = "Enrolled assignments"; }
+<h1>Enrolled assignments</h1><p><a asp-controller="Submissions" asp-action="Index">My submissions</a></p>
+<ul>@foreach (var assignment in Model) { <li><a asp-action="Details" asp-route-id="@assignment.Id">@assignment.Title</a> — @assignment.Course.Name</li> }</ul>

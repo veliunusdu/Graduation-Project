@@ -1,0 +1,8 @@
+@model HomeworkPlatform.Web.Models.Domain.Assignment
+@{ ViewData["Title"] = Model.Title; }
+<h1>@Model.Title</h1><p>@Model.Description</p><p>Course: @Model.Course.Name</p>
+@if (ViewData["SubmissionId"] is int submissionId)
+{ <p><a asp-controller="Submissions" asp-action="Details" asp-route-id="@submissionId">My submission</a></p> }
+else
+{ <p><a asp-controller="Submissions" asp-action="Create" asp-route-assignmentId="@Model.Id">Create submission</a></p> }
+<p><a asp-action="Index">Enrolled assignments</a></p>
