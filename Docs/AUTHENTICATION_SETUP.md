@@ -110,7 +110,7 @@ Verified October 9, 2026:
 
 ## Milestone boundaries
 
-Email confirmation and email delivery are not implemented; an account's email is not verified. Production Teacher provisioning and production migration orchestration remain later deployment work. Course, assignment and submission ownership enforcement is Step 4 and is still pending. Role-protected dashboard pages do not establish ownership protection for those future resources.
+Email confirmation and email delivery are not implemented; an account's email is not verified. Production Teacher provisioning and production migration orchestration remain later deployment work. Course, assignment and submission ownership enforcement is now implemented in the subsequent Step 4; see OWNERSHIP_SETUP.md. Role-protected dashboard pages alone did not establish ownership protection.
 
 ## Independent review and completion
 
@@ -118,4 +118,4 @@ One independent read-only review found no Critical or Minor defects and one Impo
 
 Implementation stayed in Veli's chosen main folder on `feature/authentication`, with local commits only. Native Windows bookkeeping replaced shell-only skill scripts. The EF design-time factory prevents database initialization during migration generation. Supported host options remain usable, including the `--key=value` form passed by MVC Testing; malformed application commands still fail without serving HTTP. Default storage is resolved by DatabaseConfiguration rather than duplicated in appsettings.
 
-The reviewer set aside resource ownership, production account/migration management, and email confirmation/delivery. Those exclusions match the approved milestone and remain explicitly pending. This step completes authentication and role restrictions; it does not complete all Week 2 work.
+The reviewer set aside resource ownership, production account/migration management, and email confirmation/delivery. Those exclusions match the approved milestone and remain explicitly pending. This Step 3 record covers authentication and roles. Subsequent ownership and final verification now complete the defined first-two-weeks work; see WEEKS_1_2_COMPLETION.md.

@@ -2,7 +2,7 @@
 
 ## Current milestone
 
-The ASP.NET Core 8 MVC app now includes Identity authentication, SQLite migrations, and Teacher/Student role restrictions. See [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md) for registration, login, Teacher provisioning and tests. Ownership checks and AI integration remain later steps. The verification record below preserves the original foundation milestone.
+The ASP.NET Core 8 MVC app now includes Identity authentication, SQLite migrations, and Teacher/Student role restrictions. See [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md) for registration, login, Teacher provisioning and tests. Ownership checks are implemented; see OWNERSHIP_SETUP.md. AI integration remains later work. The verification record below preserves the original foundation milestone.
 
 ## Prerequisites
 
@@ -61,10 +61,10 @@ Verified on October 9 2026:
 - A real Development-mode app returned HTTP 200 with the Welcome heading and expected application title at http://127.0.0.1:5080/.
 - The process started for verification was stopped afterward.
 
-The unchanged framework scaffold originally used build and HTTP checks. Authentication now has dedicated integration tests described in AUTHENTICATION_SETUP.md; ownership tests remain pending.
+The unchanged framework scaffold originally used build and HTTP checks. Authentication now has dedicated integration tests described in AUTHENTICATION_SETUP.md; ownership tests are now included in the expanded suite.
 
 ## Review and branch
 
-An independent read-only review of the completed foundation found no actionable defects. The original foundation was saved locally on feature/aspnet-foundation. Later work continues on feature/authentication, with those earlier commits included; no branch has been pushed or merged by this workflow.
+An independent read-only review of the completed foundation found no actionable defects. The original foundation was saved locally on feature/aspnet-foundation. Later work continues on feature/ownership, with those earlier commits included; no branch has been pushed or merged by this workflow.
 
-Implementation stayed in the requested main project folder on a feature branch. Native Windows progress tracking was used. Verification followed the approved scaffold exception: build and real HTTP checks rather than custom unit tests. At that foundation stage, authentication, ownership and production hosting were pending. Authentication is now implemented; ownership and production hosting remain pending. Existing Python files and template libraries were preserved; one upstream vendor comment retains harmless trailing whitespace.
+Implementation stayed in the requested main project folder on a feature branch. Native Windows progress tracking was used. Verification followed the approved scaffold exception: build and real HTTP checks rather than custom unit tests. At that foundation stage, authentication, ownership and production hosting were pending. Authentication is now implemented; ownership is now implemented and production hosting remains pending. Existing Python files and template libraries were preserved; one upstream vendor comment retains harmless trailing whitespace.
