@@ -1,0 +1,4 @@
+@model HomeworkPlatform.Web.Models.Domain.Submission
+@{ ViewData["Title"] = "Submission review"; }
+<h1>@Model.Assignment.Title — submission @Model.Id</h1><pre class="border rounded p-3" style="white-space:pre-wrap">@Model.Content</pre>
+<p><a asp-action="Submissions" asp-route-id="@Model.AssignmentId">Back to submissions</a></p>

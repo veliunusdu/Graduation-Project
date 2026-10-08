@@ -1,0 +1,5 @@
+@model HomeworkPlatform.Web.Models.Domain.Assignment
+@{ ViewData["Title"] = "Delete assignment"; }
+<h1>Delete @Model.Title?</h1><p>Assignments with student submissions cannot be deleted.</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete assignment</button></form>
+<p><a asp-action="Details" asp-route-id="@Model.Id">Cancel</a></p>
