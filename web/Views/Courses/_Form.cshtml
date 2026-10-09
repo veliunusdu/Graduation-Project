@@ -1,0 +1,5 @@
+@model HomeworkPlatform.Web.Models.Work.CourseForm
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="mb-3"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div>
+<div class="mb-3"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="4"></textarea></div>
+<button type="submit" class="btn btn-primary">Save course</button>

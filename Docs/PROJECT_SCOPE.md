@@ -54,3 +54,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for branch names, PR/issue title forma
 
 ## Open Questions
 Exact October 13 deliverables; initial submission languages; shared schema/transport agreement; additional supervisor requirements.
+
+## Current execution scope
+
+On October 9 2026, Veli requested completion of all teammates' first two roadmap weeks and approved implementation choices without further permission requests. This work completes those foundations; later analysis/model and full domain milestones remain separate. See WEEKS_1_2_COMPLETION.md for verified outcomes.

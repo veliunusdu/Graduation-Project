@@ -14,7 +14,7 @@ Use lowercase English words separated by hyphens:
 | Tests or evaluation | test/<description> | test/requirement-fixtures |
 | Setup or tooling | chore/<description> | chore/python-environment |
 
-Keep one coherent change per branch. Target the shared integration branch; main is the proposed name when the repository is created. This folder currently has no Git repository, so no branches or remote settings have been created.
+Keep one coherent change per branch. Target the shared integration branch; main is the proposed name when the repository is created. The main project folder now contains a Git repository with main and origin configured. Create feature branches for implementation work; do not reset another teammate's changes.
 
 ## Pull request titles
 
@@ -26,7 +26,7 @@ Use .github/pull_request_template.md. Explain the problem and resulting behavior
 
 Use the Task template for planned work and the Bug report template for unexpected behavior. Name issues `task: <outcome>` or `bug: <observed problem>`. Identify the responsible owner, dependencies, and a concrete completion criterion. Bug reports include reproduction, expected/actual behavior, environment, and evidence.
 
-GitHub templates are stored locally in .github/ISSUE_TEMPLATE. They become available when committed to the appropriate branch of a GitHub repository; no issues have been created online.
+GitHub templates are stored locally in .github/ISSUE_TEMPLATE. They become available when committed to the appropriate branch of the GitHub repository; these templates do not create online issues automatically.
 
 ## Responsibilities and review
 

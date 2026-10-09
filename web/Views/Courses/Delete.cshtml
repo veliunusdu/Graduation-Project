@@ -1,0 +1,5 @@
+@model HomeworkPlatform.Web.Models.Domain.Course
+@{ ViewData["Title"] = "Delete course"; }
+<h1>Delete @Model.Name?</h1><p>Courses containing assignments cannot be deleted. Student work is preserved.</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete course</button></form>
+<p><a asp-action="Details" asp-route-id="@Model.Id">Cancel</a></p>

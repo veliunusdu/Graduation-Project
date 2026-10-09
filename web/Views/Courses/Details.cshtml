@@ -1,0 +1,13 @@
+@model HomeworkPlatform.Web.Models.Domain.Course
+@{ ViewData["Title"] = Model.Name; }
+<h1>@Model.Name</h1><p>@Model.Description</p>
+<p><a asp-action="Edit" asp-route-id="@Model.Id">Edit course</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete course</a> | <a asp-action="Index">My courses</a></p>
+<p><a asp-controller="Assignments" asp-action="Index" asp-route-courseId="@Model.Id">Assignments</a> | <a asp-controller="Assignments" asp-action="Create" asp-route-courseId="@Model.Id">Create assignment</a></p>
+<h2>Enroll a Student</h2>
+<form asp-action="Enroll" asp-route-id="@Model.Id" method="post">
+<div asp-validation-summary="All" class="text-danger"></div>
+<label for="Email">Existing Student email</label><input id="Email" name="Email" type="email" class="form-control" required />
+<button type="submit" class="btn btn-primary mt-2">Enroll</button>
+</form>
+<h2>Enrolled Students</h2>
+<ul>@foreach (var email in ViewData["Students"] as IReadOnlyList<string> ?? Array.Empty<string>()) { <li>@email</li> }</ul>

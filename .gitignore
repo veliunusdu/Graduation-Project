@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+.vs/
+**/.venv/
+**/__pycache__/
+*.pyc
+.env
+.superpowers/
+**/.pytest_cache/
+
+# Local SQLite Identity database (migrations stay tracked)
+web/App_Data/*.db
+web/App_Data/*.db-*

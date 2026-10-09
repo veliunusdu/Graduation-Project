@@ -11,7 +11,7 @@ Agreement recorded: October 6 2026. Veli reported in this chat: "the team agreed
 2. ../CONTRIBUTING.md: branch names, PR and issue names, ownership, review and integration conventions.
 3. ANALYSIS_CONTRACT.md: proposed shared interface. It prepares later work; its technical agreement is tracked separately from Week 1 scope closure.
 
-GitHub issue and PR templates are available locally under ../.github/. No Git repository, GitHub remote, online issues, or review invitations have been created.
+GitHub issue and PR templates are available locally under ../.github/. The local project now contains a Git repository, origin and feature branches. Codex has not created online issues or sent review invitations; reproducible local defect records are stored under Docs/issues.
 
 ## Scope decisions to confirm
 
