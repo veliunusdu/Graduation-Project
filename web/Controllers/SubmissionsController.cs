@@ -13,7 +13,7 @@ public class SubmissionsController(ApplicationDbContext database) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
     private IQueryable<Submission> Owned => database.Submissions.Include(s => s.Assignment).Where(s => s.StudentId == UserId);
-    private Task<bool> CanSubmit(int assignmentId) => database.Assignments.AnyAsync(a => a.Id == assignmentId
+    private Task<bool> CanSubmit(int assignmentId) => database.Assignments.AnyAsync(a => a.Id == assignmentId && a.Course.IsActive
         && database.StudentCourses.Any(e => e.CourseId == a.CourseId && e.StudentId == UserId));
 
     [HttpGet] public async Task<IActionResult> Index() => View(await Owned.AsNoTracking().OrderByDescending(s => s.UpdatedAt).ToListAsync());

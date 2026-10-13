@@ -10,7 +10,7 @@ public static class FormClient
     public static async Task<HttpResponseMessage> PostAsync(HttpClient client, string path, Dictionary<string, string> fields, string? tokenPage = null)
     {
         using var page = await client.GetAsync(tokenPage ?? path);
-        Assert.Equal(HttpStatusCode.OK, page.StatusCode);
+        Assert.True(page.StatusCode == HttpStatusCode.OK, $"Token page {tokenPage ?? path}: {page.StatusCode}\n{await page.Content.ReadAsStringAsync()}");
         var html = await page.Content.ReadAsStringAsync();
         var token = Regex.Match(html, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"");
         Assert.True(token.Success, "The rendered page must provide an antiforgery token.");

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using HomeworkPlatform.Web.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -14,6 +17,7 @@ public class AuthWebApplicationFactory : WebApplicationFactory<HomeController>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment(EnvironmentName);
+        builder.ConfigureTestServices(services => services.AddDataProtection().UseEphemeralDataProtectionProvider());
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["ConnectionStrings:DefaultConnection"] = $"Data Source={DatabasePath}",

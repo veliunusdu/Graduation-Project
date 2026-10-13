@@ -6,7 +6,7 @@ The ASP.NET Core 8 MVC app now includes Identity authentication, SQLite migratio
 
 ## Prerequisites
 
-Install .NET SDK 8.0.425 or a compatible later 8.0.4xx patch. The root global.json selects this feature band with latestPatch roll-forward; installing only .NET 10 does not satisfy it.
+Install .NET SDK 8.0.425 or a later stable SDK. The root global.json uses latestMajor roll-forward so the project also builds with an installed newer SDK. The application still targets net8.0 and requires the ASP.NET Core 8 runtime to run.
 
 From PowerShell:
 

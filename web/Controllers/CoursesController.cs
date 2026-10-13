@@ -25,7 +25,7 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
     [HttpPost] public async Task<IActionResult> Create(CourseForm model)
     {
         if (!ModelState.IsValid) return View(model);
-        var course = new Course { Name = model.Name.Trim(), Description = model.Description ?? "", TeacherId = UserId };
+        var course = new Course { Name = model.Name.Trim(), Description = model.Description ?? "", TeacherId = UserId, EducationLevel = model.EducationLevel, GradeLevel = model.GradeLevel, IsActive = model.IsActive };
         database.Courses.Add(course);
         await database.SaveChangesAsync();
         return RedirectToAction(nameof(Details), new { id = course.Id });
@@ -33,7 +33,7 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
     [HttpGet] public async Task<IActionResult> Edit([FromRoute] int id)
     {
         var course = await Owned.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id);
-        return course == null ? NotFound() : View(new CourseForm { Name = course.Name, Description = course.Description });
+        return course == null ? NotFound() : View(new CourseForm { Name = course.Name, Description = course.Description, EducationLevel = course.EducationLevel, GradeLevel = course.GradeLevel, IsActive = course.IsActive });
     }
     [HttpPost] public async Task<IActionResult> Edit([FromRoute] int id, CourseForm model)
     {
@@ -41,6 +41,7 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
         if (course == null) return NotFound();
         if (!ModelState.IsValid) return View(model);
         course.Name = model.Name.Trim(); course.Description = model.Description ?? "";
+        course.EducationLevel = model.EducationLevel; course.GradeLevel = model.GradeLevel; course.IsActive = model.IsActive;
         await database.SaveChangesAsync();
         return RedirectToAction(nameof(Details), new { id });
     }
@@ -63,6 +64,7 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
     {
         var course = await Owned.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id);
         if (course == null) return NotFound();
+        if (!course.IsActive) return Conflict("Activate the course before enrolling students.");
         if (!ModelState.IsValid) return await DetailsView(course);
         var student = await users.FindByEmailAsync(model.Email.Trim());
         if (student == null || !await users.IsInRoleAsync(student, AppRoles.Student))

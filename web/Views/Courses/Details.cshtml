@@ -1,6 +1,7 @@
 @model HomeworkPlatform.Web.Models.Domain.Course
 @{ ViewData["Title"] = Model.Name; }
 <h1>@Model.Name</h1><p>@Model.Description</p>
+<p>@Model.EducationLevel · Grade / year @Model.GradeLevel · @(Model.IsActive ? "Active" : "Inactive")</p>
 <p><a asp-action="Edit" asp-route-id="@Model.Id">Edit course</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete course</a> | <a asp-action="Index">My courses</a></p>
 <p><a asp-controller="Assignments" asp-action="Index" asp-route-courseId="@Model.Id">Assignments</a> | <a asp-controller="Assignments" asp-action="Create" asp-route-courseId="@Model.Id">Create assignment</a></p>
 <h2>Enroll a Student</h2>

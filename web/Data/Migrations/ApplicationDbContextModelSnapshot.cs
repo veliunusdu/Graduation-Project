@@ -124,6 +124,17 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("EducationLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("GradeLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(true);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -137,7 +148,10 @@ namespace HomeworkPlatform.Web.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Courses_EducationGrade", "(EducationLevel = 0 AND GradeLevel BETWEEN 9 AND 12) OR (EducationLevel = 1 AND GradeLevel BETWEEN 1 AND 4)");
+                        });
                 });
 
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.StudentCourse", b =>

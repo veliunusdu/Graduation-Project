@@ -43,3 +43,8 @@ finally { Pop-Location }
 ```
 
 [Week 1/2 completion report](Docs/WEEKS_1_2_COMPLETION.md) maps every teammate's tasks to test/live/clean-clone evidence. [Scope](Docs/PROJECT_SCOPE.md) and [collaboration conventions](CONTRIBUTING.md) describe the larger project. AI agents, RAG, files, rubrics and grading are later roadmap milestones.
+
+
+## Ayşe - Week 3
+
+Education levels, grade validation, active courses and the student enrolled-course screen are implemented. See [week 3 setup and verification](Docs/WEEK_3_AYSE.md).
