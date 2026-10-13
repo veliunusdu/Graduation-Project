@@ -2,4 +2,7 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 <div class="mb-3"><label asp-for="Name"></label><input asp-for="Name" class="form-control" /></div>
 <div class="mb-3"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="4"></textarea></div>
+<div class="mb-3"><label asp-for="EducationLevel">Education level</label><select asp-for="EducationLevel" asp-items="Html.GetEnumSelectList<HomeworkPlatform.Web.Models.Domain.EducationLevel>()" class="form-select"></select></div>
+<div class="mb-3"><label asp-for="GradeLevel">Grade / year</label><select asp-for="GradeLevel" class="form-select">@foreach (var grade in new[] { 1, 2, 3, 4, 9, 10, 11, 12 }) { <option value="@grade">@grade</option> }</select><small>High School: 9-12. University: 1-4.</small><span asp-validation-for="GradeLevel" class="text-danger"></span></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Active course</label></div>
 <button type="submit" class="btn btn-primary">Save course</button>

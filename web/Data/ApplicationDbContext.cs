@@ -13,6 +13,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<Course>().ToTable("Courses", table => table.HasCheckConstraint("CK_Courses_EducationGrade",
+            "(EducationLevel = 0 AND GradeLevel BETWEEN 9 AND 12) OR (EducationLevel = 1 AND GradeLevel BETWEEN 1 AND 4)"));
+        builder.Entity<Course>().Property(c => c.IsActive).HasDefaultValue(true);
         builder.Entity<Course>().HasOne<ApplicationUser>().WithMany().HasForeignKey(c => c.TeacherId).OnDelete(DeleteBehavior.Restrict);
         builder.Entity<Assignment>().HasOne(a => a.Course).WithMany().HasForeignKey(a => a.CourseId).OnDelete(DeleteBehavior.Restrict);
         builder.Entity<StudentCourse>().HasKey(e => new { e.StudentId, e.CourseId });

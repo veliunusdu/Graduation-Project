@@ -52,7 +52,7 @@ public class OwnershipSchemaTests
         Assert.Equal(System.Net.HttpStatusCode.OK, (await client.GetAsync("/Student")).StatusCode);
         using var scope = app.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        Assert.Equal(2, (await db.Database.GetAppliedMigrationsAsync()).Count());
+        Assert.Equal(db.Database.GetMigrations().Count(), (await db.Database.GetAppliedMigrationsAsync()).Count());
         Assert.Equal(2, await db.Roles.CountAsync());
         Assert.Equal(0, await db.Courses.CountAsync());
     }

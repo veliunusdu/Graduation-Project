@@ -2,4 +2,4 @@
 @{ ViewData["Title"] = "My courses"; }
 <h1>My courses</h1>
 <p><a asp-action="Create" class="btn btn-primary">Create course</a> <a asp-controller="Assignments" asp-action="Index">My assignments</a></p>
-<ul>@foreach (var course in Model) { <li><a asp-action="Details" asp-route-id="@course.Id">@course.Name</a></li> }</ul>
+<ul>@foreach (var course in Model) { <li><a asp-action="Details" asp-route-id="@course.Id">@course.Name</a> — @course.EducationLevel / @course.GradeLevel · @(course.IsActive ? "Active" : "Inactive")</li> }</ul>
