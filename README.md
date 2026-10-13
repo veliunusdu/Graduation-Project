@@ -48,3 +48,7 @@ finally { Pop-Location }
 ## Ayşe - Week 3
 
 Education levels, grade validation, active courses and the student enrolled-course screen are implemented. See [week 3 setup and verification](Docs/WEEK_3_AYSE.md).
+
+## Veli - Week 3 verification
+
+Course/enrollment checks use saved HighSchool/University fixture data. Debug and Release both passed 108/108 tests. See [Veli Week 3 review](Docs/VELI_WEEK3_AYSE_REVIEW_2026-10-13.md) for the 13-scenario matrix, TRX evidence and the open minor view-encoding finding.

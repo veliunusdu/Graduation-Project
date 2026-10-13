@@ -1,0 +1,128 @@
+{
+  "fixture_version": 1,
+  "purpose": "Veli Week 3 Course/Enrollment test senaryoları",
+  "automatic_import": false,
+  "notes": [
+    "Bu JSON test veri taslağıdır; HTTP payload sözleşmesi veya otomatik DB seed değildir.",
+    "FixtureKey/TeacherRef/StudentRef senaryo referanslarıdır. Gerçek Id değerleri test ortamında oluşur.",
+    "EducationLevel, GradeLevel ve IsActive Ayşe Week 3 kodunda mevcut. VeliWeek3CourseEnrollmentTests bu fixture verisini izole test DB üzerinde kullanır.",
+    "Mevcut 59 test bu dosyayı okumaz; kendi Alpha/Beta fixture verilerini kullanır.",
+    "Varsayılan homework.db yerine izole test ortamı kullan; gerçek kullanıcı/parola yoktur."
+  ],
+  "users": [
+    {
+      "FixtureKey": "teacher-a",
+      "Email": "teacher-a@example.test",
+      "Role": "Teacher"
+    },
+    {
+      "FixtureKey": "teacher-b",
+      "Email": "teacher-b@example.test",
+      "Role": "Teacher"
+    },
+    {
+      "FixtureKey": "student-a",
+      "Email": "student-a@example.test",
+      "Role": "Student"
+    },
+    {
+      "FixtureKey": "student-b",
+      "Email": "student-b@example.test",
+      "Role": "Student"
+    }
+  ],
+  "courses": [
+    {
+      "FixtureKey": "highschool-9",
+      "Name": "Lise 9 - Programlama Temelleri",
+      "Description": "Lise test dersi",
+      "EducationLevel": "HighSchool",
+      "GradeLevel": 9,
+      "TeacherRef": "teacher-a",
+      "IsActive": true
+    },
+    {
+      "FixtureKey": "university-1",
+      "Name": "Üniversite 1 - Programlamaya Giriş",
+      "Description": "Üniversite test dersi",
+      "EducationLevel": "University",
+      "GradeLevel": 1,
+      "TeacherRef": "teacher-b",
+      "IsActive": true
+    }
+  ],
+  "student_courses": [
+    {
+      "StudentRef": "student-a",
+      "CourseRef": "highschool-9"
+    }
+  ],
+  "assignment_templates": [
+    {
+      "CourseRef": "highschool-9",
+      "Title": "Lise test ödevi"
+    },
+    {
+      "CourseRef": "university-1",
+      "Title": "Üniversite test ödevi"
+    }
+  ],
+  "variants": [
+    {
+      "Name": "pasif-ders",
+      "CourseRef": "highschool-9",
+      "Changes": {
+        "IsActive": false
+      }
+    },
+    {
+      "Name": "yeniden-aktif-ders",
+      "CourseRef": "highschool-9",
+      "Changes": {
+        "IsActive": true
+      }
+    },
+    {
+      "Name": "lise-ust-sinir",
+      "CourseRef": "highschool-9",
+      "Changes": {
+        "GradeLevel": 12
+      }
+    },
+    {
+      "Name": "universite-ust-sinir",
+      "CourseRef": "university-1",
+      "Changes": {
+        "GradeLevel": 4
+      }
+    }
+  ],
+  "invalid_grade_cases": [
+    {
+      "EducationLevel": "HighSchool",
+      "GradeLevel": 8
+    },
+    {
+      "EducationLevel": "HighSchool",
+      "GradeLevel": 13
+    },
+    {
+      "EducationLevel": "University",
+      "GradeLevel": 0
+    },
+    {
+      "EducationLevel": "University",
+      "GradeLevel": 5
+    }
+  ],
+  "passive_course_policy": {
+    "status": "IMPLEMENTED_AND_DOCUMENTED_BY_AYSE",
+    "source": "Docs/WEEK_3_AYSE.md",
+    "course_and_assignment_access": "Only active enrolled courses/assignments are visible; direct inactive access is 404.",
+    "new_enrollment": "409 for owned inactive course.",
+    "new_submission": "404 for inactive course.",
+    "existing_submission": "Existing own submissions remain readable/editable; records preserved.",
+    "reactivation": "Existing enrollment restores access."
+  },
+  "verified_product_commit": "ec7ae36c5644da373e7de9d68d5a1f6fd39e1fc2"
+}

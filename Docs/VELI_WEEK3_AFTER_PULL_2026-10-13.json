@@ -1,0 +1,1546 @@
+{
+  "checked_on": "2026-10-13",
+  "timezone": "Europe/Istanbul",
+  "project": "Graduation-Project",
+  "reviewed_commit": "ec7ae36c5644da373e7de9d68d5a1f6fd39e1fc2",
+  "ayse_commit": "bf12c255e6b91000efe6d1ab38d5bbc88f07ecc6",
+  "source_pull_request": "https://github.com/veliunusdu/Graduation-Project/pull/3",
+  "status": "WEEK3_FUNCTIONAL_TESTS_COMPLETE_MINOR_REVIEW_FINDING_OPEN",
+  "suites": {
+    "ayse_debug_before_local_tests": {
+      "trx": "Docs/TestEvidence/Week3/2026-10-13/ayse-week3-debug.trx",
+      "sha256": "f97b87eb3ba610f9f28c6892057a6be47b586492cc3a3b2e2ab8f8459505f2a7",
+      "total": 102,
+      "passed": 102,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.TeacherCannotDeleteParentsContainingStudentWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Student\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.StartupAddsOwnershipTablesWithoutRemovingIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.EnrollmentIsOwnedRoleCheckedAndIdempotent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentCourseRoutesRequireStudentRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"12\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Teacher\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.UpgradePreservesExistingCourseEnrollmentAssignmentAndSubmission",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"13\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"77\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.DuplicateEmailDoesNotCreateAnotherUser",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"//outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ProductionAuthenticationCookieRequiresHttps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"https://outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidCredentialsAndLockoutNeverSignIn",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.SubmissionContentIsEncodedForBothStudentAndTeacher",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--provision-teacher\", value: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.LogoutWithoutTokenOrByGetCannotSignOut",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Production\", password: \"Test-Only8!Password\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentSeesOnlyEnrolledActiveCoursesAndCannotBypassInactiveCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.InvalidResourceInputDoesNotCreateOrChangeRecords",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.TeacherCanAccessTeacherPageButNotStudentPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Register\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ForgedTeacherRegistrationCannotAccessTeacherPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginAcceptsLocalReturnUrl",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"University\", grade: \"wrong\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.RegistrationHashesPasswordAndAssignsStudentOnly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid-email\", password: \"Test-Only8!Password\", confirmation: \"Test-Only8!Password\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.UpgradeFromIdentityOnlyPreservesAccountAndRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.IdentityStoreTests.StartupAppliesIdentityMigrationAndCreatesRoles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"weak\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Login\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"0\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandRefusesExistingStudentPromotion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"Test-Only8!Password\", confirmation: \"different\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.ValidPostLogoutRemovesProtectedAccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"weak\", confirmation: \"weak\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"Test-Only8!Password\", email: \"not-email\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OwnSubmissionCrudIgnoresForgedStudentParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandCreatesTeacherExitsAndIsIdempotentWithoutChangingPassword",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--unknown\", value: \"value\")",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    "debug": {
+      "trx": "Docs/TestEvidence/Week3/2026-10-13/veli-week3-after-pull-debug.trx",
+      "sha256": "0ca94707a6f6751332f961f938532991f4c7cca27f42064b1418febae95d95ed",
+      "total": 108,
+      "passed": 108,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"weak\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.DuplicateEmailDoesNotCreateAnotherUser",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"University\", grade: \"wrong\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Student\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidCredentialsAndLockoutNeverSignIn",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentCourseRoutesRequireStudentRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"77\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Teacher\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid-email\", password: \"Test-Only8!Password\", confirmation: \"Test-Only8!Password\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Production\", password: \"Test-Only8!Password\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginAcceptsLocalReturnUrl",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.HighSchoolAndUniversityFixtureHasOnlyOneStudentEnrollmentAndNoCourseLeak",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.RegistrationHashesPasswordAndAssignsStudentOnly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"https://outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ProductionAuthenticationCookieRequiresHttps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"weak\", confirmation: \"weak\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.EnrollmentIsOwnedRoleCheckedAndIdempotent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.UpgradePreservesExistingCourseEnrollmentAssignmentAndSubmission",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.TeacherCannotDeleteParentsContainingStudentWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"0\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandCreatesTeacherExitsAndIsIdempotentWithoutChangingPassword",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.UpgradeFromIdentityOnlyPreservesAccountAndRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"12\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.InvalidResourceInputDoesNotCreateOrChangeRecords",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 13)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentSeesOnlyEnrolledActiveCoursesAndCannotBypassInactiveCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.SubmissionContentIsEncodedForBothStudentAndTeacher",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Register\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--unknown\", value: \"value\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Login\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"13\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.ValidPostLogoutRemovesProtectedAccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.TeacherCanAccessTeacherPageButNotStudentPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.IdentityStoreTests.StartupAppliesIdentityMigrationAndCreatesRoles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.StartupAddsOwnershipTablesWithoutRemovingIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 8)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"//outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"Test-Only8!Password\", email: \"not-email\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--provision-teacher\", value: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ForgedTeacherRegistrationCannotAccessTeacherPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.LogoutWithoutTokenOrByGetCannotSignOut",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OwnSubmissionCrudIgnoresForgedStudentParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"Test-Only8!Password\", confirmation: \"different\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 5)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandRefusesExistingStudentPromotion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.InactiveCourseBlocksNewWorkButKeepsOldSubmissionAndReactivationRestoresAccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    "release": {
+      "trx": "Docs/TestEvidence/Week3/2026-10-13/veli-week3-after-pull-release.trx",
+      "sha256": "9426eab719e0abc0a27f7a064ed0294096b8b968d930024f5be81a71c6510c95",
+      "total": 108,
+      "passed": 108,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"77\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"12\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 8)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Register\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--unknown\", value: \"value\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"weak\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"University\", grade: \"wrong\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ForgedTeacherRegistrationCannotAccessTeacherPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"Test-Only8!Password\", email: \"not-email\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.HighSchoolAndUniversityFixtureHasOnlyOneStudentEnrollmentAndNoCourseLeak",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.StartupAddsOwnershipTablesWithoutRemovingIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Production\", password: \"Test-Only8!Password\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.ValidPostLogoutRemovesProtectedAccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"4\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.EnrollmentIsOwnedRoleCheckedAndIdempotent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.InvalidProvisioningFailsWithoutCreatingDatabase(environment: \"Development\", password: \"\", email: \"teacher@example.test\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Student\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentCourseRoutesRequireStudentRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidCredentialsAndLockoutNeverSignIn",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"0\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.InvalidResourceInputDoesNotCreateOrChangeRecords",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"https://outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.MalformedCommandExitsWithoutServingOrWriting(argument: \"--provision-teacher\", value: \"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 13)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginAcceptsLocalReturnUrl",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 5)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.LogoutWithoutTokenOrByGetCannotSignOut",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AntiforgeryTests.AccountPostWithoutTokenIsRejected(path: \"/Account/Login\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.RegistrationHashesPasswordAndAssignsStudentOnly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OwnSubmissionCrudIgnoresForgedStudentParentAndBodyId",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.TeacherCanAccessTeacherPageButNotStudentPage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.AnonymousCannotOpenRolePage(path: \"/Teacher\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid-email\", password: \"Test-Only8!Password\", confirmation: \"Test-Only8!Password\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandCreatesTeacherExitsAndIsIdempotentWithoutChangingPassword",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.TeacherCannotDeleteParentsContainingStudentWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.UpgradePreservesExistingCourseEnrollmentAssignmentAndSubmission",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"Test-Only8!Password\", confirmation: \"different\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 0)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.IdentityStoreTests.StartupAppliesIdentityMigrationAndCreatesRoles",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.RoleAccessTests.ProductionAuthenticationCookieRequiresHttps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"13\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Courses\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentSeesOnlyEnrolledActiveCoursesAndCannotBypassInactiveCourse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.OwnershipSchemaTests.UpgradeFromIdentityOnlyPreservesAccountAndRole",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.DuplicateEmailDoesNotCreateAnotherUser",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.LoginRejectsExternalReturnUrl(returnUrl: \"//outside.example/\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/StudentWork\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"9\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.SubmissionContentIsEncodedForBothStudentAndTeacher",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Delete\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.InactiveCourseBlocksNewWorkButKeepsOldSubmissionAndReactivationRestoresAccess",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Edit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.ProvisioningTests.CommandRefusesExistingStudentPromotion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Assignments\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HomeworkPlatform.Web.Tests.AccountFlowTests.InvalidRegistrationCreatesNoAccount(email: \"invalid@example.test\", password: \"weak\", confirmation: \"weak\")",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  },
+  "scenario_counts": {
+    "PASS": 13,
+    "BLOCKED": 0
+  },
+  "scenarios": [
+    {
+      "id": "W3-01",
+      "title": "Lise ve üniversite course verisi",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"12\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"0\", grade: \"9\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"1\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.TeacherCreatesAndEditsCourseWithEducation(level: \"1\", grade: \"4\")",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.HighSchoolAndUniversityFixtureHasOnlyOneStudentEnrollmentAndNoCourseLeak"
+      ]
+    },
+    {
+      "id": "W3-02",
+      "title": "Sınıf/yıl aralığı doğrulaması",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"13\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"0\", grade: \"4\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"0\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"1\", grade: \"9\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"77\", grade: \"9\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.InvalidEducationNeverPersists(level: \"University\", grade: \"wrong\")",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 13)",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"HighSchool\", grade: 8)",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 0)",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.FixtureGradeBoundariesRejectCreateAndEditWithoutChangingCourse(level: \"University\", grade: 5)"
+      ]
+    },
+    {
+      "id": "W3-03",
+      "title": "Öğrenci yalnızca kayıtlı dersini listeler",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentSeesOnlyEnrolledActiveCoursesAndCannotBypassInactiveCourse",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.HighSchoolAndUniversityFixtureHasOnlyOneStudentEnrollmentAndNoCourseLeak"
+      ]
+    },
+    {
+      "id": "W3-04",
+      "title": "Kayıtsız course doğrudan erişimi",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.HighSchoolAndUniversityFixtureHasOnlyOneStudentEnrollmentAndNoCourseLeak"
+      ]
+    },
+    {
+      "id": "W3-05",
+      "title": "Kayıtsız dersin ödevine/teslimine erişim engeli",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite"
+      ]
+    },
+    {
+      "id": "W3-06",
+      "title": "Öğretmenin kendi course CRUD akışı",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId"
+      ]
+    },
+    {
+      "id": "W3-07",
+      "title": "Başka öğretmenin course kaydına erişim",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")"
+      ]
+    },
+    {
+      "id": "W3-08",
+      "title": "Sahte TeacherId veya body Id",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId"
+      ]
+    },
+    {
+      "id": "W3-09",
+      "title": "Pozitif enrollment erişimi açar",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse"
+      ]
+    },
+    {
+      "id": "W3-10",
+      "title": "Yetkisiz, hatalı ve tekrarlı enrollment",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe"
+      ]
+    },
+    {
+      "id": "W3-11",
+      "title": "Pasif course liste/detail davranışı",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentSeesOnlyEnrolledActiveCoursesAndCannotBypassInactiveCourse",
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.InactiveCourseBlocksNewWorkButKeepsOldSubmissionAndReactivationRestoresAccess"
+      ]
+    },
+    {
+      "id": "W3-12",
+      "title": "Pasif course enrollment/submission davranışı",
+      "status": "PASS",
+      "previous_status": "BLOCKED",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.VeliWeek3CourseEnrollmentTests.InactiveCourseBlocksNewWorkButKeepsOldSubmissionAndReactivationRestoresAccess"
+      ]
+    },
+    {
+      "id": "W3-13",
+      "title": "Rol ve form güvenliği",
+      "status": "PASS",
+      "previous_status": "PASS",
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+        "HomeworkPlatform.Web.Tests.CourseEducationTests.StudentCourseRoutesRequireStudentRole"
+      ]
+    }
+  ],
+  "fixture": "samples/week3-course-enrollment/test-data.json",
+  "additional_tests": "tests/HomeworkPlatform.Web.Tests/VeliWeek3CourseEnrollmentTests.cs",
+  "migration_check": {
+    "status": "PASS",
+    "connection": "Data Source=:memory:",
+    "log": "Docs/TestEvidence/Week3/2026-10-13/ayse-week3-model-check.txt",
+    "sha256": "c924da1693ad60eb6a78717ddd333946a8a61a056c2ce2868ae514384f01c866"
+  },
+  "findings": [
+    {
+      "id": "TEST-002",
+      "severity": "Minor",
+      "priority": "P3",
+      "title": "Student course view files are not UTF-8",
+      "status": "OPEN",
+      "evidence": [
+        {
+          "file": "web/Views/StudentCourses/Index.cshtml",
+          "line": 5,
+          "byte_offset": 347,
+          "byte_hex": "97",
+          "sha256": "4c68ef3d23dff161e82bfce43a3bc3ea738046caf4a262026a5b6e93325bf60e"
+        },
+        {
+          "file": "web/Views/StudentCourses/Details.cshtml",
+          "line": 4,
+          "byte_offset": 160,
+          "byte_hex": "b7",
+          "sha256": "944d85509690eb8f05a0a1708bc2a3907200541790da1c821801d4967753b0eb"
+        }
+      ],
+      "recommended_fix": "Convert both files to UTF-8 and preserve their intended separators.",
+      "impact": "Text separators may display incorrectly; course/enrollment functional tests passed."
+    }
+  ],
+  "limits": [
+    "Automated in-process HTTP integration tests; no interactive browser review performed.",
+    "Application source from Ayse was reviewed unchanged; only local tests/fixtures/docs were added.",
+    "No real homework.db migration or reset performed; tests use isolated SQLite.",
+    "No local test/report changes were committed, pushed or sent to Ayse."
+  ],
+  "migration_default_note": "Existing courses default to HighSchool / 9 / active, requiring teacher correction where necessary.",
+  "publication_verification": {
+    "branch": "test/veli-week3-course-enrollment",
+    "base": "main",
+    "fresh_test_checks": {
+      "debug": {
+        "trx": "Docs/TestEvidence/Week3/2026-10-13/veli-week3-push-debug.trx",
+        "sha256": "ce150768037ea43eaeb8201b2fd7a2a30c4f585663c7c1a5373713271c0c1c7a",
+        "passed": 108,
+        "failed": 0
+      },
+      "release": {
+        "trx": "Docs/TestEvidence/Week3/2026-10-13/veli-week3-push-release.trx",
+        "sha256": "92ade0d18fbad775c165e4aac3ff2a850562b76aefb477368a18f41ebccc2b08",
+        "passed": 108,
+        "failed": 0
+      }
+    }
+  }
+}

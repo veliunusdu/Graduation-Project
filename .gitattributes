@@ -1,0 +1,2 @@
+# Preserve raw test evidence bytes for the recorded SHA-256 hashes.
+Docs/TestEvidence/Week3/** -text whitespace=cr-at-eol

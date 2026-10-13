@@ -1,0 +1,456 @@
+{
+  "checked_on": "2026-10-13",
+  "timezone": "Europe/Istanbul",
+  "owner": "Veli",
+  "source": "Docs/AI_Odev_Platformu_Gorev_Dagilimi.pdf, page 3",
+  "user_scope": "Testleri hazırla, Ayşe'nin kodunu bekleyelim",
+  "project_commit": "6303272c241868d60c53bda780f0bd94d11d3cda",
+  "overall_status": "PREPARATION_COMPLETE_PRODUCT_TESTS_BLOCKED",
+  "suite": {
+    "configuration": "Debug",
+    "total": 59,
+    "passed": 59,
+    "failed": 0,
+    "skipped": 0,
+    "trx": "Docs/TestEvidence/Week3/2026-10-13/veli-week3-existing-controls.trx",
+    "sha256": "c363e6c1d601de8b20d8ad54262c01646d74dea8d635a171e002afd3a11c6605",
+    "test_results": [
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Submissions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Courses\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OwnSubmissionCrudIgnoresForgedStudentParentAndBodyId",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Submissions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Details\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.SubmissionContentIsEncodedForBothStudentAndTeacher",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Submissions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.InvalidResourceInputDoesNotCreateOrChangeRecords",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Assignments\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/StudentWork\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.AnonymousResourceRequestsLeadToLogin(route: \"/Assignments\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Courses\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.GetDeleteOnlyShowsConfirmation(controller: \"Assignments\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentEditOrDeleteLeavesSubmissionUnchanged(action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.TeacherCannotDeleteParentsContainingStudentWork",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.StudentOwnershipTests.OtherStudentSubmissionIsNotReadable(action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ForeignInvalidBodyAndForgedRouteTargetRemainDenied(controller: \"Courses\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")",
+        "outcome": "Passed"
+      }
+    ]
+  },
+  "scenario_counts": {
+    "PASS": 7,
+    "BLOCKED": 6
+  },
+  "fixture": "samples/week3-course-enrollment/test-data.json",
+  "missing_course_fields": [
+    "EducationLevel",
+    "GradeLevel",
+    "IsActive"
+  ],
+  "missing_flows": [
+    "Student course list/detail",
+    "Passive course policy"
+  ],
+  "scenarios": [
+    {
+      "id": "W3-01",
+      "title": "Lise ve üniversite course verisi",
+      "status": "BLOCKED",
+      "steps": [
+        "teacher-a ile HighSchool/9, teacher-b ile University/1 oluştur; DB ve formdaki EducationLevel/GradeLevel değerlerini karşılaştır."
+      ],
+      "reason": "Course modelinde EducationLevel ve GradeLevel yok.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-02",
+      "title": "Sınıf/yıl aralığı doğrulaması",
+      "status": "BLOCKED",
+      "steps": [
+        "HighSchool 9/12 ve University 1/4 geçerli; fixture içindeki dört sınır dışı değeri dene; geçersiz değer DB değiştirmemeli."
+      ],
+      "reason": "Eğitim seviyesi ve sınıf/yıl model/form doğrulaması henüz yok.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-03",
+      "title": "Öğrenci yalnızca kayıtlı dersini listeler",
+      "status": "BLOCKED",
+      "steps": [
+        "student-a yalnızca highschool-9 kaydına sahip; öğrenci ders listesinde lise görünmeli, university-1 görünmemeli."
+      ],
+      "reason": "Öğrenci course listesi akışı mevcut değil; /StudentWork yalnızca ödev listeler.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-04",
+      "title": "Kayıtsız course doğrudan erişimi",
+      "status": "BLOCKED",
+      "steps": [
+        "Öğrenci course detail akışı hazır olduğunda student-a ile university-1 gerçek route Id değerini çağır; ders bilgisi sızmamalı."
+      ],
+      "reason": "Öğrenci course detail endpoint/form akışı yok; /Courses öğretmen rolüne ayrılmıştır.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-05",
+      "title": "Kayıtsız dersin ödevine/teslimine erişim engeli",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "StudentWork listesinde kayıtlı ödev görünür, diğer ödev görünmez; kayıtsız detail/Create GET ve POST 404, DB değişmez."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.StudentOwnershipTests.ListsAndCreationRequireEnrollmentAndDuplicateDoesNotOverwrite"
+      ]
+    },
+    {
+      "id": "W3-06",
+      "title": "Öğretmenin kendi course CRUD akışı",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Öğretmen kendi course oluşturur/düzenler/siler; oluşturulan kayıt giriş yapan öğretmene bağlanır."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ListsAndAssignmentCreationStayUnderOwnedCourses",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId"
+      ]
+    },
+    {
+      "id": "W3-07",
+      "title": "Başka öğretmenin course kaydına erişim",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Diğer öğretmenin detail/edit/delete GET ve edit/delete POST çağrılarını dene; 404 ve değişmeyen kayıt beklenir."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Details\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherMutationDoesNotChangeData(controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Submissions\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Courses\", action: \"Details\")",
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.ForeignTeacherRecordIsNotReadable(controller: \"Assignments\", action: \"Delete\")"
+      ]
+    },
+    {
+      "id": "W3-08",
+      "title": "Sahte TeacherId veya body Id",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Create/Edit formunda diğer TeacherId/Id değerlerini gönder; sahiplik ve route hedefi değişmemeli."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.TeacherOwnershipTests.OwnCrudIgnoresForgedOwnerParentAndBodyId"
+      ]
+    },
+    {
+      "id": "W3-09",
+      "title": "Pozitif enrollment erişimi açar",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Course sahibi öğrenciyi kaydeder; önceden kayıtsız ödeve erişim ve teslim açılır; diğer öğretmen teslimi göremez."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.StudentOwnershipTests.EnrollmentEnablesStudentWorkAndTeacherReadStaysUnderOwnedCourse"
+      ]
+    },
+    {
+      "id": "W3-10",
+      "title": "Yetkisiz, hatalı ve tekrarlı enrollment",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Foreign course kaydı 404; Teacher veya olmayan email reddedilir; aynı StudentCourse ikinci kez oluşmaz."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.EnrollmentCannotTargetForeignCourseOrNonStudentAndDuplicateIsSafe"
+      ]
+    },
+    {
+      "id": "W3-11",
+      "title": "Pasif course liste/detail davranışı",
+      "status": "BLOCKED",
+      "steps": [
+        "highschool-9 IsActive=false yap; kayıtlı öğrenci listesi ve doğrudan detail erişimini tanımlanan pasif ders kuralıyla karşılaştır; aktif hale getirip yeniden dene."
+      ],
+      "reason": "IsActive alanı yok; pasif course görünürlük politikası tanımlanmamış.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-12",
+      "title": "Pasif course enrollment/submission davranışı",
+      "status": "BLOCKED",
+      "steps": [
+        "Pasif course için yeni enrollment/teslim dene; eski StudentCourse ve Submission kayıtlarının korunmasını ve tanımlanan erişim kuralını doğrula."
+      ],
+      "reason": "IsActive alanı yok; pasif course yazma/önceki kayıt politikası tanımlanmamış.",
+      "evidence_tests": []
+    },
+    {
+      "id": "W3-13",
+      "title": "Rol ve form güvenliği",
+      "status": "PASS",
+      "scope": "Mevcut Week 2 temel akışı; eğitim seviyesi veya pasif ders kanıtı değildir.",
+      "steps": [
+        "Student ile Teacher course/Enroll akışını ve eksik antiforgery token ile mutasyonları dene; yanlış rol 403, tokensiz POST 400 ve DB değişmez."
+      ],
+      "evidence_tests": [
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Assignments\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/Submissions\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Assignments\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: False, route: \"/Courses\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Enroll\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotReadResourceLists(teacher: True, route: \"/StudentWork\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Assignments\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Enroll\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Courses\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Create\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: True, controller: \"Submissions\", action: \"Delete\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.WrongRoleCannotMutateResourcesEvenWithValidToken(teacher: False, controller: \"Courses\", action: \"Edit\")",
+        "HomeworkPlatform.Web.Tests.AuthorizationMatrixTests.ResourcePostWithoutTokenIsRejectedWithoutMutation(controller: \"Submissions\", action: \"Create\")"
+      ]
+    }
+  ],
+  "limits": [
+    "59 test mevcut temel akışlara aittir; tam Week 3 veya gerçek browser smoke testi olarak sunulmaz.",
+    "Testler WebApplicationFactory, gerçek Identity ve izole SQLite kullanır; default homework.db kullanılmaz.",
+    "Fixture JSON uygulamaya otomatik import edilmedi.",
+    "Web/Python ürün kodu ve migration değiştirilmedi."
+  ]
+}
