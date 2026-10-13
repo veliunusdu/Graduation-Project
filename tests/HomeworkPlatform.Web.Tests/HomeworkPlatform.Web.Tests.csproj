@@ -9,4 +9,7 @@
     <ProjectReference Include="../../web/HomeworkPlatform.Web.csproj" />
     <Using Include="Xunit" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="../../samples/week3-course-enrollment/test-data.json" Link="TestData/week3-test-data.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
