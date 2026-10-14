@@ -1,0 +1,7 @@
+@model HomeworkPlatform.Web.Models.Domain.Assignment
+<p>Difficulty: @Model.Difficulty | Due date: @(Model.DueDate?.ToString("yyyy-MM-dd") ?? "Not specified (legacy assignment)")</p>
+<h2>Requirements / rubric</h2>
+@foreach (var requirement in Model.Requirements.OrderBy(r => r.Order))
+{
+<section><h3>@requirement.Order. @requirement.Title (@requirement.Weight%)</h3><p>@requirement.Description</p></section>
+}

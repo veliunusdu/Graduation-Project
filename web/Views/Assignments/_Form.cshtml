@@ -2,4 +2,40 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 <div class="mb-3"><label asp-for="Title"></label><input asp-for="Title" class="form-control" /></div>
 <div class="mb-3"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" rows="6"></textarea></div>
+<div class="mb-3"><label asp-for="Difficulty"></label><select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<HomeworkPlatform.Web.Models.Domain.Difficulty>()" class="form-select"></select></div>
+<div class="mb-3"><label asp-for="DueDate">Due date</label><input asp-for="DueDate" type="date" class="form-control" /></div>
+<h2>Requirements / rubric</h2><p>Weights must total 100%. Use unique order values.</p>
+<div id="requirements">
+@for (var i = 0; i < Model.Requirements.Count; i++)
+{
+<fieldset class="border rounded p-3 mb-3 requirement">
+<label>Title</label><input asp-for="Requirements[i].Title" class="form-control" />
+<label>Description</label><textarea asp-for="Requirements[i].Description" class="form-control"></textarea>
+<label>Weight (%)</label><input asp-for="Requirements[i].Weight" type="number" min="1" max="100" class="form-control" />
+<label>Order</label><input asp-for="Requirements[i].Order" type="number" min="1" max="100" class="form-control" />
+<button type="button" class="btn btn-outline-danger remove">Remove requirement</button>
+</fieldset>
+}
+</div>
+<button type="button" id="add-requirement" class="btn btn-secondary">Add requirement</button>
 <button class="btn btn-primary" type="submit">Save assignment</button>
+<script>
+(() => {
+ const container = document.getElementById('requirements');
+ function reindex() { container.querySelectorAll('.requirement').forEach((row, i) => row.querySelectorAll('[name]').forEach(input => { input.name = input.name.replace(/Requirements\[\d+\]/, `Requirements[${i}]`); input.id = input.name.replace(/[^a-zA-Z0-9]/g, '_'); })); }
+ container.addEventListener('click', e => {
+ const button = e.target instanceof Element ? e.target.closest('button.remove') : null;
+ if (!button || !container.contains(button)) return;
+ const row = button.closest('.requirement');
+ if (row) { row.remove(); reindex(); }
+ });
+ document.getElementById('add-requirement').addEventListener('click', () => {
+ const i = container.children.length; if(i >= 100) return;
+ const row = document.createElement('fieldset'); row.className = 'border rounded p-3 mb-3 requirement';
+ for(const [field, label, type, value] of [['Title','Title','text',''],['Description','Description','text',''],['Weight','Weight (%)','number','1'],['Order','Order','number',String(i+1)]]) {
+ const l = document.createElement('label'); l.textContent = label; const input = document.createElement('input'); input.name = `Requirements[${i}].${field}`; input.type = type; input.value = value; input.className = 'form-control'; if(type === 'number') { input.min=1; input.max=100; } row.append(l,input);
+ }
+ const button = document.createElement('button'); button.type='button'; button.className='btn btn-outline-danger remove'; button.textContent='Remove requirement'; row.append(button); container.append(row);
+ });
+})();
+</script>

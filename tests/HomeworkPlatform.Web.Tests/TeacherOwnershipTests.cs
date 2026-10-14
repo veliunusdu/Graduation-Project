@@ -55,10 +55,10 @@ public class TeacherOwnershipTests
         var edited = await FormClient.PostAsync(client, $"/Courses/Edit/{course.Id}", new() { ["Name"] = "Edited course", ["TeacherId"] = fixture.TeacherBId, ["Id"] = fixture.CourseBId.ToString() });
         Assert.Equal(HttpStatusCode.Redirect, edited.StatusCode);
         Assert.Equal(fixture.TeacherAId, await fixture.ReadAsync(db => db.Courses.Where(c => c.Id == course.Id).Select(c => c.TeacherId).SingleAsync()));
-        var assignment = await FormClient.PostAsync(client, $"/Assignments/Create?courseId={course.Id}", new() { ["Title"] = "Created assignment" });
+        var assignment = await FormClient.PostAsync(client, $"/Assignments/Create?courseId={course.Id}", new() { ["Title"] = "Created assignment", ["DueDate"] = "2026-12-01", ["Requirements[0].Title"] = "Implement", ["Requirements[0].Weight"] = "100", ["Requirements[0].Order"] = "1" });
         Assert.Equal(HttpStatusCode.Redirect, assignment.StatusCode);
         var assignmentId = await fixture.ReadAsync(db => db.Assignments.Where(a => a.Title == "Created assignment").Select(a => a.Id).SingleAsync());
-        var update = await FormClient.PostAsync(client, $"/Assignments/Edit/{assignmentId}", new() { ["Title"] = "Edited assignment", ["CourseId"] = fixture.CourseBId.ToString(), ["Id"] = fixture.AssignmentBId.ToString() });
+        var update = await FormClient.PostAsync(client, $"/Assignments/Edit/{assignmentId}", new() { ["Title"] = "Edited assignment", ["DueDate"] = "2026-12-02", ["Requirements[0].Title"] = "Implement updated", ["Requirements[0].Weight"] = "100", ["Requirements[0].Order"] = "1", ["CourseId"] = fixture.CourseBId.ToString(), ["Id"] = fixture.AssignmentBId.ToString() });
         Assert.Equal(HttpStatusCode.Redirect, update.StatusCode);
         Assert.Equal(course.Id, await fixture.ReadAsync(db => db.Assignments.Where(a => a.Id == assignmentId).Select(a => a.CourseId).SingleAsync()));
         Assert.Equal(HttpStatusCode.Redirect, (await FormClient.PostAsync(client, $"/Assignments/Delete/{assignmentId}", new())).StatusCode);
@@ -91,7 +91,15 @@ public class TeacherOwnershipTests
         using var fixture = await OwnershipFixture.CreateAsync();
         using var client = await fixture.TeacherAsync();
         Assert.Equal(HttpStatusCode.Conflict, (await FormClient.PostAsync(client, $"/Courses/Delete/{fixture.CourseAId}", new())).StatusCode);
-        Assert.Equal(HttpStatusCode.Conflict, (await FormClient.PostAsync(client, $"/Assignments/Delete/{fixture.AssignmentAId}", new())).StatusCode);
+        var blocked = await FormClient.PostAsync(client, $"/Assignments/Delete/{fixture.AssignmentAId}", new());
+        Assert.Equal(HttpStatusCode.Conflict, blocked.StatusCode);
+        var html = await blocked.Content.ReadAsStringAsync();
+        Assert.Contains("role=\"alert\"", html);
+        Assert.Contains("alert alert-warning", html);
+        Assert.Contains("Alpha-private-assignment", html);
+        Assert.Contains("<button class=\"btn btn-danger\"", html);
+        Assert.True(html.IndexOf("role=\"alert\"", StringComparison.Ordinal) < html.IndexOf("<button class=\"btn btn-danger\"", StringComparison.Ordinal));
+        Assert.True(await fixture.ReadAsync(db => db.Assignments.AnyAsync(a => a.Id == fixture.AssignmentAId)));
         Assert.Equal(2, await fixture.ReadAsync(db => db.Submissions.CountAsync()));
     }
 }

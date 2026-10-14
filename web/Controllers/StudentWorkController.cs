@@ -11,7 +11,7 @@ namespace HomeworkPlatform.Web.Controllers;
 public class StudentWorkController(ApplicationDbContext database) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-    private IQueryable<Assignment> Enrolled => database.Assignments.Include(a => a.Course)
+    private IQueryable<Assignment> Enrolled => database.Assignments.Include(a => a.Course).Include(a => a.Requirements)
         .Where(a => a.Course.IsActive && database.StudentCourses.Any(e => e.CourseId == a.CourseId && e.StudentId == UserId));
     [HttpGet] public async Task<IActionResult> Index() => View(await Enrolled.AsNoTracking().OrderBy(a => a.Title).ToListAsync());
     [HttpGet] public async Task<IActionResult> Details([FromRoute] int id)
