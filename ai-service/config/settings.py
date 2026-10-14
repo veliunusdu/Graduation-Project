@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     APP_NAME: str = "AI-Supported Homework Platform - AI Service"
     OLLAMA_BASE_URL: HttpUrl = "http://localhost:11434"
 
+    OLLAMA_GENERAL_MODEL: str = "qwen3:8b"
+    OLLAMA_CODE_REVIEW_MODEL: str = "qwen2.5-coder:7b"
+    OLLAMA_TIMEOUT_SECONDS: float = 120.0
+
     @field_validator("APP_NAME")
     @classmethod
     def validate_app_name(cls, value: str) -> str:
