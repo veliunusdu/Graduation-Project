@@ -52,6 +52,7 @@ public class SubmissionsController(ApplicationDbContext database) : Controller
         if (submission == null) return NotFound();
         if (!ModelState.IsValid) return View(model);
         submission.Content = model.Content; submission.UpdatedAt = DateTime.UtcNow;
+        submission.TeacherFeedback = null; submission.TeacherGrade = null; submission.ReviewedAt = null;
         await database.SaveChangesAsync();
         return RedirectToAction(nameof(Details), new { id });
     }

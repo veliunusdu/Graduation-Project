@@ -1,4 +1,5 @@
 @model HomeworkPlatform.Web.Models.Domain.Assignment
 @{ ViewData["Title"] = Model.Title; }
 <h1>@Model.Title</h1><p>@Model.Description</p><p>Course: @Model.Course.Name</p>
+<partial name="_AssignmentRequirements" model="Model" />
 <p><a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> | <a asp-action="Submissions" asp-route-id="@Model.Id">Student submissions</a> | <a asp-action="Index" asp-route-courseId="@Model.CourseId">Assignments</a></p>
