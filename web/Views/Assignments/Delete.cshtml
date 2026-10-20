@@ -1,5 +1,12 @@
 @model HomeworkPlatform.Web.Models.Domain.Assignment
-@{ ViewData["Title"] = "Delete assignment"; }
-<h1>Delete @Model.Title?</h1><p>Assignments with student submissions cannot be deleted.</p>
-<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete assignment</button></form>
-<p><a asp-action="Details" asp-route-id="@Model.Id">Cancel</a></p>
+@{ ViewData["Title"] = "Ödevi sil"; }
+<h1>@Model.Title ödevi silinsin mi?</h1>
+<p>Öğrenci teslimi bulunan ödevler silinemez.</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    @if (ViewData["DeleteWarning"] is string warning)
+    {
+        <div class="alert alert-warning" role="alert">@warning</div>
+    }
+    <button class="btn btn-danger" type="submit">Ödevi sil</button>
+</form>
+<p><a asp-action="Details" asp-route-id="@Model.Id">Vazgeç ve ödeve dön</a></p>

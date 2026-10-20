@@ -1,4 +1,27 @@
 @model IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Submission>
-@{ ViewData["Title"] = "Assignment submissions"; }
-<h1>Assignment submissions</h1>
-<ul>@foreach (var submission in Model) { <li><a asp-action="Submission" asp-route-id="@submission.Id">Submission @submission.Id</a> — @submission.CreatedAt.ToString("u")</li> }</ul>
+@{
+    ViewData["Title"] = "Öğrenci teslimleri";
+    var emails = ViewData["StudentEmails"] as Dictionary<string, string> ?? new Dictionary<string, string>();
+}
+<h1>Öğrenci teslimleri</h1>
+@if (Model.Count == 0)
+{
+    <p>Henüz teslim yapılmadı.</p>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>Öğrenci</th><th>Teslim tarihi (UTC)</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var submission in Model)
+        {
+            var email = emails.TryGetValue(submission.StudentId, out var value) ? value : "Bilinmeyen öğrenci";
+            <tr>
+                <td>@email</td>
+                <td>@submission.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td><a asp-action="Submission" asp-route-id="@submission.Id">Teslimi incele</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
