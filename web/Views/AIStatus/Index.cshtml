@@ -1,0 +1,14 @@
+@model HomeworkPlatform.Web.Services.AI.AIServiceResult<HomeworkPlatform.Web.Services.AI.AIHealthResponse>
+@{ ViewData["Title"] = "AI servis durumu"; }
+<h1>AI servis durumu</h1>
+@if (Model.Success)
+{
+    <div class="alert alert-success" role="status">Python AI servisine bağlantı başarılı. Durum: @Model.Data!.Status</div>
+    <p>Bu kontrol Python servisine erişimi doğrular. Model ve analiz özellikleri ayrıca kontrol edilir.</p>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">@Model.Error?.Message</div>
+}
+<a asp-action="Index" class="btn btn-primary">Yeniden kontrol et</a>
+<a asp-controller="Teacher" asp-action="Index" class="btn btn-outline-secondary">Öğretmen paneline dön</a>

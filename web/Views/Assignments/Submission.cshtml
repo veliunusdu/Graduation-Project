@@ -3,6 +3,7 @@
 <h1>@Model.Assignment.Title</h1>
 <p><strong>Öğrenci:</strong> @(ViewData["StudentEmail"] as string ?? "Bilinmeyen öğrenci")</p>
 <p><strong>Teslim numarası:</strong> @Model.Id</p><pre class="border rounded p-3" style="white-space:pre-wrap">@Model.Content</pre>
+<partial name="_SubmissionFile" model="Model" />
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Review" asp-route-id="@Model.Id" method="post">
 <label for="Feedback">Teacher feedback</label><textarea id="Feedback" name="Feedback" maxlength="10000" required class="form-control">@Model.TeacherFeedback</textarea>

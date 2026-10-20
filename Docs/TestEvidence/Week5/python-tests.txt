@@ -1,0 +1,5 @@
+Python service tests, 2026-10-20
+Command: ai-service/.venv/Scripts/python.exe -m pytest -q
+Working directory: ai-service
+Result: 28 passed, 1 warning in 1.07s
+Warning: inherited FastAPI/Starlette TestClient httpx deprecation.
