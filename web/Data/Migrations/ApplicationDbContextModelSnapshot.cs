@@ -239,7 +239,21 @@ namespace HomeworkPlatform.Web.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<long?>("FileSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("FileUploadedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OriginalFileName")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("ReviewedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StoredFileName")
+                        .HasMaxLength(39)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StudentId")

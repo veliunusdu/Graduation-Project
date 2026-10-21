@@ -1,3 +1,6 @@
+using HomeworkPlatform.Web.Services.AI;
+using HomeworkPlatform.Web.Services.Files;
+using Microsoft.Extensions.Options;
 using HomeworkPlatform.Web.Data;
 using HomeworkPlatform.Web.Security;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +33,17 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always;
 });
 builder.Services.AddScoped<TeacherProvisioner>();
+builder.Services.AddOptions<AIServiceOptions>().BindConfiguration(AIServiceOptions.SectionName)
+    .ValidateDataAnnotations().Validate(o => o.HasValidBaseUrl(), "AIService:BaseUrl must be an HTTP(S) URL without credentials, query or fragment.").ValidateOnStart();
+builder.Services.AddHttpClient<AIServiceClient>((services, client) =>
+{
+    var options = services.GetRequiredService<IOptions<AIServiceOptions>>().Value;
+    client.BaseAddress = new Uri(options.BaseUrl.TrimEnd('/') + "/");
+    client.Timeout = Timeout.InfiniteTimeSpan;
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
+builder.Services.AddOptions<SubmissionFileOptions>().BindConfiguration(SubmissionFileOptions.SectionName)
+    .ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddScoped<SubmissionFileStore>();
 var app = builder.Build();
 if (commandMode)
 {

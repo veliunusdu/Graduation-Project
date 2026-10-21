@@ -21,6 +21,7 @@ public class AuthWebApplicationFactory : WebApplicationFactory<HomeController>
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["ConnectionStrings:DefaultConnection"] = $"Data Source={DatabasePath}",
+            ["SubmissionFiles:RootPath"] = Path.Combine(DirectoryPath, "SubmissionFiles"),
             ["Logging:LogLevel:Default"] = "Warning"
         }));
     }

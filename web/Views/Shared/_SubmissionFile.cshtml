@@ -1,0 +1,9 @@
+@model HomeworkPlatform.Web.Models.Domain.Submission
+@if (Model.StoredFileName != null)
+{
+    <div class="border rounded p-3 mb-3">
+        <strong>Ödev dosyası:</strong>
+        <a asp-controller="SubmissionFiles" asp-action="Download" asp-route-id="@Model.Id">@Model.OriginalFileName</a>
+        <span>(@((Model.FileSize.GetValueOrDefault() / 1024.0).ToString("0.0")) KB)</span>
+    </div>
+}

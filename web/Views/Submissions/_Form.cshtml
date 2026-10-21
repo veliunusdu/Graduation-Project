@@ -1,4 +1,16 @@
 @model HomeworkPlatform.Web.Models.Work.SubmissionForm
-<div asp-validation-summary="All" class="text-danger"></div>
-<div class="mb-3"><label asp-for="Content"></label><textarea asp-for="Content" class="form-control font-monospace" rows="14"></textarea></div>
-<button class="btn btn-primary" type="submit">Save submission</button>
+@inject Microsoft.Extensions.Options.IOptions<HomeworkPlatform.Web.Services.Files.SubmissionFileOptions> FileOptions
+<div asp-validation-summary="All" class="text-danger" role="alert"></div>
+<div class="mb-3"><label asp-for="Content">Teslim metni / açıklama (isteğe bağlı)</label><textarea asp-for="Content" class="form-control font-monospace" rows="10"></textarea></div>
+<div class="mb-3">
+    <label asp-for="Upload">Ödev dosyası</label>
+    <input asp-for="Upload" type="file" class="form-control" accept="@string.Join(",", HomeworkPlatform.Web.Services.Files.SubmissionFileStore.AllowedExtensions)" aria-describedby="upload-help" />
+    <p id="upload-help" class="form-text">PDF, ZIP veya kod/metin dosyası. En fazla @FileOptions.Value.MaxFileSizeMB MB. Birden fazla dosyalı projeyi ZIP olarak yükleyin. Kod dosyaları UTF-8 olmalıdır.</p>
+    <p class="form-text">Metin veya dosyadan en az biri gereklidir. Doğrulama hatasından sonra dosyayı yeniden seçin.</p>
+</div>
+@if (Model.ExistingFileName != null)
+{
+    <p>Mevcut dosya: <strong>@Model.ExistingFileName</strong>. Yeni dosya seçerseniz mevcut dosya değiştirilir.</p>
+    <div class="form-check mb-3"><input asp-for="RemoveFile" class="form-check-input" /><label asp-for="RemoveFile" class="form-check-label">Mevcut dosyayı kaldır</label></div>
+}
+<button class="btn btn-primary" type="submit">Teslimi kaydet</button>
