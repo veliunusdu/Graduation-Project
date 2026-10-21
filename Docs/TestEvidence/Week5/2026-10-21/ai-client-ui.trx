@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7daa0828-ea70-47d6-a566-47d6618c4fce" name="veliu@MONSTER 2026-10-21 17:13:08" runUser="MONSTER\veliu" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-21T17:13:08.0878578+03:00" queuing="2026-10-21T17:13:08.0878579+03:00" start="2026-10-21T17:13:07.5702025+03:00" finish="2026-10-21T17:13:09.3624721+03:00" />
+  <TestSettings name="default" id="01c650e0-2c7f-45e1-acd5-df8ee0678894">
+    <Deployment runDeploymentRoot="veliu_MONSTER_2026-10-21_17_13_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4c979d4a-6eb5-4226-b90c-dafe60f0afa8" testId="97fed9d4-fde4-183b-2209-7dbef94de9f8" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{\&quot;status\&quot;:\&quot;failed\&quot;}&quot;)" computerName="MONSTER" duration="00:00:00.0003526" startTime="2026-10-21T17:13:08.0440565+03:00" endTime="2026-10-21T17:13:08.0442737+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c979d4a-6eb5-4226-b90c-dafe60f0afa8" />
+    <UnitTestResult executionId="1c2743ae-83f0-4cc0-9804-2e6c12692639" testId="aa2a33f2-02db-dca2-098f-bcc99337dd41" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.TimeoutIsControlledAndCallerCancellationPropagates" computerName="MONSTER" duration="00:00:01.0130598" startTime="2026-10-21T17:13:08.0645711+03:00" endTime="2026-10-21T17:13:09.0619184+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c2743ae-83f0-4cc0-9804-2e6c12692639" />
+    <UnitTestResult executionId="a5fbf370-fbb1-4be2-88e5-d2dc70b647e0" testId="9c91b5c0-dbb0-cf34-4850-ecc6b6788a66" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.ConnectionFailureHasSafeMessage" computerName="MONSTER" duration="00:00:00.0085104" startTime="2026-10-21T17:13:08.0400967+03:00" endTime="2026-10-21T17:13:08.0428391+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5fbf370-fbb1-4be2-88e5-d2dc70b647e0" />
+    <UnitTestResult executionId="e23eff3c-d8e7-48fd-b07a-fa078c29ee38" testId="610ea367-8c18-8ba4-5b71-bb51df606364" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 503)" computerName="MONSTER" duration="00:00:00.0029639" startTime="2026-10-21T17:13:09.0780244+03:00" endTime="2026-10-21T17:13:09.0811667+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e23eff3c-d8e7-48fd-b07a-fa078c29ee38" />
+    <UnitTestResult executionId="4220f591-ee81-487e-b37b-0c483a3e67f7" testId="d36b671d-33b9-89f7-424d-61c00af3e375" testName="HomeworkPlatform.Web.Tests.AIStatusTests.OnlyTeacherCanSeeStatusAndFailureIsRenderedInPage" computerName="MONSTER" duration="00:00:01.2969797" startTime="2026-10-21T17:13:07.9988016+03:00" endTime="2026-10-21T17:13:09.2993571+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4220f591-ee81-487e-b37b-0c483a3e67f7" />
+    <UnitTestResult executionId="8fca2d47-36b7-499b-b520-a7c88ac0431b" testId="2f0c2988-9944-1d57-7a90-d2a6dfd83ac4" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 500)" computerName="MONSTER" duration="00:00:00.0000286" startTime="2026-10-21T17:13:09.0813990+03:00" endTime="2026-10-21T17:13:09.0814249+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8fca2d47-36b7-499b-b520-a7c88ac0431b" />
+    <UnitTestResult executionId="7e19649e-04a2-4832-98f2-1d483ddaab25" testId="c664eaa7-bf11-95bf-abf6-ad90b4f161e3" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;not json&quot;)" computerName="MONSTER" duration="00:00:00.0011049" startTime="2026-10-21T17:13:08.0443438+03:00" endTime="2026-10-21T17:13:08.0453835+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e19649e-04a2-4832-98f2-1d483ddaab25" />
+    <UnitTestResult executionId="f2ce1577-2abf-4d1a-b8b2-0b84dbc31f7d" testId="dc306bae-a37c-9efc-76c9-06f23b9f79b3" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.ExcessiveJsonResponseIsRejected" computerName="MONSTER" duration="00:00:00.0153246" startTime="2026-10-21T17:13:09.0625077+03:00" endTime="2026-10-21T17:13:09.0778852+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f2ce1577-2abf-4d1a-b8b2-0b84dbc31f7d" />
+    <UnitTestResult executionId="771c8792-d216-46ed-a38b-364ec7d24f5b" testId="0ab3a7be-a2aa-475b-3cb6-8ba896133ee0" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;null&quot;)" computerName="MONSTER" duration="00:00:00.0011364" startTime="2026-10-21T17:13:08.0433470+03:00" endTime="2026-10-21T17:13:08.0439687+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="771c8792-d216-46ed-a38b-364ec7d24f5b" />
+    <UnitTestResult executionId="ce1fac2c-852c-4dda-9577-bb4774488392" testId="845b09c3-8067-8b31-9289-7a74d69571bc" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{}&quot;)" computerName="MONSTER" duration="00:00:00.0000388" startTime="2026-10-21T17:13:08.0454895+03:00" endTime="2026-10-21T17:13:08.0455157+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ce1fac2c-852c-4dda-9577-bb4774488392" />
+    <UnitTestResult executionId="c6c5865c-d914-4333-9196-c4ccff9d620d" testId="b72aae2b-431e-2130-72f1-fd83b8945381" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.HealthUsesConfiguredBaseAddressAndParsesPythonJson" computerName="MONSTER" duration="00:00:00.0005048" startTime="2026-10-21T17:13:08.0461831+03:00" endTime="2026-10-21T17:13:08.0465591+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c6c5865c-d914-4333-9196-c4ccff9d620d" />
+    <UnitTestResult executionId="ec0098db-217f-40f5-9b8c-3e7529d8dd2f" testId="f71973f1-ba09-436b-b052-a265c9f882d6" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 404)" computerName="MONSTER" duration="00:00:00.0002389" startTime="2026-10-21T17:13:09.0812612+03:00" endTime="2026-10-21T17:13:09.0813307+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec0098db-217f-40f5-9b8c-3e7529d8dd2f" />
+    <UnitTestResult executionId="750c2934-2351-4ae6-bce7-74102620c99a" testId="b9c58055-53bb-f1d4-2f6f-2e971e6b2fd1" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.PostUsesStructuredSnakeCaseJsonAndParsesResponse" computerName="MONSTER" duration="00:00:00.0308219" startTime="2026-10-21T17:13:07.9996201+03:00" endTime="2026-10-21T17:13:08.0341976+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="750c2934-2351-4ae6-bce7-74102620c99a" />
+    <UnitTestResult executionId="7ad9ed42-c6d6-456e-a68a-be812d5522b9" testId="b8385b9d-859b-e80c-f893-8f6b8550e73c" testName="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{\&quot;status\&quot;:123}&quot;)" computerName="MONSTER" duration="00:00:00.0005369" startTime="2026-10-21T17:13:08.0455633+03:00" endTime="2026-10-21T17:13:08.0460975+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ad9ed42-c6d6-456e-a68a-be812d5522b9" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 404)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="f71973f1-ba09-436b-b052-a265c9f882d6">
+      <Execution id="ec0098db-217f-40f5-9b8c-3e7529d8dd2f" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="HttpErrorsDoNotExposeServerBody" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;null&quot;)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="0ab3a7be-a2aa-475b-3cb6-8ba896133ee0">
+      <Execution id="771c8792-d216-46ed-a38b-364ec7d24f5b" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="InvalidHealthResponseIsControlled" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 503)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="610ea367-8c18-8ba4-5b71-bb51df606364">
+      <Execution id="e23eff3c-d8e7-48fd-b07a-fa078c29ee38" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="HttpErrorsDoNotExposeServerBody" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{\&quot;status\&quot;:123}&quot;)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="b8385b9d-859b-e80c-f893-8f6b8550e73c">
+      <Execution id="7ad9ed42-c6d6-456e-a68a-be812d5522b9" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="InvalidHealthResponseIsControlled" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIStatusTests.OnlyTeacherCanSeeStatusAndFailureIsRenderedInPage" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="d36b671d-33b9-89f7-424d-61c00af3e375">
+      <Execution id="4220f591-ee81-487e-b37b-0c483a3e67f7" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIStatusTests" name="OnlyTeacherCanSeeStatusAndFailureIsRenderedInPage" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.TimeoutIsControlledAndCallerCancellationPropagates" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="aa2a33f2-02db-dca2-098f-bcc99337dd41">
+      <Execution id="1c2743ae-83f0-4cc0-9804-2e6c12692639" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="TimeoutIsControlledAndCallerCancellationPropagates" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.PostUsesStructuredSnakeCaseJsonAndParsesResponse" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="b9c58055-53bb-f1d4-2f6f-2e971e6b2fd1">
+      <Execution id="750c2934-2351-4ae6-bce7-74102620c99a" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="PostUsesStructuredSnakeCaseJsonAndParsesResponse" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.HealthUsesConfiguredBaseAddressAndParsesPythonJson" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="b72aae2b-431e-2130-72f1-fd83b8945381">
+      <Execution id="c6c5865c-d914-4333-9196-c4ccff9d620d" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="HealthUsesConfiguredBaseAddressAndParsesPythonJson" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;not json&quot;)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="c664eaa7-bf11-95bf-abf6-ad90b4f161e3">
+      <Execution id="7e19649e-04a2-4832-98f2-1d483ddaab25" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="InvalidHealthResponseIsControlled" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.HttpErrorsDoNotExposeServerBody(status: 500)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="2f0c2988-9944-1d57-7a90-d2a6dfd83ac4">
+      <Execution id="8fca2d47-36b7-499b-b520-a7c88ac0431b" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="HttpErrorsDoNotExposeServerBody" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.ExcessiveJsonResponseIsRejected" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="dc306bae-a37c-9efc-76c9-06f23b9f79b3">
+      <Execution id="f2ce1577-2abf-4d1a-b8b2-0b84dbc31f7d" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="ExcessiveJsonResponseIsRejected" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{}&quot;)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="845b09c3-8067-8b31-9289-7a74d69571bc">
+      <Execution id="ce1fac2c-852c-4dda-9577-bb4774488392" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="InvalidHealthResponseIsControlled" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.InvalidHealthResponseIsControlled(body: &quot;{\&quot;status\&quot;:\&quot;failed\&quot;}&quot;)" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="97fed9d4-fde4-183b-2209-7dbef94de9f8">
+      <Execution id="4c979d4a-6eb5-4226-b90c-dafe60f0afa8" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="InvalidHealthResponseIsControlled" />
+    </UnitTest>
+    <UnitTest name="HomeworkPlatform.Web.Tests.AIServiceClientTests.ConnectionFailureHasSafeMessage" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="9c91b5c0-dbb0-cf34-4850-ecc6b6788a66">
+      <Execution id="a5fbf370-fbb1-4be2-88e5-d2dc70b647e0" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.AIServiceClientTests" name="ConnectionFailureHasSafeMessage" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="97fed9d4-fde4-183b-2209-7dbef94de9f8" executionId="4c979d4a-6eb5-4226-b90c-dafe60f0afa8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa2a33f2-02db-dca2-098f-bcc99337dd41" executionId="1c2743ae-83f0-4cc0-9804-2e6c12692639" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9c91b5c0-dbb0-cf34-4850-ecc6b6788a66" executionId="a5fbf370-fbb1-4be2-88e5-d2dc70b647e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="610ea367-8c18-8ba4-5b71-bb51df606364" executionId="e23eff3c-d8e7-48fd-b07a-fa078c29ee38" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d36b671d-33b9-89f7-424d-61c00af3e375" executionId="4220f591-ee81-487e-b37b-0c483a3e67f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2f0c2988-9944-1d57-7a90-d2a6dfd83ac4" executionId="8fca2d47-36b7-499b-b520-a7c88ac0431b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c664eaa7-bf11-95bf-abf6-ad90b4f161e3" executionId="7e19649e-04a2-4832-98f2-1d483ddaab25" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc306bae-a37c-9efc-76c9-06f23b9f79b3" executionId="f2ce1577-2abf-4d1a-b8b2-0b84dbc31f7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0ab3a7be-a2aa-475b-3cb6-8ba896133ee0" executionId="771c8792-d216-46ed-a38b-364ec7d24f5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="845b09c3-8067-8b31-9289-7a74d69571bc" executionId="ce1fac2c-852c-4dda-9577-bb4774488392" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b72aae2b-431e-2130-72f1-fd83b8945381" executionId="c6c5865c-d914-4333-9196-c4ccff9d620d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f71973f1-ba09-436b-b052-a265c9f882d6" executionId="ec0098db-217f-40f5-9b8c-3e7529d8dd2f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9c58055-53bb-f1d4-2f6f-2e971e6b2fd1" executionId="750c2934-2351-4ae6-bce7-74102620c99a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b8385b9d-859b-e80c-f893-8f6b8550e73c" executionId="7ad9ed42-c6d6-456e-a68a-be812d5522b9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="14" executed="14" passed="14" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 8.0.32)&#xD;
+[xUnit.net 00:00:00.05]   Discovering: HomeworkPlatform.Web.Tests&#xD;
+[xUnit.net 00:00:00.09]   Discovered:  HomeworkPlatform.Web.Tests&#xD;
+[xUnit.net 00:00:00.11]   Starting:    HomeworkPlatform.Web.Tests&#xD;
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]&#xD;
+      AI service returned HTTP 503.&#xD;
+[xUnit.net 00:00:01.42]   Finished:    HomeworkPlatform.Web.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-21",
+  "timezone": "Europe/Istanbul",
+  "owner": "Veli",
+  "week": 5,
+  "scope": "Only first three requested steps: Python health, Python offline, timeout/HTTP handling",
+  "first_three_steps": "PASS",
+  "entire_week5_complete": false,
+  "live_http_scenarios": 6,
+  "all_live_http_passed": true,
+  "web_targeted_tests": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python_tests": {
+    "passed": 128,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1
+  },
+  "python_access_log_health_200_count": 3,
+  "new_validator_tests": 7,
+  "python_offline_observation": "Windows connection attempt reached configured 2-second timeout; safe timeout warning and corresponding log verified. Not misreported as immediate connection refused.",
+  "fault_dependency": "Real loopback HTTP server supplies controlled delay/500/503/malformed JSON; it is not Ollama or a real failing FastAPI instance.",
+  "model_validation": {
+    "status": "NOT_RUN_USER_DEFERRED",
+    "calls": 0,
+    "remaining": [
+      "real ASP.NET-Python-Ollama response chain",
+      "Ollama stopped",
+      "missing installed model",
+      "real model timeout"
+    ]
+  },
+  "cleanup": {
+    "owned_handles_exited": true,
+    "temporary_directory_removed": true,
+    "post_run_pid_check": "Windows Popen launcher10416, actual Uvicorn8632, and dotnet17012 all absent from Win32_Process after run"
+  },
+  "review": {
+    "independent": "completed",
+    "important_or_critical_findings": 0
+  },
+  "source_commit": "2ad7f5e55c09285223c7482f5c4d12520865748b",
+  "warning": "Existing upstream Starlette TestClient/httpx deprecation; no dependency changes."
+}

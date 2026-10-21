@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "scope": "Veli Week 5 first three steps",
+  "model_calls": 0,
+  "live_model_validation": "NOT_RUN_USER_DEFERRED",
+  "scenarios": [
+    {
+      "scenario": "real_python_health",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "success",
+      "message_verified": "Python AI servisine bağlantı başarılı.",
+      "diagnostic_markers_absent": true,
+      "log_verified": false,
+      "expected_log": null,
+      "dependency": "real FastAPI process",
+      "direct_python_json": {
+        "status": "ok"
+      }
+    },
+    {
+      "scenario": "python_offline",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "warning",
+      "message_verified": "AI servisi zamanında yanıt vermedi.",
+      "diagnostic_markers_absent": true,
+      "log_verified": true,
+      "expected_log": "AI service request timed out.",
+      "dependency": "real Python process stopped",
+      "error_kind": "timeout"
+    },
+    {
+      "scenario": "timeout",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "warning",
+      "message_verified": "AI servisi zamanında yanıt vermedi.",
+      "diagnostic_markers_absent": true,
+      "log_verified": true,
+      "expected_log": "AI service request timed out.",
+      "dependency": "controlled loopback HTTP fault server",
+      "duration_ms": 2021,
+      "configured_timeout_seconds": 2,
+      "fault_requests": [
+        {
+          "mode": "timeout",
+          "path": "/health"
+        }
+      ]
+    },
+    {
+      "scenario": "http_500",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "warning",
+      "message_verified": "AI servisi isteği tamamlayamadı.",
+      "diagnostic_markers_absent": true,
+      "log_verified": true,
+      "expected_log": "AI service returned HTTP 500.",
+      "dependency": "controlled loopback HTTP fault server",
+      "duration_ms": 4,
+      "configured_timeout_seconds": 2,
+      "fault_requests": [
+        {
+          "mode": "http_500",
+          "path": "/health"
+        }
+      ]
+    },
+    {
+      "scenario": "http_503",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "warning",
+      "message_verified": "AI servisi isteği tamamlayamadı.",
+      "diagnostic_markers_absent": true,
+      "log_verified": true,
+      "expected_log": "AI service returned HTTP 503.",
+      "dependency": "controlled loopback HTTP fault server",
+      "duration_ms": 3,
+      "configured_timeout_seconds": 2,
+      "fault_requests": [
+        {
+          "mode": "http_503",
+          "path": "/health"
+        }
+      ]
+    },
+    {
+      "scenario": "invalid_json",
+      "status": "PASS",
+      "http_status": 200,
+      "page_result": "warning",
+      "message_verified": "AI servisinden geçerli bir JSON yanıtı alınamadı.",
+      "diagnostic_markers_absent": true,
+      "log_verified": true,
+      "expected_log": "AI service returned invalid JSON.",
+      "dependency": "controlled loopback HTTP fault server",
+      "duration_ms": 5,
+      "configured_timeout_seconds": 2,
+      "fault_requests": [
+        {
+          "mode": "invalid_json",
+          "path": "/health"
+        }
+      ]
+    }
+  ],
+  "faults_are_controlled_http_dependencies": true,
+  "isolated_database": true,
+  "owned_processes_stopped": true,
+  "owned_process_ids": {
+    "python": 10416,
+    "web": 17012
+  },
+  "temporary_directory_removed": true
+}

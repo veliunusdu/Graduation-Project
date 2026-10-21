@@ -1,2 +1,6 @@
 # Preserve raw test evidence bytes for the recorded SHA-256 hashes.
 Docs/TestEvidence/Week3/** -text whitespace=cr-at-eol
+
+# Preserve Veli Week 5 live evidence bytes.
+Docs/TestEvidence/Week5/2026-10-21/** -text whitespace=cr-at-eol
+Docs/TestEvidence/Week5/2026-10-27/** -text whitespace=cr-at-eol
