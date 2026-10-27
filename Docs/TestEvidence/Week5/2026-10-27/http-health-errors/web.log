@@ -1,0 +1,13 @@
+Teacher created.
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]
+      AI service request timed out.
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]
+      AI service request timed out.
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]
+      AI service returned HTTP 500.
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]
+      AI service returned HTTP 503.
+warn: HomeworkPlatform.Web.Services.AI.AIServiceClient[0]
+      AI service returned invalid JSON.

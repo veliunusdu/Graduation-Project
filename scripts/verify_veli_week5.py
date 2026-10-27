@@ -109,7 +109,7 @@ def run(output_dir):
     modes = ["real_python_health", "python_offline", "timeout", "http_500", "http_503", "invalid_json"]
     rows = [{"scenario":mode, "status":"NOT_RUN"} for mode in modes]
     report = {"status":"failed", "scope":"Veli Week 5 first three steps",
-              "model_calls":0, "live_model_validation":"NOT_RUN_USER_DEFERRED",
+              "model_calls":0, "live_model_validation":"NOT_RUN_BY_THIS_HEALTH_HARNESS",
               "scenarios":rows, "faults_are_controlled_http_dependencies":True,
               "isolated_database":True, "owned_processes_stopped":False}
     python_process = web_process = fault = None

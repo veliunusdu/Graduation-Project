@@ -1,5 +1,7 @@
 # Veli — 5. hafta ilk üç adım / 21 Ekim 2026
 
+> Tarihsel kayıt: test sayıları o günkü birleşik çalışma dalına aittir. İzole 5. hafta PR teslimi ve güncel test sayıları için [27 Ekim kapanış raporunu](VELI_WEEK5_COMPLETION_2026-10-27.md) kullanın.
+
 **İstenen ilk üç adım tamamlandı.** Gerçek HTTP kontrolünde 6/6 senaryo, mevcut
 ASP.NET istemci/ekran testlerinde 14/14 ve tüm Python testlerinde 128/128 geçti.
 Hata ve atlanan test yok; Python'da mevcut bağımlılık kaynaklı bir TestClient uyarısı var.

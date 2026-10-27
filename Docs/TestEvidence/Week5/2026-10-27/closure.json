@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27",
+  "owner": "Veli",
+  "week": 5,
+  "branch": "test/veli-week5-integration",
+  "scope": "Week5-only test delivery; no Requirement Agent or Week4 implementation",
+  "test_delivery_status": "complete_peer_review_pending",
+  "web": {
+    "debug": {
+      "passed": 145,
+      "failed": 0,
+      "opt_in_skipped": 1
+    },
+    "release": {
+      "passed": 145,
+      "failed": 0,
+      "opt_in_skipped": 1
+    }
+  },
+  "python": {
+    "passed": 35,
+    "failed": 0,
+    "warnings": 1
+  },
+  "fresh_health_http_scenarios": 6,
+  "fresh_health_http_result": "PASS",
+  "real_model_evidence": {
+    "date": "2026-10-21",
+    "cases": 4,
+    "result": "PASS",
+    "rerun_on_2026_10_27": false,
+    "reason": "Ollama not running; combined startup/test command was blocked by automatic approval review (blocked by policy). No retry of blocked startup."
+  },
+  "tasks": {
+    "aspnet_python_ollama_chain": "PASS (21 October actual service class chain)",
+    "python_offline": "PASS (fresh27October)",
+    "ollama_unreachable": "PASS (21October controlled unreachable URL; no physical daemon shutdown)",
+    "missing_model": "PASS (21October real Ollama404 mapped to Python502 and safe .NETerror)",
+    "timeout": "PASS (fresh HTTP timeout +21October actual upstream timeout)",
+    "http_behavior_and_logs": "PASS"
+  },
+  "limitations": [
+    "Opt-in real model test skipped in ordinary regression by design; executed4times in historical live evidence.",
+    "Historical21October regression counts include other modules and are not current isolated-branch counts.",
+    "No production analysis screen added; no Requirement Agent quality claim; peer review/merge remains separate."
+  ]
+}

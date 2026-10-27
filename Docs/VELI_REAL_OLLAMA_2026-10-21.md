@@ -1,5 +1,7 @@
 # Veli — gerçek Qwen3/Ollama entegrasyonu / 21 Ekim 2026
 
+> Tarihsel kayıt: test sayıları o günkü birleşik çalışma dalına aittir. İzole 5. hafta PR teslimi ve güncel test sayıları için [27 Ekim kapanış raporunu](VELI_WEEK5_COMPLETION_2026-10-27.md) kullanın.
+
 **Gerçek ASP.NET AIServiceClient → FastAPI → Ollama → FastAPI → ASP.NET istemcisi zinciri doğrulandı.**
 Ollama: 0.40.7. Model: qwen3:4b. Digest:
 `359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7`.
