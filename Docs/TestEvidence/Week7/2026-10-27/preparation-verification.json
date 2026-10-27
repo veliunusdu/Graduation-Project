@@ -33,5 +33,10 @@
   "product_calls": 0,
   "overall_product_status": "NOT_RUN",
   "week7_task_complete": false,
-  "note": "No ingestion/embedding/vector DB/retrieval invoked; corpus is a minimal isolation smoke set, not a semantic benchmark."
+  "note": "No ingestion/embedding/vector DB/retrieval invoked; corpus is a minimal isolation smoke set, not a semantic benchmark.",
+  "publication": {
+    "pull_request": "https://github.com/veliunusdu/Graduation-Project/pull/11",
+    "state": "OPEN",
+    "product_acceptance_complete": false
+  }
 }

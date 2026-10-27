@@ -1,6 +1,7 @@
 # Veli — 7. hafta RAG izolasyon ve kalite kontrol listesi
 
 27 Ekim 2026. **Hazırlık hazır; ürün retrieval testleri çalıştırılmadı.**
+Yayın: [PR #11 — Week 7 RAG preparation](https://github.com/veliunusdu/Graduation-Project/pull/11). Ekip incelemesi bekleniyor.
 İncelenen main: `25f823a31693e6219d0f9f66178c44c49d801976` (6. hafta hazırlık PR10 dahil).
 CourseMaterial/indexleme/vector store/retrieval kodu henüz yok; API yolları ve sözleşme
 alanları takım adına uydurulmaz. 6. hafta hazırlığının birleşmesi ürünün hazır olduğu anlamına gelmez.
