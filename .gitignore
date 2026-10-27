@@ -11,6 +11,8 @@
 # Local SQLite Identity database (migrations stay tracked)
 web/App_Data/*.db
 web/App_Data/*.db-*
+ai-service/data/*.db
+ai-service/data/*.db-*
 
 # Private uploaded files and local editor settings
 web/App_Data/SubmissionFiles/
