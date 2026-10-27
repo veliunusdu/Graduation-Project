@@ -43,5 +43,11 @@
     "Opt-in real model test skipped in ordinary regression by design; executed4times in historical live evidence.",
     "Historical21October regression counts include other modules and are not current isolated-branch counts.",
     "No production analysis screen added; no Requirement Agent quality claim; peer review/merge remains separate."
-  ]
+  ],
+  "pull_request": {
+    "url": "https://github.com/veliunusdu/Graduation-Project/pull/9",
+    "state": "OPEN",
+    "base": "main",
+    "review_and_merge": "pending"
+  }
 }

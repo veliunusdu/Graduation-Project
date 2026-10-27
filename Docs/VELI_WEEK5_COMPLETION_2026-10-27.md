@@ -2,6 +2,8 @@
 
 **5. hafta test teslimi tamamlandı; ekip PR incelemesi ve merge bekleniyor.**
 Dal: `test/veli-week5-integration`, taban: güncel `origin/main`.
+PR: [#9 — Veli Week 5 integration verification](https://github.com/veliunusdu/Graduation-Project/pull/9).
+GitHub'a gönderildi; otomatik merge veya reviewer ataması yapılmadı.
 Requirement Agent kodu/kalite kabulü ve 4. hafta ekleri bu PR'ın dışında tutuldu.
 
 ## Görev / kanıt eşlemesi
