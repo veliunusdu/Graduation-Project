@@ -1,0 +1,2 @@
+# Optional reference-only validation; not production extraction dependencies.
+pypdf==6.10.0

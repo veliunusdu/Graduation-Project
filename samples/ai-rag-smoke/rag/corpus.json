@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "note": "Synthetic logical IDs. Map to actual authorized records before product tests; do not use as production chunk schemas.",
+  "documents": [
+    {
+      "fixture_document_id": "doc-hs-a",
+      "fixture_course_id": 101,
+      "education_level": "HighSchool",
+      "source_file": "rag/hs-a.txt",
+      "sentinel": "HS_A_ONLY_9F31"
+    },
+    {
+      "fixture_document_id": "doc-hs-b",
+      "fixture_course_id": 102,
+      "education_level": "HighSchool",
+      "source_file": "rag/hs-b.txt",
+      "sentinel": "HS_B_ONLY_8C72"
+    },
+    {
+      "fixture_document_id": "doc-uni-a",
+      "fixture_course_id": 201,
+      "education_level": "University",
+      "source_file": "rag/uni-a.txt",
+      "sentinel": "UNI_ONLY_7D64"
+    }
+  ]
+}

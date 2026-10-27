@@ -1,0 +1,675 @@
+{
+  "schema_version": 1,
+  "record_type": "TEMPLATE_NOT_EXECUTED",
+  "prepared_date": "2026-10-27",
+  "prepared_against_main": "55c6b4b184cea76baede85332b1218a5ef49f707",
+  "preparation_status": "READY",
+  "overall_product_status": "NOT_RUN",
+  "run_id": null,
+  "executed_at": null,
+  "tested_web_commit": null,
+  "tested_python_commit": null,
+  "contract": {
+    "approval_reference": null,
+    "upload_endpoint": null,
+    "processing_status_endpoint": null,
+    "extraction_entrypoint": null,
+    "chunk_result_endpoint": null,
+    "maximum_bytes": null,
+    "type_detection_policy": null,
+    "unsupported_extension_policy": null,
+    "txt_encoding_policy": null,
+    "http_error_mapping": null,
+    "state_field_and_value_mapping": null,
+    "course_material_chunk_field_mapping": null,
+    "async_polling_timeout_ms": null,
+    "retry_policy": null
+  },
+  "environment": {
+    "isolated_database": null,
+    "isolated_file_root": null,
+    "test_accounts": null,
+    "real_course_ids": null
+  },
+  "status_semantics": {
+    "BLOCKED": "Not executed: prerequisite or contract missing.",
+    "NOT_RUN": "Ready but not invoked.",
+    "PASS": "Product invoked and evidence meets agreed expectations.",
+    "FAIL": "Product invoked and actual behavior violates agreed expectations."
+  },
+  "cases": [
+    {
+      "case_id": "W6-EXT-01",
+      "scenario": "valid: extraction.docx",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.docx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.docx": "3a8cfa73a409e724d1775b16901f79ba3b1fe47c608126f97c5015f54adac041"
+      },
+      "expected_logical_behavior": [
+        "Manifest markers and Turkish text retained by actual product extraction.",
+        "Correct course/material metadata on resulting chunks; terminal Ready; no silent truncation."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EXT-02",
+      "scenario": "valid: extraction.pdf",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.pdf"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.pdf": "ac2f6101a574e7d7413ebedeaf84a939a170f019f416922267e2f3ab8428ee77"
+      },
+      "expected_logical_behavior": [
+        "Manifest markers and Turkish text retained by actual product extraction.",
+        "Correct course/material metadata on resulting chunks; terminal Ready; no silent truncation."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EXT-03",
+      "scenario": "valid: extraction.pptx",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.pptx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.pptx": "cca733ca6cefcce51de8996a32acd028be52263c1bd5d32e61e0d0e0f2f4060b"
+      },
+      "expected_logical_behavior": [
+        "Manifest markers and Turkish text retained by actual product extraction.",
+        "Correct course/material metadata on resulting chunks; terminal Ready; no silent truncation."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EXT-04",
+      "scenario": "valid: extraction.txt",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.txt": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba"
+      },
+      "expected_logical_behavior": [
+        "Manifest markers and Turkish text retained by actual product extraction.",
+        "Correct course/material metadata on resulting chunks; terminal Ready; no silent truncation."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-ZERO-01",
+      "scenario": "zero_byte: empty.docx",
+      "fixtures": [
+        "samples/ai-rag-smoke/zero-byte/empty.docx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/zero-byte/empty.docx": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-ZERO-02",
+      "scenario": "zero_byte: empty.pdf",
+      "fixtures": [
+        "samples/ai-rag-smoke/zero-byte/empty.pdf"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/zero-byte/empty.pdf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-ZERO-03",
+      "scenario": "zero_byte: empty.pptx",
+      "fixtures": [
+        "samples/ai-rag-smoke/zero-byte/empty.pptx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/zero-byte/empty.pptx": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-ZERO-04",
+      "scenario": "zero_byte: empty.txt",
+      "fixtures": [
+        "samples/ai-rag-smoke/zero-byte/empty.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/zero-byte/empty.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EMPTY-01",
+      "scenario": "empty_content: blank.docx",
+      "fixtures": [
+        "samples/ai-rag-smoke/empty-content/blank.docx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/empty-content/blank.docx": "6c53b8c25f288ef7a2e4511549c0fbff6b47e2acc4384f8682fe79d1c41c9037"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EMPTY-02",
+      "scenario": "empty_content: blank.pdf",
+      "fixtures": [
+        "samples/ai-rag-smoke/empty-content/blank.pdf"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/empty-content/blank.pdf": "43db7f43eada5aa5958183690605a63e209cbea770315a7618b71e18c4c45934"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EMPTY-03",
+      "scenario": "empty_content: blank.pptx",
+      "fixtures": [
+        "samples/ai-rag-smoke/empty-content/blank.pptx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/empty-content/blank.pptx": "cc862c651ec66e1fbb2e46581d62722a133d891de5c8fccc01fe2d2c5d58a68d"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-EMPTY-04",
+      "scenario": "empty_content: whitespace.txt",
+      "fixtures": [
+        "samples/ai-rag-smoke/empty-content/whitespace.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/empty-content/whitespace.txt": "e0d0f6a0a83f5850d8f255b2c875c7f2e984cc1c6fafc2e79b59ea629323eb92"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-BAD-01",
+      "scenario": "corrupt: invalid-utf8.txt",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/invalid-utf8.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/invalid-utf8.txt": "30f195603322f1e606f997c3928456c915990b69d3c27b7d02aefc8c53272687"
+      },
+      "expected_logical_behavior": [
+        "Under an approved UTF-8-only policy, return controlled encoding rejection/Failed without successful chunks.",
+        "If explicit alternate encodings are supported, agree expected decoded text and outcome before execution; never silently accept mojibake."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-BAD-02",
+      "scenario": "corrupt: truncated.docx",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/truncated.docx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/truncated.docx": "dcad8022b00f6a198296294531d773b249ab27ea68128a9a51527d820c230806"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-BAD-03",
+      "scenario": "corrupt: truncated.pdf",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/truncated.pdf"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/truncated.pdf": "a5b85ea1e96d33e5a208c0af3a30b8e9dded6a2de44470f13ecad00994c24212"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-BAD-04",
+      "scenario": "corrupt: truncated.pptx",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/truncated.pptx"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/truncated.pptx": "e93b74b574b8731162d828bec08be8448e53fde1768a3ae8c734a7d4890711ed"
+      },
+      "expected_logical_behavior": [
+        "Controlled rejection or agreed Failed state; never a successful empty analysis/chunk.",
+        "No new successful chunks and no removal of earlier valid chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-TYPE-01",
+      "scenario": "unsupported_extension: unsupported.bin",
+      "fixtures": [
+        "samples/week6-document-processing/unsupported/unsupported.bin"
+      ],
+      "fixture_sha256": {
+        "samples/week6-document-processing/unsupported/unsupported.bin": "3aa8c3a3e03526b82a2278f61c840044049e10d61ece84c70ffd817cdd813242"
+      },
+      "expected_logical_behavior": [
+        "Reject unsupported extension under agreed upload/type policy; no successful chunks."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-META-01",
+      "scenario": "Stored course/material identity survives extraction and chunking",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.txt": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba"
+      },
+      "expected_logical_behavior": [
+        "Map fixture to actual authorized course/material IDs; every chunk matches them.",
+        "Record page/chunk identity only under agreed metadata contract; no foreign-course metadata."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-STATUS-01",
+      "scenario": "Successful processing lifecycle",
+      "fixtures": [
+        "samples/ai-rag-smoke/valid/extraction.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/valid/extraction.txt": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba"
+      },
+      "expected_logical_behavior": [
+        "Record Pending/Processing/Ready logical states using agreed fields and event/log evidence.",
+        "Do not invent fast intermediate states not observed by polling."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-STATUS-02",
+      "scenario": "Failure lifecycle or validation rejection",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/truncated.pdf",
+        "samples/ai-rag-smoke/valid/extraction.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/truncated.pdf": "a5b85ea1e96d33e5a208c0af3a30b8e9dded6a2de44470f13ecad00994c24212",
+        "samples/ai-rag-smoke/valid/extraction.txt": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba"
+      },
+      "expected_logical_behavior": [
+        "Record rejection before creation or Pending/Processing/Failed according to agreed policy.",
+        "Existing successful materials/chunks remain unchanged."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    },
+    {
+      "case_id": "W6-RECOVERY-01",
+      "scenario": "Valid upload after invalid upload",
+      "fixtures": [
+        "samples/ai-rag-smoke/corrupt/truncated.pdf",
+        "samples/ai-rag-smoke/valid/extraction.txt"
+      ],
+      "fixture_sha256": {
+        "samples/ai-rag-smoke/corrupt/truncated.pdf": "a5b85ea1e96d33e5a208c0af3a30b8e9dded6a2de44470f13ecad00994c24212",
+        "samples/ai-rag-smoke/valid/extraction.txt": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba"
+      },
+      "expected_logical_behavior": [
+        "After rejected corrupt input, process a valid fixture successfully on the same instance.",
+        "Record before/after material/chunk counts and terminal status."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/extraction/chunking product implementation and agreed API contract are not available in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "steps_or_command": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "material_id": null,
+      "course_id": null,
+      "chunk_ids": [],
+      "observed_status_transitions": [],
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null
+    }
+  ]
+}

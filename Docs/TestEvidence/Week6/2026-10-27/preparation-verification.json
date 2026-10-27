@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-27",
+  "kind": "PREPARATION_REFERENCE_CHECK_ONLY",
+  "prepared_against_main": "55c6b4b184cea76baede85332b1218a5ef49f707",
+  "preparation_checks": "PASS",
+  "python": "3.12.14",
+  "reference_pypdf": "6.10.0",
+  "original_package": {
+    "fixture_count": 19,
+    "integrity": "PASS",
+    "reference_parser_checks": "PASS",
+    "rag_fixture_consistency": "PASS",
+    "product_smoke_tests": "NOT_RUN"
+  },
+  "week6_manifest_fixtures": 17,
+  "week6_fixture_hashes": "PASS",
+  "template_cases": 21,
+  "all_cases_blocked": true,
+  "actual_result_fields_empty": true,
+  "contract_fields_unconfirmed": true,
+  "product_calls": 0,
+  "overall_product_status": "NOT_RUN",
+  "week6_task_complete": false,
+  "note": "No CourseMaterial/extraction/chunking implementation in reviewed main; reference parser checks do not exercise the product."
+}

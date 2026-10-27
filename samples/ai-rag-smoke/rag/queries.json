@@ -1,0 +1,67 @@
+[
+  {
+    "id": "query-hs-a",
+    "fixture_course_id": 101,
+    "education_level": "HighSchool",
+    "query": "Bu derste süreklilik doğrulama kodu nedir?",
+    "top_k_values": [
+      1,
+      3
+    ],
+    "required_sentinel": "HS_A_ONLY_9F31",
+    "forbidden_sentinels": [
+      "HS_B_ONLY_8C72",
+      "UNI_ONLY_7D64"
+    ],
+    "allowed_document_ids": [
+      "doc-hs-a"
+    ]
+  },
+  {
+    "id": "query-hs-b",
+    "fixture_course_id": 102,
+    "education_level": "HighSchool",
+    "query": "Bu derste süreklilik doğrulama kodu nedir?",
+    "top_k_values": [
+      1,
+      3
+    ],
+    "required_sentinel": "HS_B_ONLY_8C72",
+    "forbidden_sentinels": [
+      "HS_A_ONLY_9F31",
+      "UNI_ONLY_7D64"
+    ],
+    "allowed_document_ids": [
+      "doc-hs-b"
+    ]
+  },
+  {
+    "id": "query-uni-a",
+    "fixture_course_id": 201,
+    "education_level": "University",
+    "query": "Bu derste süreklilik doğrulama kodu nedir?",
+    "top_k_values": [
+      1,
+      3
+    ],
+    "required_sentinel": "UNI_ONLY_7D64",
+    "forbidden_sentinels": [
+      "HS_A_ONLY_9F31",
+      "HS_B_ONLY_8C72"
+    ],
+    "allowed_document_ids": [
+      "doc-uni-a"
+    ]
+  },
+  {
+    "id": "query-empty-course",
+    "fixture_course_id": 999,
+    "query": "Bu derste süreklilik doğrulama kodu nedir?",
+    "top_k_values": [
+      1,
+      3
+    ],
+    "expected_count": 0,
+    "note": "Create an authorized empty course; do not substitute a nonexistent or unauthorized ID."
+  }
+]
