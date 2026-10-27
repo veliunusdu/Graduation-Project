@@ -1,0 +1,4 @@
+Üniversite A süreklilik notu
+Bu sentetik derste ortak konu sürekliliktir.
+Bu dersin süreklilik doğrulama kodu: UNI_ONLY_7D64
+Bu metin yalnızca course 201 kapsamında kullanılmalıdır.

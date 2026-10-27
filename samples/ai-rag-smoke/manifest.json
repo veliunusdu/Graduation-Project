@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "fixtures": [
+    {
+      "path": "valid/extraction.docx",
+      "kind": "valid",
+      "size_bytes": 36776,
+      "sha256": "3a8cfa73a409e724d1775b16901f79ba3b1fe47c608126f97c5015f54adac041",
+      "expected_markers": [
+        "SMOKE_EXTRACT_ALPHA_20261011",
+        "The reference value is 42.",
+        "SMOKE_EXTRACT_OMEGA_20261011",
+        "Türkçe karakterler: öğrenci, üniversite, ışık, ölçüm."
+      ]
+    },
+    {
+      "path": "valid/extraction.pdf",
+      "kind": "valid",
+      "size_bytes": 42241,
+      "sha256": "ac2f6101a574e7d7413ebedeaf84a939a170f019f416922267e2f3ab8428ee77",
+      "expected_markers": [
+        "SMOKE_EXTRACT_ALPHA_20261011",
+        "The reference value is 42.",
+        "SMOKE_EXTRACT_OMEGA_20261011",
+        "Türkçe karakterler: öğrenci, üniversite, ışık, ölçüm."
+      ]
+    },
+    {
+      "path": "valid/extraction.pptx",
+      "kind": "valid",
+      "size_bytes": 19562,
+      "sha256": "cca733ca6cefcce51de8996a32acd028be52263c1bd5d32e61e0d0e0f2f4060b",
+      "expected_markers": [
+        "SMOKE_EXTRACT_ALPHA_20261011",
+        "The reference value is 42.",
+        "SMOKE_EXTRACT_OMEGA_20261011",
+        "Türkçe karakterler: öğrenci, üniversite, ışık, ölçüm."
+      ]
+    },
+    {
+      "path": "valid/extraction.txt",
+      "kind": "valid",
+      "size_bytes": 180,
+      "sha256": "988e5dbf96e9f4f41aae0732961292a13d30206a0f494033fe0bb7f9d62737ba",
+      "expected_markers": [
+        "SMOKE_EXTRACT_ALPHA_20261011",
+        "The reference value is 42.",
+        "SMOKE_EXTRACT_OMEGA_20261011",
+        "Türkçe karakterler: öğrenci, üniversite, ışık, ölçüm."
+      ]
+    },
+    {
+      "path": "zero-byte/empty.docx",
+      "kind": "zero_byte",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_markers": []
+    },
+    {
+      "path": "zero-byte/empty.pdf",
+      "kind": "zero_byte",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_markers": []
+    },
+    {
+      "path": "zero-byte/empty.pptx",
+      "kind": "zero_byte",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_markers": []
+    },
+    {
+      "path": "zero-byte/empty.txt",
+      "kind": "zero_byte",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_markers": []
+    },
+    {
+      "path": "empty-content/blank.docx",
+      "kind": "empty_content",
+      "size_bytes": 36625,
+      "sha256": "6c53b8c25f288ef7a2e4511549c0fbff6b47e2acc4384f8682fe79d1c41c9037",
+      "expected_markers": []
+    },
+    {
+      "path": "empty-content/blank.pdf",
+      "kind": "empty_content",
+      "size_bytes": 1311,
+      "sha256": "43db7f43eada5aa5958183690605a63e209cbea770315a7618b71e18c4c45934",
+      "expected_markers": []
+    },
+    {
+      "path": "empty-content/blank.pptx",
+      "kind": "empty_content",
+      "size_bytes": 19163,
+      "sha256": "cc862c651ec66e1fbb2e46581d62722a133d891de5c8fccc01fe2d2c5d58a68d",
+      "expected_markers": []
+    },
+    {
+      "path": "empty-content/whitespace.txt",
+      "kind": "empty_content",
+      "size_bytes": 7,
+      "sha256": "e0d0f6a0a83f5850d8f255b2c875c7f2e984cc1c6fafc2e79b59ea629323eb92",
+      "expected_markers": []
+    },
+    {
+      "path": "corrupt/invalid-utf8.txt",
+      "kind": "corrupt",
+      "size_bytes": 5,
+      "sha256": "30f195603322f1e606f997c3928456c915990b69d3c27b7d02aefc8c53272687",
+      "expected_markers": [],
+      "note": "Invalid under the proposed UTF-8-only TXT policy. Confirm encoding policy with team."
+    },
+    {
+      "path": "corrupt/truncated.docx",
+      "kind": "corrupt",
+      "size_bytes": 24,
+      "sha256": "dcad8022b00f6a198296294531d773b249ab27ea68128a9a51527d820c230806",
+      "expected_markers": []
+    },
+    {
+      "path": "corrupt/truncated.pdf",
+      "kind": "corrupt",
+      "size_bytes": 34,
+      "sha256": "a5b85ea1e96d33e5a208c0af3a30b8e9dded6a2de44470f13ecad00994c24212",
+      "expected_markers": []
+    },
+    {
+      "path": "corrupt/truncated.pptx",
+      "kind": "corrupt",
+      "size_bytes": 24,
+      "sha256": "e93b74b574b8731162d828bec08be8448e53fde1768a3ae8c734a7d4890711ed",
+      "expected_markers": []
+    },
+    {
+      "path": "rag/hs-a.txt",
+      "kind": "rag_document",
+      "size_bytes": 190,
+      "sha256": "c87dda4661513ddbe25a5d95a0c1e296032814cfe8ddd512400c7f92b3c5814c",
+      "expected_markers": [
+        "HS_A_ONLY_9F31"
+      ]
+    },
+    {
+      "path": "rag/hs-b.txt",
+      "kind": "rag_document",
+      "size_bytes": 190,
+      "sha256": "20ad24dca3464354278104083b2bee5b3ce368ea27ac51c72e5d04dc703f7ef6",
+      "expected_markers": [
+        "HS_B_ONLY_8C72"
+      ]
+    },
+    {
+      "path": "rag/uni-a.txt",
+      "kind": "rag_document",
+      "size_bytes": 196,
+      "sha256": "c8101f718de39967c45e555a6656c66e72f62be51d485ddb3e47b8fb7eee7d9e",
+      "expected_markers": [
+        "UNI_ONLY_7D64"
+      ]
+    }
+  ]
+}

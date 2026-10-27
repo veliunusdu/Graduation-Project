@@ -1,0 +1,4 @@
+Lise B süreklilik notu
+Bu sentetik derste ortak konu sürekliliktir.
+Bu dersin süreklilik doğrulama kodu: HS_B_ONLY_8C72
+Bu metin yalnızca course 102 kapsamında kullanılmalıdır.

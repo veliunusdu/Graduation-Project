@@ -4,3 +4,15 @@ Docs/TestEvidence/Week3/** -text whitespace=cr-at-eol
 # Preserve Veli Week 5 live evidence bytes.
 Docs/TestEvidence/Week5/2026-10-21/** -text whitespace=cr-at-eol
 Docs/TestEvidence/Week5/2026-10-27/** -text whitespace=cr-at-eol
+
+# Preserve fixture bytes for SHA-256 references (including TXT/JSON newlines).
+samples/ai-rag-smoke/** -text whitespace=cr-at-eol
+samples/week6-document-processing/** -text whitespace=cr-at-eol
+Docs/TestEvidence/Week6/** -text whitespace=cr-at-eol
+
+# Binary fixtures and intentional whitespace inputs are not source-code whitespace.
+samples/ai-rag-smoke/**/*.pdf binary
+samples/ai-rag-smoke/**/*.docx binary
+samples/ai-rag-smoke/**/*.pptx binary
+samples/week6-document-processing/**/*.bin binary
+samples/ai-rag-smoke/empty-content/whitespace.txt -whitespace

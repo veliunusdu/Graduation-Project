@@ -1,0 +1,5 @@
+Extraction smoke fixture
+SMOKE_EXTRACT_ALPHA_20261011
+The reference value is 42.
+SMOKE_EXTRACT_OMEGA_20261011
+Türkçe karakterler: öğrenci, üniversite, ışık, ölçüm.
