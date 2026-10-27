@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "model": null,
+  "response": null,
+  "done": null,
+  "error_code": "http_error",
+  "http_status": 502,
+  "error_message": "AI servisi iste\u011Fi tamamlayamad\u0131. L\u00FCtfen daha sonra tekrar deneyin."
+}

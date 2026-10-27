@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "model": "qwen3:4b",
+  "response": "INTEGRATION_OK",
+  "done": true,
+  "error_code": null,
+  "http_status": null,
+  "error_message": null
+}

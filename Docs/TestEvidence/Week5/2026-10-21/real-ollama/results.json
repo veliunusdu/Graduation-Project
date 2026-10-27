@@ -1,0 +1,78 @@
+{
+  "status": "passed",
+  "model": "qwen3:4b",
+  "scenarios": [
+    {
+      "scenario": "real_model",
+      "status": "PASS",
+      "python_http_status": 200,
+      "python_error_kind_verified": null,
+      "duration_seconds": 7.17,
+      "client": {
+        "success": true,
+        "model": "qwen3:4b",
+        "response": "INTEGRATION_OK",
+        "done": true,
+        "error_code": null,
+        "http_status": null,
+        "error_message": null
+      }
+    },
+    {
+      "scenario": "missing_model",
+      "status": "PASS",
+      "python_http_status": 502,
+      "python_error_kind_verified": "404",
+      "duration_seconds": 3.36,
+      "client": {
+        "success": false,
+        "model": null,
+        "response": null,
+        "done": null,
+        "error_code": "http_error",
+        "http_status": 502,
+        "error_message": "AI servisi isteği tamamlayamadı. Lütfen daha sonra tekrar deneyin."
+      }
+    },
+    {
+      "scenario": "unreachable_ollama",
+      "status": "PASS",
+      "python_http_status": 502,
+      "python_error_kind_verified": "Could not connect",
+      "duration_seconds": 7.26,
+      "client": {
+        "success": false,
+        "model": null,
+        "response": null,
+        "done": null,
+        "error_code": "http_error",
+        "http_status": 502,
+        "error_message": "AI servisi isteği tamamlayamadı. Lütfen daha sonra tekrar deneyin."
+      }
+    },
+    {
+      "scenario": "upstream_timeout",
+      "status": "PASS",
+      "python_http_status": 502,
+      "python_error_kind_verified": "timed out",
+      "duration_seconds": 3.52,
+      "client": {
+        "success": false,
+        "model": null,
+        "response": null,
+        "done": null,
+        "error_code": "http_error",
+        "http_status": 502,
+        "error_message": "AI servisi isteği tamamlayamadı. Lütfen daha sonra tekrar deneyin."
+      }
+    }
+  ],
+  "boundary": "real ASP.NET AIServiceClient class, real FastAPI and local Ollama; no web analysis screen",
+  "ollama_daemon_stopped": false,
+  "model_downloads": 0,
+  "owned_python_processes_stopped": true,
+  "ollama_version": {
+    "version": "0.40.7"
+  },
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+}

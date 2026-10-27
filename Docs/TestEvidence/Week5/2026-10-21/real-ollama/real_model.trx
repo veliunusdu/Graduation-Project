@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="353e0ca9-9ffe-4023-ae64-118c8b87fd65" name="veliu@MONSTER 2026-10-21 18:35:37" runUser="MONSTER\veliu" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-21T18:35:37.4462305+03:00" queuing="2026-10-21T18:35:37.4462308+03:00" start="2026-10-21T18:35:35.2538931+03:00" finish="2026-10-21T18:35:37.4647819+03:00" />
+  <TestSettings name="default" id="471cd2aa-0a5f-4c79-a730-d66201e12c27">
+    <Deployment runDeploymentRoot="veliu_MONSTER_2026-10-21_18_35_37" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c4529706-c70d-4029-9992-6e57b65924c5" testId="9741901f-5d5e-93e8-1cca-273d210d8f85" testName="HomeworkPlatform.Web.Tests.LiveOllamaIntegrationTests.ActualAspNetClientPostsThroughRealPythonToConfiguredOllama" computerName="MONSTER" duration="00:00:01.5813218" startTime="2026-10-21T18:35:35.7415380+03:00" endTime="2026-10-21T18:35:37.3317609+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4529706-c70d-4029-9992-6e57b65924c5" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="HomeworkPlatform.Web.Tests.LiveOllamaIntegrationTests.ActualAspNetClientPostsThroughRealPythonToConfiguredOllama" storage="c:\codes\projects\graduation project\tests\homeworkplatform.web.tests\bin\debug\net8.0\homeworkplatform.web.tests.dll" id="9741901f-5d5e-93e8-1cca-273d210d8f85">
+      <Execution id="c4529706-c70d-4029-9992-6e57b65924c5" />
+      <TestMethod codeBase="C:\Codes\Projects\Graduation Project\tests\HomeworkPlatform.Web.Tests\bin\Debug\net8.0\HomeworkPlatform.Web.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="HomeworkPlatform.Web.Tests.LiveOllamaIntegrationTests" name="ActualAspNetClientPostsThroughRealPythonToConfiguredOllama" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9741901f-5d5e-93e8-1cca-273d210d8f85" executionId="c4529706-c70d-4029-9992-6e57b65924c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 8.0.32)&#xD;
+[xUnit.net 00:00:00.07]   Discovering: HomeworkPlatform.Web.Tests&#xD;
+[xUnit.net 00:00:00.12]   Discovered:  HomeworkPlatform.Web.Tests&#xD;
+[xUnit.net 00:00:00.14]   Starting:    HomeworkPlatform.Web.Tests&#xD;
+[xUnit.net 00:00:01.75]   Finished:    HomeworkPlatform.Web.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

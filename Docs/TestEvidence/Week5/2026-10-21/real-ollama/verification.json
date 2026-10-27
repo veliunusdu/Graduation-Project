@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-21",
+  "owner": "Veli",
+  "live_pipeline_cases": 4,
+  "live_pipeline_passed": 4,
+  "web_regression_passed": 154,
+  "web_regression_opt_in_skipped": 1,
+  "python_regression_passed": 128,
+  "python_regression_warning_count": 1,
+  "review": "no Important/Critical findings",
+  "model": "qwen3:4b",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "model_quality_acceptance": "separate pending Requirement Agent evaluation",
+  "ollama_unreachable_method": "unused local port; user daemon remains running",
+  "production_analysis_ui_added": false
+}
