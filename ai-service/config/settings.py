@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic import HttpUrl, field_validator
+from pydantic import Field, HttpUrl, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,7 +18,11 @@ class Settings(BaseSettings):
 
     OLLAMA_GENERAL_MODEL: str = "qwen3:8b"
     OLLAMA_CODE_REVIEW_MODEL: str = "qwen2.5-coder:7b"
+    OLLAMA_EMBEDDING_MODEL: str = "bge-m3"
     OLLAMA_TIMEOUT_SECONDS: float = 120.0
+    DOCUMENT_MAX_FILE_SIZE_BYTES: int = Field(default=20 * 1024 * 1024, ge=1)
+    DOCUMENT_CHUNK_SIZE: int = 1000
+    DOCUMENT_CHUNK_OVERLAP: int = 150
 
     @field_validator("APP_NAME")
     @classmethod

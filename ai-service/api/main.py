@@ -1,10 +1,16 @@
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel, Field
+from starlette.concurrency import run_in_threadpool
 
 from config.settings import settings
 from llm.ollama_client import OllamaClientError, ollama_client
+from rag.document_processing import DocumentProcessingError
+from rag.embedding import EmbeddingError
+from rag.pipeline import document_pipeline
+from schemas.context import AgentContext
+from schemas.document import DocumentProcessingResult
 
 app = FastAPI(title=settings.APP_NAME)
 
@@ -36,3 +42,39 @@ def test_llm(request: LLMTestRequest):
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/documents/process", response_model=DocumentProcessingResult)
+async def process_document(
+    file: UploadFile = File(...),
+    material_id: int = Form(...),
+    course_id: int = Form(...),
+    education_level: str = Form(...),
+    grade_level: int = Form(...),
+):
+    """Extract, chunk and embed one CourseMaterial supplied by the web backend."""
+    try:
+        content = await file.read(settings.DOCUMENT_MAX_FILE_SIZE_BYTES + 1)
+        if len(content) > settings.DOCUMENT_MAX_FILE_SIZE_BYTES:
+            raise HTTPException(
+                status_code=413,
+                detail="Document exceeds the configured file size limit.",
+            )
+        context = AgentContext(
+            course_id=course_id,
+            education_level=education_level,
+            grade_level=grade_level,
+        )
+        return await run_in_threadpool(
+            document_pipeline.process,
+            content=content,
+            filename=file.filename or "",
+            material_id=material_id,
+            context=context,
+        )
+    except DocumentProcessingError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except EmbeddingError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
