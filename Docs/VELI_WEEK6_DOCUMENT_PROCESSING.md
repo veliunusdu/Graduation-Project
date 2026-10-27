@@ -1,6 +1,7 @@
 # Veli — 6. hafta doküman işleme kontrol listesi
 
 Tarih: 27 Ekim 2026. **Hazırlık hazır; ürün testleri çalıştırılmadı.**
+Yayın: [PR #10 — Week 6 test preparation](https://github.com/veliunusdu/Graduation-Project/pull/10). Ekip incelemesi bekleniyor.
 İncelenen main: `55c6b4b184cea76baede85332b1218a5ef49f707`.
 CourseMaterial/extraction/chunking akışı ve ilgili API sözleşmesi bu sürümde yok.
 Aşağıdaki liste ürün kodu geldiğinde uygulanır; bir endpoint veya hata kodu uydurmaz.

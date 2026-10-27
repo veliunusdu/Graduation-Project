@@ -21,5 +21,10 @@
   "product_calls": 0,
   "overall_product_status": "NOT_RUN",
   "week6_task_complete": false,
-  "note": "No CourseMaterial/extraction/chunking implementation in reviewed main; reference parser checks do not exercise the product."
+  "note": "No CourseMaterial/extraction/chunking implementation in reviewed main; reference parser checks do not exercise the product.",
+  "publication": {
+    "pull_request": "https://github.com/veliunusdu/Graduation-Project/pull/10",
+    "state": "OPEN",
+    "product_acceptance_complete": false
+  }
 }
