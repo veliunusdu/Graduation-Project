@@ -52,6 +52,14 @@ def test_document_file_size_limit_must_be_positive(monkeypatch):
         Settings(_env_file=None)
 
 
+def test_relative_vector_db_path_resolves_from_service_directory(monkeypatch):
+    monkeypatch.setenv("VECTOR_DB_PATH", "data/test-vectors.db")
+
+    value = Settings(_env_file=None).VECTOR_DB_PATH
+
+    assert value == Path(__file__).resolve().parents[1] / "data/test-vectors.db"
+
+
 def test_service_dotenv_is_loaded_from_another_working_directory(tmp_path, monkeypatch):
     # Copy the actual configuration module into an isolated service tree.
     # This exercises its path-resolution behavior without changing the user's .env.

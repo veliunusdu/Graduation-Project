@@ -9,12 +9,28 @@ Current routes:
 - `POST /llm/test` for the configured Qwen model chain
 - `POST /documents/process` for PDF/DOCX/PPTX/TXT extraction, chunking and
   BGE-M3 embeddings
+- `POST /rag/retrieve` for course-isolated similarity search
 
 The document endpoint accepts a multipart file plus `material_id`, `course_id`,
 `education_level` and `grade_level`. Every produced chunk carries those values,
-`page_number` and `chunk_id`. Week 6 forwards the embedded chunks to an in-memory
-vector-store adapter; persistent vector DB storage and retrieval belong to Week 7.
+`page_number` and `chunk_id`. Embedded chunks are stored in the persistent SQLite
+vector store configured by `VECTOR_DB_PATH`.
 `DOCUMENT_MAX_FILE_SIZE_BYTES` configures the upload limit and defaults to 20 MiB.
+
+The retrieval endpoint accepts JSON and requires a course:
+
+```json
+{
+  "question": "Bu derste süreklilik doğrulama kodu nedir?",
+  "courseId": 101,
+  "topK": 3
+}
+```
+
+It embeds the question with BGE-M3 and returns ranked source text, similarity
+score and complete chunk metadata. Candidate rows are selected with a mandatory
+SQL `course_id` filter before similarity ranking. Snake-case `course_id` and
+`top_k` request fields are accepted as well.
 
 Install the required local embedding model before live document processing:
 

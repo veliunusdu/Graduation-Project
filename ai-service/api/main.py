@@ -9,8 +9,14 @@ from llm.ollama_client import OllamaClientError, ollama_client
 from rag.document_processing import DocumentProcessingError
 from rag.embedding import EmbeddingError
 from rag.pipeline import document_pipeline
+from rag.retrieval import retrieval_service
+from rag.vector_store import VectorStoreError
 from schemas.context import AgentContext
-from schemas.document import DocumentProcessingResult
+from schemas.document import (
+    DocumentProcessingResult,
+    RetrievalRequest,
+    RetrievalResult,
+)
 
 app = FastAPI(title=settings.APP_NAME)
 
@@ -78,3 +84,17 @@ async def process_document(
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.post("/rag/retrieve", response_model=RetrievalResult)
+async def retrieve_chunks(request: RetrievalRequest):
+    """Retrieve course-isolated source chunks for a student question."""
+    try:
+        return await run_in_threadpool(retrieval_service.retrieve, request)
+    except EmbeddingError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except VectorStoreError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail="Vector store operation failed.",
+        ) from exc

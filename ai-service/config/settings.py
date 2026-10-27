@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     DOCUMENT_MAX_FILE_SIZE_BYTES: int = Field(default=20 * 1024 * 1024, ge=1)
     DOCUMENT_CHUNK_SIZE: int = 1000
     DOCUMENT_CHUNK_OVERLAP: int = 150
+    VECTOR_DB_PATH: Path = (
+        Path(__file__).resolve().parents[1] / "data" / "vector_store.db"
+    )
 
     @field_validator("APP_NAME")
     @classmethod
@@ -31,6 +34,13 @@ class Settings(BaseSettings):
         if not value:
             raise ValueError("APP_NAME must not be blank")
         return value
+
+    @field_validator("VECTOR_DB_PATH")
+    @classmethod
+    def resolve_vector_db_path(cls, value: Path) -> Path:
+        if value.is_absolute():
+            return value
+        return Path(__file__).resolve().parents[1] / value
 
 
 settings = Settings()
