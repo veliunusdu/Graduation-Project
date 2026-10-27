@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "kind": "LOGICAL_QUERY_EXPECTATIONS_NOT_API_PAYLOADS",
+  "queries": [
+    {
+      "query_id": "w7-rel-01",
+      "category": "relevant",
+      "fixture_course_ref": "hs-a",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 1,
+      "allowed_fixture_document_ids": [
+        "doc-hs-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": "HS_A_ONLY_9F31",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-rel-02",
+      "category": "relevant",
+      "fixture_course_ref": "hs-a",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-hs-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": "HS_A_ONLY_9F31",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-rel-03",
+      "category": "relevant",
+      "fixture_course_ref": "hs-b",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 1,
+      "allowed_fixture_document_ids": [
+        "doc-hs-b"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": "HS_B_ONLY_8C72",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-rel-04",
+      "category": "relevant",
+      "fixture_course_ref": "hs-b",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-hs-b"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": "HS_B_ONLY_8C72",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-rel-05",
+      "category": "relevant",
+      "fixture_course_ref": "uni-a",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 1,
+      "allowed_fixture_document_ids": [
+        "doc-uni-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72"
+      ],
+      "required_sentinel": "UNI_ONLY_7D64",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-rel-06",
+      "category": "relevant",
+      "fixture_course_ref": "uni-a",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-uni-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72"
+      ],
+      "required_sentinel": "UNI_ONLY_7D64",
+      "expected_count": null,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-unrelated-01",
+      "category": "unrelated",
+      "fixture_course_ref": "hs-a",
+      "question": "Satürn halkalarının bileşimi nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-hs-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": null,
+      "expected_count": null,
+      "abstention_rule": "Agreed relevance policy; nonempty nearest-neighbor results alone are not a failure."
+    },
+    {
+      "query_id": "w7-absent-01",
+      "category": "absent_in_material",
+      "fixture_course_ref": "hs-a",
+      "question": "Materyalde süreklilik için verilen epsilon-delta ispatının adımları nelerdir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-hs-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": null,
+      "expected_count": null,
+      "abstention_rule": "Agreed relevance policy; nonempty nearest-neighbor results alone are not a failure."
+    },
+    {
+      "query_id": "w7-unrelated-02",
+      "category": "unrelated",
+      "fixture_course_ref": "uni-a",
+      "question": "Satürn halkalarının bileşimi nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-uni-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72"
+      ],
+      "required_sentinel": null,
+      "expected_count": null,
+      "abstention_rule": "Agreed relevance policy; nonempty nearest-neighbor results alone are not a failure."
+    },
+    {
+      "query_id": "w7-absent-02",
+      "category": "absent_in_material",
+      "fixture_course_ref": "uni-a",
+      "question": "Materyalde süreklilik için verilen epsilon-delta ispatının adımları nelerdir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [
+        "doc-uni-a"
+      ],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72"
+      ],
+      "required_sentinel": null,
+      "expected_count": null,
+      "abstention_rule": "Agreed relevance policy; nonempty nearest-neighbor results alone are not a failure."
+    },
+    {
+      "query_id": "w7-empty-01",
+      "category": "authorized_empty_course",
+      "fixture_course_ref": "empty",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 1,
+      "allowed_fixture_document_ids": [],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": null,
+      "expected_count": 0,
+      "abstention_rule": null
+    },
+    {
+      "query_id": "w7-empty-02",
+      "category": "authorized_empty_course",
+      "fixture_course_ref": "empty",
+      "question": "Bu derste süreklilik doğrulama kodu nedir?",
+      "top_k": 3,
+      "allowed_fixture_document_ids": [],
+      "forbidden_sentinels": [
+        "HS_A_ONLY_9F31",
+        "HS_B_ONLY_8C72",
+        "UNI_ONLY_7D64"
+      ],
+      "required_sentinel": null,
+      "expected_count": 0,
+      "abstention_rule": null
+    }
+  ]
+}

@@ -1,0 +1,614 @@
+{
+  "schema_version": 1,
+  "record_type": "TEMPLATE_NOT_EXECUTED",
+  "prepared_date": "2026-10-27",
+  "prepared_against_main": "25f823a31693e6219d0f9f66178c44c49d801976",
+  "preparation_status": "READY",
+  "overall_product_status": "NOT_RUN",
+  "run_id": null,
+  "executed_at": null,
+  "tested_web_commit": null,
+  "tested_python_commit": null,
+  "contract": {
+    "approval_reference": null,
+    "ingestion_endpoint": null,
+    "index_readiness_endpoint": null,
+    "retrieval_endpoint": null,
+    "auth_and_course_enrollment_policy": null,
+    "embedding_model_revision": null,
+    "vector_store_and_collection": null,
+    "top_k_field_and_bounds": null,
+    "metadata_field_mapping": null,
+    "score_meaning_and_direction": null,
+    "relevance_threshold_and_abstention_policy": null,
+    "idempotency_version_policy": null,
+    "error_http_mapping": null
+  },
+  "environment": {
+    "isolated_database": null,
+    "isolated_index": null,
+    "isolated_file_root": null,
+    "real_course_material_chunk_mapping": null,
+    "test_actor_mapping": null
+  },
+  "cases": [
+    {
+      "case_id": "W7-REL-01",
+      "scenario": "relevant: hs-a / k=1",
+      "query_ids": [
+        "w7-rel-01"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-REL-02",
+      "scenario": "relevant: hs-a / k=3",
+      "query_ids": [
+        "w7-rel-02"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-REL-03",
+      "scenario": "relevant: hs-b / k=1",
+      "query_ids": [
+        "w7-rel-03"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-REL-04",
+      "scenario": "relevant: hs-b / k=3",
+      "query_ids": [
+        "w7-rel-04"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-REL-05",
+      "scenario": "relevant: uni-a / k=1",
+      "query_ids": [
+        "w7-rel-05"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-REL-06",
+      "scenario": "relevant: uni-a / k=3",
+      "query_ids": [
+        "w7-rel-06"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "After verified indexing, retrieve at least one own sentinel-bearing chunk; an empty index cannot pass this case."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-UNRELATED-01",
+      "scenario": "unrelated: hs-a / k=3",
+      "query_ids": [
+        "w7-unrelated-01"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "Record relevance/abstention under agreed threshold; do not invent supported evidence or require zero results without that policy."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-ABSENT-01",
+      "scenario": "absent_in_material: hs-a / k=3",
+      "query_ids": [
+        "w7-absent-01"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "Record relevance/abstention under agreed threshold; do not invent supported evidence or require zero results without that policy."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-UNRELATED-02",
+      "scenario": "unrelated: uni-a / k=3",
+      "query_ids": [
+        "w7-unrelated-02"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "Record relevance/abstention under agreed threshold; do not invent supported evidence or require zero results without that policy."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-ABSENT-02",
+      "scenario": "absent_in_material: uni-a / k=3",
+      "query_ids": [
+        "w7-absent-02"
+      ],
+      "expected_logical_behavior": [
+        "Each result belongs to the requested actual course and its uploaded material/chunk mappings; never foreign sentinel/IDs.",
+        "Result count <= requested top_k, unless agreed API documents another policy before execution.",
+        "Record relevance/abstention under agreed threshold; do not invent supported evidence or require zero results without that policy."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-EMPTY-01",
+      "scenario": "authorized_empty_course: empty / k=1",
+      "query_ids": [
+        "w7-empty-01"
+      ],
+      "expected_logical_behavior": [
+        "Authorized existing empty course returns zero chunks; not a nonexistent/unauthorized ID or failed request."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-EMPTY-02",
+      "scenario": "authorized_empty_course: empty / k=3",
+      "query_ids": [
+        "w7-empty-02"
+      ],
+      "expected_logical_behavior": [
+        "Authorized existing empty course returns zero chunks; not a nonexistent/unauthorized ID or failed request."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-META-01",
+      "scenario": "Top-k source metadata",
+      "query_ids": [
+        "w7-rel-01",
+        "w7-rel-02",
+        "w7-rel-03",
+        "w7-rel-04",
+        "w7-rel-05",
+        "w7-rel-06"
+      ],
+      "expected_logical_behavior": [
+        "Every returned course/material/chunk ID maps to the indexed source.",
+        "Education/grade agree with course. Page/offset metadata follows agreed TXT-nullability; do not fabricate page1."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-ORDER-01",
+      "scenario": "Ranking and score semantics",
+      "query_ids": [
+        "w7-rel-01",
+        "w7-rel-02",
+        "w7-rel-03",
+        "w7-rel-04",
+        "w7-rel-05",
+        "w7-rel-06"
+      ],
+      "expected_logical_behavior": [
+        "Agree similarity/distance score meaning and ordering before asserting sort direction.",
+        "If scores are not exposed, record that check as unverified rather than claiming success."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-AUTH-01",
+      "scenario": "Existing but unauthorized course",
+      "query_ids": [
+        "w7-rel-03"
+      ],
+      "expected_logical_behavior": [
+        "Use real hs-b ID with unenrolled_actor; backend denies before retrieval or returns agreed safe denial.",
+        "Do not substitute a nonexistent ID; no foreign course content returned."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "unenrolled_actor"
+      ]
+    },
+    {
+      "case_id": "W7-DEDUP-01",
+      "scenario": "Repeated material ingestion",
+      "query_ids": [
+        "w7-rel-01"
+      ],
+      "expected_logical_behavior": [
+        "Under agreed idempotency/upsert policy, upload same fixture twice to same course.",
+        "No duplicated successful chunks; record document/chunk counts and versions before/after."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-KRANGE-01",
+      "scenario": "Top-k limits",
+      "query_ids": [
+        "w7-rel-01"
+      ],
+      "expected_logical_behavior": [
+        "Derive boundary values from agreed minimum/maximum; do not invent API bounds.",
+        "Observe agreed rejection/clamping; no silent cross-course fallback."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "authorized_actor"
+      ]
+    },
+    {
+      "case_id": "W7-RECOVERY-01",
+      "scenario": "Valid query after rejected input",
+      "query_ids": [
+        "w7-rel-03",
+        "w7-rel-01"
+      ],
+      "expected_logical_behavior": [
+        "After unauthorized or invalid-k attempt, authorized hs-a query still returns own source.",
+        "Previous materials/chunks are preserved; no poisoned course context reused."
+      ],
+      "status": "BLOCKED",
+      "blocking_reason": "CourseMaterial/chunk indexing, vector store/retrieval routes and agreed metadata/score/auth contract are absent in reviewed main.",
+      "executed_at": null,
+      "operator": null,
+      "actual": null,
+      "http_status": null,
+      "duration_ms": null,
+      "query_request": null,
+      "raw_retrieval_response": null,
+      "mapped_course_id": null,
+      "returned_chunk_ids": [],
+      "metadata_checks": null,
+      "relevance_review": null,
+      "before_counts": null,
+      "after_counts": null,
+      "evidence_paths": [],
+      "notes": null,
+      "actor_fixture_refs": [
+        "unenrolled_actor",
+        "authorized_actor"
+      ]
+    }
+  ]
+}
