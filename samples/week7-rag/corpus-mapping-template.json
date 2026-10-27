@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "LOGICAL_FIXTURE_RECIPE_NOT_PRODUCT_SEED",
+  "courses": [
+    {
+      "fixture_course_ref": "hs-a",
+      "logical_course_id": 101,
+      "education_level": "HighSchool",
+      "grade_level": 9,
+      "documents": [
+        {
+          "fixture_document_id": "doc-hs-a",
+          "path": "samples/ai-rag-smoke/rag/hs-a.txt",
+          "sha256": "c87dda4661513ddbe25a5d95a0c1e296032814cfe8ddd512400c7f92b3c5814c",
+          "size_bytes": 190,
+          "sentinel": "HS_A_ONLY_9F31"
+        }
+      ],
+      "real_course_id": null,
+      "real_material_ids": null,
+      "real_chunk_ids": null
+    },
+    {
+      "fixture_course_ref": "hs-b",
+      "logical_course_id": 102,
+      "education_level": "HighSchool",
+      "grade_level": 12,
+      "documents": [
+        {
+          "fixture_document_id": "doc-hs-b",
+          "path": "samples/ai-rag-smoke/rag/hs-b.txt",
+          "sha256": "20ad24dca3464354278104083b2bee5b3ce368ea27ac51c72e5d04dc703f7ef6",
+          "size_bytes": 190,
+          "sentinel": "HS_B_ONLY_8C72"
+        }
+      ],
+      "real_course_id": null,
+      "real_material_ids": null,
+      "real_chunk_ids": null
+    },
+    {
+      "fixture_course_ref": "uni-a",
+      "logical_course_id": 201,
+      "education_level": "University",
+      "grade_level": 1,
+      "documents": [
+        {
+          "fixture_document_id": "doc-uni-a",
+          "path": "samples/ai-rag-smoke/rag/uni-a.txt",
+          "sha256": "c8101f718de39967c45e555a6656c66e72f62be51d485ddb3e47b8fb7eee7d9e",
+          "size_bytes": 196,
+          "sentinel": "UNI_ONLY_7D64"
+        }
+      ],
+      "real_course_id": null,
+      "real_material_ids": null,
+      "real_chunk_ids": null
+    },
+    {
+      "fixture_course_ref": "empty",
+      "logical_course_id": 999,
+      "education_level": "HighSchool",
+      "grade_level": 9,
+      "documents": [],
+      "real_course_id": null,
+      "real_material_ids": null,
+      "real_chunk_ids": null
+    }
+  ],
+  "actors": {
+    "authorized_actor": {
+      "must_be_authorized_for": [
+        "hs-a",
+        "hs-b",
+        "uni-a",
+        "empty"
+      ],
+      "real_actor_id": null
+    },
+    "unenrolled_actor": {
+      "must_not_be_enrolled_in": [
+        "hs-b"
+      ],
+      "real_actor_id": null
+    }
+  },
+  "note": "Create isolated real records and replace mapping nulls before use. Body text IDs101/102/201 are fixture labels, not actual metadata."
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-27",
+  "kind": "PREPARATION_REFERENCE_CHECK_ONLY",
+  "prepared_against_main": "25f823a31693e6219d0f9f66178c44c49d801976",
+  "preparation_checks": "PASS",
+  "python": "3.12.14",
+  "reference_pypdf": "6.10.0",
+  "source_documents": 3,
+  "course_recipes": 4,
+  "query_expectations": 12,
+  "relevant_queries": 6,
+  "unrelated_queries": 2,
+  "absent_in_material_queries": 2,
+  "empty_course_queries": 2,
+  "scenario_count": 18,
+  "hash_sentinel_reference_checks": "PASS",
+  "query_actor_bindings": "PASS",
+  "all_cases_blocked": true,
+  "actual_result_fields_empty": true,
+  "contract_fields_unconfirmed": true,
+  "source_sha256": {
+    "samples/ai-rag-smoke/rag/hs-a.txt": "c87dda4661513ddbe25a5d95a0c1e296032814cfe8ddd512400c7f92b3c5814c",
+    "samples/ai-rag-smoke/rag/hs-b.txt": "20ad24dca3464354278104083b2bee5b3ce368ea27ac51c72e5d04dc703f7ef6",
+    "samples/ai-rag-smoke/rag/uni-a.txt": "c8101f718de39967c45e555a6656c66e72f62be51d485ddb3e47b8fb7eee7d9e"
+  },
+  "original_package_check": {
+    "fixture_count": 19,
+    "integrity": "PASS",
+    "reference_parser_checks": "PASS",
+    "rag_fixture_consistency": "PASS",
+    "product_smoke_tests": "NOT_RUN"
+  },
+  "product_calls": 0,
+  "overall_product_status": "NOT_RUN",
+  "week7_task_complete": false,
+  "note": "No ingestion/embedding/vector DB/retrieval invoked; corpus is a minimal isolation smoke set, not a semantic benchmark."
+}

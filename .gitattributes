@@ -16,3 +16,7 @@ samples/ai-rag-smoke/**/*.docx binary
 samples/ai-rag-smoke/**/*.pptx binary
 samples/week6-document-processing/**/*.bin binary
 samples/ai-rag-smoke/empty-content/whitespace.txt -whitespace
+
+# Preserve Week7 recipe/evidence bytes; referenced corpus remains unchanged.
+samples/week7-rag/** -text whitespace=cr-at-eol
+Docs/TestEvidence/Week7/** -text whitespace=cr-at-eol
