@@ -8,6 +8,8 @@ public class AIServiceOptions
     [Required] public string BaseUrl { get; set; } = "http://127.0.0.1:8000/";
     [Range(1, 120)] public int TimeoutSeconds { get; set; } = 10;
 
+    [Range(0.0, 1.0)] public double SourceMinimumScore { get; set; } = 0.60;
+
     public bool HasValidBaseUrl() => Uri.TryCreate(BaseUrl, UriKind.Absolute, out var uri)
         && (uri.Scheme == "http" || uri.Scheme == "https")
         && string.IsNullOrEmpty(uri.UserInfo) && string.IsNullOrEmpty(uri.Query)

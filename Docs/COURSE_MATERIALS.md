@@ -59,3 +59,23 @@ Verified 11 November 2026: 161 Debug and 161 Release tests passed, with two
 opt-in live facts skipped per ordinary run. The real MVC -> Python -> BGE-M3
 upload fact passed in its dedicated run on 10 November. The isolated test DB
 applied the migration. The EF model snapshot check found no pending changes.
+
+## Student source search
+
+Open Student Courses -> course details -> Ders kaynaklarında ara. The POST uses
+antiforgery, checks active enrollment before querying Python, and only displays
+sources from Ready materials in that course. The web app asks for up to 20 hits
+and displays up to three eligible sources. It distinguishes unavailable retrieval
+(502) from a successful search with no eligible source.
+
+`AIService:SourceMinimumScore` defaults to 0.60 for the BGE-M3 smoke corpus.
+The initial cutoff was exercised on a relevant question and an unrelated Saturn
+question. Larger representative sets are needed to calibrate it for other
+courses or embedding models. The page displays source excerpts and has no answer
+generation step. Keep Python bound to loopback or on a private service network.
+
+Live student search evidence: `Docs/TestEvidence/CourseMaterials/2026-11-11/student-search/acceptance.json`.
+The same run verified allowed enrollment, denied unenrolled and inactive courses,
+and displayed the no-source message for the unrelated question. Python received
+six direct retrieval calls and two permitted student retrieval calls. Both denied
+student requests stopped in ASP.NET.

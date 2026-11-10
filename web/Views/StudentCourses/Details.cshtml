@@ -7,3 +7,10 @@
 <a asp-action="Index">My enrolled courses</a>
 
 <p><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Id">Ders materyalleri</a></p>
+
+<h2>Ders kaynaklarında ara</h2>
+<form asp-action="SearchSources" asp-route-id="@Model.Id" method="post">
+    <label for="question">Sorun</label>
+    <input class="form-control" id="question" name="question" required maxlength="4000" />
+    <button type="submit" class="btn btn-primary mt-2">Kaynak ara</button>
+</form>

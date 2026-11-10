@@ -1,0 +1,120 @@
+{
+  "corruptPdf": "Failed",
+  "controlledHttp503": "Failed",
+  "retry": "Ready",
+  "studentRelevant": "OK",
+  "studentUnrelated": "OK",
+  "studentUnenrolled": "NotFound",
+  "studentInactive": "NotFound",
+  "retrieval": [
+    {
+      "courseId": 1,
+      "top1": [
+        {
+          "text": "Lise A süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: HS_A_ONLY_9F31\nBu metin yalnızca course 101 kapsamında kullanılmalıdır.",
+          "score": 0.7047862240240871,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 1,
+            "page_number": 1,
+            "chunk_id": "1:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "Lise A süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: HS_A_ONLY_9F31\nBu metin yalnızca course 101 kapsamında kullanılmalıdır.",
+          "score": 0.7047862240240871,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 1,
+            "page_number": 1,
+            "chunk_id": "1:1"
+          }
+        },
+        {
+          "text": "Bitkiler fotosentez yapar.",
+          "score": 0.33977426865665344,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 5,
+            "page_number": 1,
+            "chunk_id": "5:1"
+          }
+        }
+      ]
+    },
+    {
+      "courseId": 2,
+      "top1": [
+        {
+          "text": "Lise B süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: HS_B_ONLY_8C72\nBu metin yalnızca course 102 kapsamında kullanılmalıdır.",
+          "score": 0.6998336713080139,
+          "metadata": {
+            "course_id": 2,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 2,
+            "page_number": 1,
+            "chunk_id": "2:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "Lise B süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: HS_B_ONLY_8C72\nBu metin yalnızca course 102 kapsamında kullanılmalıdır.",
+          "score": 0.6998336713080139,
+          "metadata": {
+            "course_id": 2,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 2,
+            "page_number": 1,
+            "chunk_id": "2:1"
+          }
+        }
+      ]
+    },
+    {
+      "courseId": 3,
+      "top1": [
+        {
+          "text": "Üniversite A süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: UNI_ONLY_7D64\nBu metin yalnızca course 201 kapsamında kullanılmalıdır.",
+          "score": 0.6909221236144534,
+          "metadata": {
+            "course_id": 3,
+            "education_level": "University",
+            "grade_level": 1,
+            "material_id": 3,
+            "page_number": 1,
+            "chunk_id": "3:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "Üniversite A süreklilik notu\nBu sentetik derste ortak konu sürekliliktir.\nBu dersin süreklilik doğrulama kodu: UNI_ONLY_7D64\nBu metin yalnızca course 201 kapsamında kullanılmalıdır.",
+          "score": 0.6909221236144534,
+          "metadata": {
+            "course_id": 3,
+            "education_level": "University",
+            "grade_level": 1,
+            "material_id": 3,
+            "page_number": 1,
+            "chunk_id": "3:1"
+          }
+        }
+      ]
+    }
+  ],
+  "source_minimum_score": 0.6,
+  "relevant_expected_source_found": true,
+  "unrelated_no_source_message_verified": true,
+  "python_retrieve_calls": 8
+}

@@ -149,6 +149,24 @@ public class CourseMaterialTests
              foreach (var foreign in courses.Where(c=>c.Item1!=courseId)) Assert.DoesNotContain(foreign.Item4,hit.GetProperty("text").GetString());
          }
      }
+     var studentPage = $"/StudentCourses/Details/{f.CourseAId}";
+     using var relevant = await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseAId}",new(){["question"]="Bu derste süreklilik doğrulama kodu nedir?"},studentPage);
+     Assert.Equal(HttpStatusCode.OK,relevant.StatusCode);
+     var relevantHtml = await relevant.Content.ReadAsStringAsync();
+     Assert.Contains("HS_A_ONLY_9F31",relevantHtml);
+     Assert.DoesNotContain("HS_B_ONLY_8C72",relevantHtml);
+     Assert.DoesNotContain("UNI_ONLY_7D64",relevantHtml);
+     using var unrelated = await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseAId}",new(){["question"]="Satürn halkalarının bileşimi nedir?"},studentPage);
+     Assert.Equal(HttpStatusCode.OK,unrelated.StatusCode);
+     Assert.Contains("uygun ders kaynağı bulunamadı",WebUtility.HtmlDecode(await unrelated.Content.ReadAsStringAsync()));
+     using var unenrolled = await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseBId}",new(){["question"]="Ders kodu nedir?"},studentPage);
+     Assert.Equal(HttpStatusCode.NotFound,unenrolled.StatusCode);
+     await f.ReadAsync(async db=>{await db.Courses.Where(c=>c.Id==f.CourseAId).ExecuteUpdateAsync(set=>set.SetProperty(c=>c.IsActive,false));return true;});
+     var tokenMatch = Regex.Match(await student.GetStringAsync("/StudentCourses/Index"),"name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"");
+     Assert.True(tokenMatch.Success);
+     using var inactive = await student.PostAsync($"/StudentCourses/SearchSources/{f.CourseAId}",new FormUrlEncodedContent(new Dictionary<string,string>{["question"]="Ders kodu nedir?",["__RequestVerificationToken"]=WebUtility.HtmlDecode(tokenMatch.Groups[1].Value)}));
+     Assert.Equal(HttpStatusCode.NotFound,inactive.StatusCode);
+
      var evidencePath = Environment.GetEnvironmentVariable("VELI_MATERIAL_EVIDENCE");
      if (!string.IsNullOrEmpty(evidencePath))
          File.WriteAllText(evidencePath,System.Text.Json.JsonSerializer.Serialize(new
@@ -156,6 +174,10 @@ public class CourseMaterialTests
              corruptPdf = corrupt.Status.ToString(),
              controlledHttp503 = recovery.Status.ToString(),
              retry = MaterialStatus.Ready.ToString(),
+             studentRelevant = relevant.StatusCode.ToString(),
+             studentUnrelated = unrelated.StatusCode.ToString(),
+             studentUnenrolled = unenrolled.StatusCode.ToString(),
+             studentInactive = inactive.StatusCode.ToString(),
              retrieval = evidence
          },new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
 
