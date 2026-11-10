@@ -34,8 +34,12 @@ existing database was migrated.
 No delete/replacement interface is provided in this first version. Downloads
 are attachments. Indexing credentials and raw model errors are not shown in UI.
 Course deletion is restricted by the material FK. Education/grade edits are blocked while a course has material records, to
-prevent stale index metadata; other course edits remain available. Python's existing PPTX-table and model/index compatibility findings remain
-separate unresolved issues; this feature does not close all Week6/7 cases.
+prevent stale index metadata; other course edits remain available. The index stores the Ollama model name and digest. A changed digest or an older
+populated database without provenance returns HTTP 409 for processing/retrieval.
+Keep the old database as a backup, set VECTOR_DB_PATH to a new file and index
+the original materials again before enabling retrieval. Change model versions
+while the service is idle so in-flight embeddings cannot span a tag update.
+PPTX extraction reads table cells on the correct slide.
 
 ## Verification
 

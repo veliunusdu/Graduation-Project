@@ -315,3 +315,25 @@ def test_in_memory_store_replaces_all_chunks_when_material_is_reprocessed():
     assert [item.metadata.chunk_id for item in store.get_for_material(41)] == [
         "41:1"
     ]
+
+
+@pytest.mark.parametrize("with_textbox", [False, True])
+def test_pptx_extracts_table_cells_and_slide_number(with_textbox):
+    from io import BytesIO
+    from pptx import Presentation
+    from pptx.util import Inches
+
+    deck = Presentation()
+    deck.slides.add_slide(deck.slide_layouts[6])
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    if with_textbox:
+        slide.shapes.add_textbox(0, 0, Inches(2), Inches(1)).text = "Başlık"
+    table = slide.shapes.add_table(1, 2, 0, Inches(1), Inches(4), Inches(1)).table
+    table.cell(0, 0).text = "Hücre bir"
+    table.cell(0, 1).text = "Hücre iki"
+    output = BytesIO()
+    deck.save(output)
+    pages = extract_text(output.getvalue(), "tables.pptx")
+    assert len(pages) == 1 and pages[0].page_number == 2
+    assert "Hücre bir Hücre iki" in pages[0].text
+    assert ("Başlık" in pages[0].text) == with_textbox

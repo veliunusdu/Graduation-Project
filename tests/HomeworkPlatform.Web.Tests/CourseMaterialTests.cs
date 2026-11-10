@@ -82,13 +82,102 @@ public class CourseMaterialTests
   Assert.Equal(HttpStatusCode.OK,r.StatusCode);Assert.Contains("validation-summary-errors",await r.Content.ReadAsStringAsync());
   var course=await f.ReadAsync(db=>db.Courses.SingleAsync(x=>x.Id==f.CourseAId));Assert.Equal(EducationLevel.HighSchool,course.EducationLevel);Assert.Equal(9,course.GradeLevel);Assert.NotEqual("Changed",course.Name);
  }
- [LocalMaterialFact] public async Task ActualWebUploadReachesRealPythonAndBge()
+ [LocalMaterialFact]
+ public async Task ActualWebUploadReachesRealPythonAndBge()
  {
-  var url=Environment.GetEnvironmentVariable("VELI_MATERIAL_PYTHON_URL")!;Assert.True(new Uri(url).IsLoopback);
-  using var f=await OwnershipFixture.CreateAsync(a=>a.ConfigureServices=s=>s.Configure<AIServiceOptions>(o=>{o.BaseUrl=url;o.TimeoutSeconds=120;}));using var c=await f.TeacherAsync();
-  Assert.Equal(HttpStatusCode.Redirect,(await Upload(c,f.CourseAId)).StatusCode);
-  var m=await f.ReadAsync(db=>db.CourseMaterials.SingleAsync());Assert.Equal(MaterialStatus.Ready,m.Status);Assert.True(m.ChunkCount>0);Assert.Null(m.ErrorMessage);
+     var url = Environment.GetEnvironmentVariable("VELI_MATERIAL_PYTHON_URL")!;
+     Assert.True(new Uri(url).IsLoopback);
+     var outage = new TemporaryFailureHandler();
+     using var f = await OwnershipFixture.CreateAsync(a => a.ConfigureServices = services =>
+     {
+         services.Configure<AIServiceOptions>(o => { o.BaseUrl = url; o.TimeoutSeconds = 120; });
+         services.AddHttpClient<AIServiceClient>().ConfigurePrimaryHttpMessageHandler(() => outage);
+     });
+     using var teacher = await f.TeacherAsync();
+     using var secondTeacher = await f.TeacherAsync(true);
+     var university = await f.ReadAsync(async db =>
+     {
+         var course = new Course { Name = "University materials", TeacherId = f.TeacherAId, EducationLevel = EducationLevel.University, GradeLevel = 1 };
+         db.Courses.Add(course);
+         await db.SaveChangesAsync();
+         return course.Id;
+     });
+     var courses = new[] { (f.CourseAId,teacher,"hs-a.txt","HS_A_ONLY_9F31"), (f.CourseBId,secondTeacher,"hs-b.txt","HS_B_ONLY_8C72"), (university,teacher,"uni-a.txt","UNI_ONLY_7D64") };
+     foreach (var (courseId, client, name, _) in courses)
+     {
+         var path = Path.Combine(ProvisioningProcess.Root,"samples","ai-rag-smoke","rag",name);
+         Assert.Equal(HttpStatusCode.Redirect, (await Upload(client,courseId,name,File.ReadAllBytes(path))).StatusCode);
+     }
+     var ready = await f.ReadAsync(db => db.CourseMaterials.OrderBy(m=>m.Id).ToListAsync());
+     Assert.Equal(3,ready.Count);
+     Assert.All(ready,m=>{Assert.Equal(MaterialStatus.Ready,m.Status);Assert.True(m.ChunkCount>0);});
+     Assert.Equal(HttpStatusCode.Redirect,(await Upload(teacher,f.CourseAId,"corrupt.pdf","%PDF-1.7\nbroken"u8.ToArray())).StatusCode);
+     var corrupt = await f.ReadAsync(db=>db.CourseMaterials.SingleAsync(m=>m.OriginalFileName=="corrupt.pdf"));
+     Assert.Equal(MaterialStatus.Failed,corrupt.Status);
+     outage.FailNext = true;
+     Assert.Equal(HttpStatusCode.Redirect,(await Upload(teacher,f.CourseAId,"recovery.txt","Bitkiler fotosentez yapar."u8.ToArray())).StatusCode);
+     var recovery = await f.ReadAsync(db=>db.CourseMaterials.SingleAsync(m=>m.OriginalFileName=="recovery.txt"));
+     Assert.Equal(MaterialStatus.Failed,recovery.Status);
+     using var student = await f.StudentAsync();
+     Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Download/{recovery.Id}")).StatusCode);
+     Assert.Equal(HttpStatusCode.Redirect,(await FormClient.PostAsync(teacher,$"/CourseMaterials/Retry/{recovery.Id}",new(),$"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
+     Assert.Equal(MaterialStatus.Ready,await f.ReadAsync(db=>db.CourseMaterials.Where(m=>m.Id==recovery.Id).Select(m=>m.Status).SingleAsync()));
+     Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{recovery.Id}")).StatusCode);
+     Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Download/{ready[1].Id}")).StatusCode);
+     using var api = new HttpClient { BaseAddress=new Uri(url), Timeout=TimeSpan.FromSeconds(120) };
+     var evidence = new List<object>();
+     foreach (var (courseId, _, name, marker) in courses)
+     {
+         var original = ready.Single(m=>m.OriginalFileName==name);
+         var hits = await Retrieve(courseId,3);
+         var first = await Retrieve(courseId,1);
+         Assert.Single(first);
+         Assert.Equal(courseId==f.CourseAId ? 2 : 1,hits.Length);
+         evidence.Add(new { courseId, top1=first, top3=hits });
+         Assert.Equal(hits[0].GetProperty("metadata").GetProperty("chunk_id").GetString(),first[0].GetProperty("metadata").GetProperty("chunk_id").GetString());
+         Assert.Contains(hits,h=>h.GetProperty("text").GetString()!.Contains(marker) && h.GetProperty("metadata").GetProperty("material_id").GetInt32()==original.Id);
+         var scores = hits.Select(h=>h.GetProperty("score").GetDouble()).ToArray();
+         Assert.Equal(scores.OrderDescending(),scores);
+         foreach (var hit in hits)
+         {
+             var metadata=hit.GetProperty("metadata");
+             Assert.Equal(courseId,metadata.GetProperty("course_id").GetInt32());
+             Assert.Equal(1,metadata.GetProperty("page_number").GetInt32());
+             Assert.Equal(courseId==university ? "University" : "HighSchool", metadata.GetProperty("education_level").GetString());
+             Assert.Equal(courseId==university ? 1 : 9, metadata.GetProperty("grade_level").GetInt32());
+             Assert.Contains(metadata.GetProperty("material_id").GetInt32(),ready.Where(m=>m.CourseId==courseId).Select(m=>m.Id).Concat(courseId==f.CourseAId?[recovery.Id]:Array.Empty<int>()));
+             foreach (var foreign in courses.Where(c=>c.Item1!=courseId)) Assert.DoesNotContain(foreign.Item4,hit.GetProperty("text").GetString());
+         }
+     }
+     var evidencePath = Environment.GetEnvironmentVariable("VELI_MATERIAL_EVIDENCE");
+     if (!string.IsNullOrEmpty(evidencePath))
+         File.WriteAllText(evidencePath,System.Text.Json.JsonSerializer.Serialize(new
+         {
+             corruptPdf = corrupt.Status.ToString(),
+             controlledHttp503 = recovery.Status.ToString(),
+             retry = MaterialStatus.Ready.ToString(),
+             retrieval = evidence
+         },new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+
+     async Task<System.Text.Json.JsonElement[]> Retrieve(int courseId,int topK)
+     {
+         using var response=await System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync(api,"rag/retrieve",new{question="Bu derste süreklilik doğrulama kodu nedir?",course_id=courseId,top_k=topK});
+         response.EnsureSuccessStatusCode();
+         using var json=System.Text.Json.JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+         return json.RootElement.GetProperty("results").EnumerateArray().Select(x=>x.Clone()).ToArray();
+     }
  }
+ private sealed class TemporaryFailureHandler() : DelegatingHandler(new HttpClientHandler())
+ {
+     public bool FailNext { get; set; }
+     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken cancellationToken)
+     {
+         if (!FailNext) return base.SendAsync(request,cancellationToken);
+         FailNext=false;
+         return Task.FromResult(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+     }
+ }
+
 }
 public sealed class LocalMaterialFactAttribute:FactAttribute
 {

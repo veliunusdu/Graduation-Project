@@ -10,7 +10,7 @@ from rag.document_processing import DocumentProcessingError
 from rag.embedding import EmbeddingError
 from rag.pipeline import document_pipeline
 from rag.retrieval import retrieval_service
-from rag.vector_store import VectorStoreError
+from rag.vector_store import IndexCompatibilityError, VectorStoreError
 from schemas.context import AgentContext
 from schemas.document import (
     DocumentProcessingResult,
@@ -80,6 +80,8 @@ async def process_document(
         )
     except DocumentProcessingError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except EmbeddingError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except ValueError as exc:
@@ -91,6 +93,8 @@ async def retrieve_chunks(request: RetrievalRequest):
     """Retrieve course-isolated source chunks for a student question."""
     try:
         return await run_in_threadpool(retrieval_service.retrieve, request)
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except EmbeddingError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except VectorStoreError as exc:

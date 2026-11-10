@@ -1,16 +1,22 @@
 import json
 import math
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 from threading import RLock
-from typing import Protocol
+from typing import Callable, Protocol
 
 from config.settings import settings
+from rag.embedding import embedding_client
 from schemas.document import ProcessedChunk, RetrievedChunk
 
 
 class VectorStoreError(RuntimeError):
     """Raised when persistent vector storage cannot complete an operation."""
+
+
+class IndexCompatibilityError(VectorStoreError):
+    """The stored vectors require a rebuild with the configured model."""
 
 
 class VectorStore(Protocol):
@@ -77,7 +83,8 @@ class InMemoryVectorStore:
 class SQLiteVectorStore:
     """Persistent SQLite vector store with course-scoped cosine retrieval."""
 
-    def __init__(self, database_path: str | Path):
+    def __init__(self, database_path: str | Path, *, model_identity: Callable[[], str] | None = None):
+        self.model_identity = model_identity
         self.database_path = Path(database_path)
         self.database_path.parent.mkdir(parents=True, exist_ok=True)
         self._lock = RLock()
@@ -90,8 +97,9 @@ class SQLiteVectorStore:
 
     def _initialize(self) -> None:
         try:
-            with self._connect() as connection:
+            with closing(self._connect()) as connection, connection:
                 connection.execute("PRAGMA journal_mode=WAL")
+                connection.execute("CREATE TABLE IF NOT EXISTS index_identity (id INTEGER PRIMARY KEY CHECK (id = 1), model TEXT NOT NULL)")
                 connection.execute(
                     """
                     CREATE TABLE IF NOT EXISTS vector_chunks (
@@ -122,6 +130,19 @@ class SQLiteVectorStore:
         except sqlite3.Error as exc:
             raise VectorStoreError("Could not initialize the vector database.") from exc
 
+    def _check_identity(self, connection, identity, *, write: bool) -> None:
+        if identity is None:
+            return
+        row = connection.execute("SELECT model FROM index_identity WHERE id = 1").fetchone()
+        if row is not None:
+            if row["model"] != identity:
+                raise IndexCompatibilityError("Embedding model changed. Reindex materials in a new vector database.")
+            return
+        if connection.execute("SELECT 1 FROM vector_chunks LIMIT 1").fetchone():
+            raise IndexCompatibilityError("The vector database has no model identity. Reindex materials in a new vector database.")
+        if write:
+            connection.execute("INSERT INTO index_identity (id, model) VALUES (1, ?)", (identity,))
+
     def add(self, chunks: list[ProcessedChunk]) -> None:
         if not chunks:
             return
@@ -145,8 +166,11 @@ class SQLiteVectorStore:
             for chunk in chunks
         ]
 
+        identity = self.model_identity() if self.model_identity else None
         try:
-            with self._lock, self._connect() as connection:
+            with self._lock, closing(self._connect()) as connection, connection:
+                connection.execute("BEGIN IMMEDIATE")
+                self._check_identity(connection, identity, write=True)
                 connection.execute(
                     f"DELETE FROM vector_chunks WHERE material_id IN ({placeholders})",
                     material_ids,
@@ -172,8 +196,11 @@ class SQLiteVectorStore:
         top_k: int,
     ) -> list[RetrievedChunk]:
         _validate_search(course_id, query_embedding, top_k)
+        identity = self.model_identity() if self.model_identity else None
         try:
-            with self._connect() as connection:
+            with closing(self._connect()) as connection, connection:
+                connection.execute("BEGIN")
+                self._check_identity(connection, identity, write=False)
                 rows = connection.execute(
                     """
                     SELECT chunk_id, course_id, education_level, grade_level,
@@ -191,7 +218,7 @@ class SQLiteVectorStore:
         for row in rows:
             embedding = json.loads(row["embedding"])
             if row["embedding_dimensions"] != len(query_embedding):
-                continue
+                raise IndexCompatibilityError("Embedding dimensions do not match. Reindex materials in a new vector database.")
             candidates.append(
                 ProcessedChunk(
                     text=row["text"],
@@ -210,7 +237,7 @@ class SQLiteVectorStore:
 
     def get_for_material(self, material_id: int) -> list[ProcessedChunk]:
         try:
-            with self._connect() as connection:
+            with closing(self._connect()) as connection, connection:
                 rows = connection.execute(
                     """
                     SELECT chunk_id, course_id, education_level, grade_level,
@@ -241,7 +268,7 @@ class SQLiteVectorStore:
 
     def count(self) -> int:
         try:
-            with self._connect() as connection:
+            with closing(self._connect()) as connection, connection:
                 return connection.execute(
                     "SELECT COUNT(*) FROM vector_chunks"
                 ).fetchone()[0]
@@ -300,4 +327,4 @@ def _rank_chunks(
     return ranked[:top_k]
 
 
-vector_store = SQLiteVectorStore(settings.VECTOR_DB_PATH)
+vector_store = SQLiteVectorStore(settings.VECTOR_DB_PATH, model_identity=embedding_client.model_identity)
