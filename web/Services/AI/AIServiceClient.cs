@@ -29,6 +29,9 @@ public class AIServiceClient(HttpClient http, IOptions<AIServiceOptions> options
             Content = JsonContent.Create(payload, options: JsonOptions)
         }, cancellationToken);
 
+    public Task<AIServiceResult<T>> PostMultipartAsync<T>(string endpoint, MultipartFormDataContent content, CancellationToken cancellationToken=default) where T:class
+        => SendAsync<T>(new HttpRequestMessage(HttpMethod.Post,RelativeEndpoint(endpoint)){Content=content},cancellationToken);
+
     private static string RelativeEndpoint(string endpoint)
     {
         if (string.IsNullOrWhiteSpace(endpoint) || endpoint.StartsWith('/') || endpoint.Contains('\\')

@@ -17,3 +17,6 @@ ai-service/data/*.db-*
 # Private uploaded files and local editor settings
 web/App_Data/SubmissionFiles/
 *.csproj.user
+
+# Private teacher course material uploads
+web/App_Data/CourseMaterials/

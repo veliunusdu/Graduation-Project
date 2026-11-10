@@ -5,6 +5,7 @@ namespace HomeworkPlatform.Web.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
+    public DbSet<CourseMaterial> CourseMaterials => Set<CourseMaterial>();
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<AssignmentRequirement> AssignmentRequirements => Set<AssignmentRequirement>();
     public DbSet<Assignment> Assignments => Set<Assignment>();
@@ -14,6 +15,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<CourseMaterial>().HasOne(m=>m.Course).WithMany().HasForeignKey(m=>m.CourseId).OnDelete(DeleteBehavior.Restrict);
+        builder.Entity<CourseMaterial>().HasIndex(m=>new {m.CourseId,m.Status});
+        builder.Entity<CourseMaterial>().ToTable("CourseMaterials",t=>t.HasCheckConstraint("CK_Material_Status","Status BETWEEN 0 AND 3"));
         builder.Entity<Course>().ToTable("Courses", table => table.HasCheckConstraint("CK_Courses_EducationGrade",
             "(EducationLevel = 0 AND GradeLevel BETWEEN 9 AND 12) OR (EducationLevel = 1 AND GradeLevel BETWEEN 1 AND 4)"));
         builder.Entity<Course>().Property(c => c.IsActive).HasDefaultValue(true);

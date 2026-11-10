@@ -204,6 +204,54 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.CourseMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChunkCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ProcessingStartedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(39)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId", "Status");
+
+                    b.ToTable("CourseMaterials", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Material_Status", "Status BETWEEN 0 AND 3");
+                        });
+                });
+
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.StudentCourse", b =>
                 {
                     b.Property<string>("StudentId")
@@ -437,6 +485,17 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.CourseMaterial", b =>
+                {
+                    b.HasOne("HomeworkPlatform.Web.Models.Domain.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.StudentCourse", b =>

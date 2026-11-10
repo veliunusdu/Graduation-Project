@@ -10,6 +10,7 @@ namespace HomeworkPlatform.Web.Tests.Infrastructure;
 
 public class AuthWebApplicationFactory : WebApplicationFactory<HomeController>
 {
+    public Action<IServiceCollection>? ConfigureServices {get;set;}
     public string DirectoryPath { get; } = Path.Combine(Path.GetTempPath(), "HomeworkPlatform.Tests", Guid.NewGuid().ToString("N"));
     public string DatabasePath => Path.Combine(DirectoryPath, "identity.db");
     public string EnvironmentName { get; set; } = "Development";
@@ -17,10 +18,11 @@ public class AuthWebApplicationFactory : WebApplicationFactory<HomeController>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment(EnvironmentName);
-        builder.ConfigureTestServices(services => services.AddDataProtection().UseEphemeralDataProtectionProvider());
+        builder.ConfigureTestServices(services => { services.AddDataProtection().UseEphemeralDataProtectionProvider(); ConfigureServices?.Invoke(services); });
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["ConnectionStrings:DefaultConnection"] = $"Data Source={DatabasePath}",
+            ["CourseMaterials:RootPath"] = Path.Combine(DirectoryPath, "CourseMaterials"),
             ["SubmissionFiles:RootPath"] = Path.Combine(DirectoryPath, "SubmissionFiles"),
             ["Logging:LogLevel:Default"] = "Warning"
         }));
