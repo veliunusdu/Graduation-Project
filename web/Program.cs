@@ -44,6 +44,9 @@ builder.Services.AddHttpClient<AIServiceClient>((services, client) =>
 builder.Services.AddOptions<SubmissionFileOptions>().BindConfiguration(SubmissionFileOptions.SectionName)
     .ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddScoped<SubmissionFileStore>();
+builder.Services.AddOptions<MaterialFileOptions>().BindConfiguration(MaterialFileOptions.SectionName).ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddScoped<MaterialFileStore>();
+builder.Services.AddScoped<IMaterialProcessor, MaterialProcessor>();
 var app = builder.Build();
 if (commandMode)
 {

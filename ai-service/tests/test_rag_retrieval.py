@@ -289,3 +289,34 @@ def test_retrieval_endpoint_requires_course_id_and_valid_top_k():
 
     assert missing_course.status_code == 422
     assert invalid_top_k.status_code == 422
+
+
+def test_index_rejects_changed_digest_without_replacing_stored_rows(tmp_path):
+    import pytest
+    from rag.vector_store import IndexCompatibilityError
+
+    database = tmp_path / "model.db"
+    chunk = make_chunk("41:1", course_id=7, material_id=41, text="original", embedding=[1.0, 0.0])
+    original = SQLiteVectorStore(database, model_identity=lambda: "bge-m3:latest@old")
+    original.add([chunk])
+    changed = SQLiteVectorStore(database, model_identity=lambda: "bge-m3:latest@new")
+    with pytest.raises(IndexCompatibilityError, match="model changed"):
+        changed.search(course_id=7, query_embedding=[1.0, 0.0], top_k=1)
+    with pytest.raises(IndexCompatibilityError, match="model changed"):
+        changed.add([chunk.model_copy(update={"text": "new"})])
+    assert original.get_for_material(41)[0].text == "original"
+    with pytest.raises(IndexCompatibilityError, match="dimensions"):
+        original.search(course_id=7, query_embedding=[1.0], top_k=1)
+
+
+def test_index_without_provenance_requires_reindex(tmp_path):
+    import pytest
+    from rag.vector_store import IndexCompatibilityError
+
+    database = tmp_path / "legacy.db"
+    legacy = SQLiteVectorStore(database)
+    legacy.add([make_chunk("1:1", course_id=7, material_id=1, text="legacy", embedding=[1.0])])
+    guarded = SQLiteVectorStore(database, model_identity=lambda: "bge-m3:latest@current")
+    with pytest.raises(IndexCompatibilityError, match="no model identity"):
+        guarded.search(course_id=7, query_embedding=[1.0], top_k=1)
+    assert guarded.count() == 1

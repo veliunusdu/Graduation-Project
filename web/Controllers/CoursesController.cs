@@ -40,6 +40,12 @@ public class CoursesController(ApplicationDbContext database, UserManager<Applic
         var course = await Owned.SingleOrDefaultAsync(c => c.Id == id);
         if (course == null) return NotFound();
         if (!ModelState.IsValid) return View(model);
+        if ((course.EducationLevel != model.EducationLevel || course.GradeLevel != model.GradeLevel)
+            && await database.CourseMaterials.AnyAsync(m=>m.CourseId==id))
+        {
+            ModelState.AddModelError("", "Materyali olan dersin eğitim seviyesi veya sınıfı değiştirilemez; kaynak metadata tutarlılığı korunmalıdır.");
+            return View(model);
+        }
         course.Name = model.Name.Trim(); course.Description = model.Description ?? "";
         course.EducationLevel = model.EducationLevel; course.GradeLevel = model.GradeLevel; course.IsActive = model.IsActive;
         await database.SaveChangesAsync();

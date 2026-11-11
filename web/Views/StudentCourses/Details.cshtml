@@ -1,7 +1,17 @@
 @model HomeworkPlatform.Web.Models.Domain.Course
 @{ ViewData["Title"] = Model.Name; }
 <h1>@Model.Name</h1><p>@Model.Description</p>
-<p>@Model.EducationLevel � Grade / year @Model.GradeLevel</p>
+<p>@Model.EducationLevel · Grade / year @Model.GradeLevel</p>
 <h2>Assignments</h2>
 <ul>@foreach (var assignment in ViewData["Assignments"] as IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Assignment> ?? Array.Empty<HomeworkPlatform.Web.Models.Domain.Assignment>()) { <li><a asp-controller="StudentWork" asp-action="Details" asp-route-id="@assignment.Id">@assignment.Title</a></li> }</ul>
 <a asp-action="Index">My enrolled courses</a>
+
+<p><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Id">Ders materyalleri</a></p>
+
+<h2>Ders kaynaklarında ara</h2>
+<form asp-action="SearchSources" asp-route-id="@Model.Id" method="post">
+    <label for="question">Sorun</label>
+    <input class="form-control" id="question" name="question" required maxlength="4000" />
+    <button type="submit" class="btn btn-primary mt-2">Kaynak ara</button>
+    <button type="submit" name="tutor" value="true" class="btn btn-secondary mt-2">Tutor ile açıkla</button>
+</form>

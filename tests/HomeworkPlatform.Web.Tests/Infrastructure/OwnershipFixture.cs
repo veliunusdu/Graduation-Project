@@ -21,9 +21,10 @@ public sealed class OwnershipFixture : IDisposable
     public int SubmissionAId { get; private set; }
     public int SubmissionBId { get; private set; }
 
-    public static async Task<OwnershipFixture> CreateAsync()
+    public static async Task<OwnershipFixture> CreateAsync(Action<AuthWebApplicationFactory>? configure = null)
     {
         var fixture = new OwnershipFixture();
+        configure?.Invoke(fixture.App);
         try
         {
             using var scope = fixture.App.Services.CreateScope();

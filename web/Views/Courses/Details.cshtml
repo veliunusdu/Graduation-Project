@@ -12,3 +12,5 @@
 </form>
 <h2>Enrolled Students</h2>
 <ul>@foreach (var email in ViewData["Students"] as IReadOnlyList<string> ?? Array.Empty<string>()) { <li>@email</li> }</ul>
+
+<p><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Id">Ders materyalleri</a></p>

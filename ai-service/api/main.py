@@ -5,12 +5,13 @@ from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
 from config.settings import settings
+from tutor.service import TutorAnswer, TutorError, TutorRequest, answer
 from llm.ollama_client import OllamaClientError, ollama_client
 from rag.document_processing import DocumentProcessingError
 from rag.embedding import EmbeddingError
 from rag.pipeline import document_pipeline
 from rag.retrieval import retrieval_service
-from rag.vector_store import VectorStoreError
+from rag.vector_store import IndexCompatibilityError, VectorStoreError
 from schemas.context import AgentContext
 from schemas.document import (
     DocumentProcessingResult,
@@ -80,6 +81,8 @@ async def process_document(
         )
     except DocumentProcessingError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except EmbeddingError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except ValueError as exc:
@@ -91,6 +94,8 @@ async def retrieve_chunks(request: RetrievalRequest):
     """Retrieve course-isolated source chunks for a student question."""
     try:
         return await run_in_threadpool(retrieval_service.retrieve, request)
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except EmbeddingError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except VectorStoreError as exc:
@@ -98,3 +103,13 @@ async def retrieve_chunks(request: RetrievalRequest):
             status_code=500,
             detail="Vector store operation failed.",
         ) from exc
+
+
+
+
+@app.post("/tutor/answer", response_model=TutorAnswer)
+def tutor_answer(request: TutorRequest):
+    try:
+        return answer(request)
+    except TutorError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc

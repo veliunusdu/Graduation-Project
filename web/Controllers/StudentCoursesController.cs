@@ -2,12 +2,14 @@ using System.Security.Claims;
 using HomeworkPlatform.Web.Data;
 using HomeworkPlatform.Web.Models.Domain;
 using HomeworkPlatform.Web.Security;
+using HomeworkPlatform.Web.Services.AI;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace HomeworkPlatform.Web.Controllers;
 [Authorize(Roles = AppRoles.Student)]
-public class StudentCoursesController(ApplicationDbContext database) : Controller
+public class StudentCoursesController(ApplicationDbContext database, AIServiceClient ai, IOptions<AIServiceOptions> options) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
     private IQueryable<Course> Enrolled => database.Courses.Where(c => c.IsActive &&
@@ -19,5 +21,57 @@ public class StudentCoursesController(ApplicationDbContext database) : Controlle
         if (course == null) return NotFound();
         ViewData["Assignments"] = await database.Assignments.AsNoTracking().Where(a => a.CourseId == id).OrderBy(a => a.Title).ToListAsync();
         return View(course);
+    }
+
+    public record SourceRequest(string Question, int CourseId, int TopK);
+    public record SourceMetadata(int CourseId, int MaterialId, int PageNumber, string ChunkId);
+    public record SourceHit(string Text, double Score, SourceMetadata? Metadata);
+    public record SourceResponse(int CourseId, List<SourceHit>? Results);
+    public record CourseSource(string FileName, int PageNumber, string Text);
+    public record TutorSource(string SourceId, string Text);
+    public record TutorContext(int CourseId, string EducationLevel, int GradeLevel);
+    public record TutorRequest(string Question, TutorContext Context, List<TutorSource> Sources);
+    public record TutorResponse(string Status, string Explanation, string NextStep, List<string>? Citations);
+
+    [HttpPost]
+    public async Task<IActionResult> SearchSources([FromRoute] int id, string? question, CancellationToken ct, bool tutor = false)
+    {
+        if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
+        question = question?.Trim();
+        if (string.IsNullOrEmpty(question) || question.Length > 4000)
+            return BadRequest("1–4000 karakterlik bir soru girin.");
+
+        var response = await ai.PostJsonAsync<SourceRequest, SourceResponse>("rag/retrieve", new(question, id, 20), ct);
+        if (!response.Success || response.Data?.CourseId != id || response.Data.Results is null)
+            return StatusCode(502, "Ders kaynakları şu anda aranamadı.");
+
+        var hits = response.Data.Results
+            .Where(hit => hit?.Metadata is { CourseId: var courseId, PageNumber: > 0 } && courseId == id
+                && double.IsFinite(hit.Score) && hit.Score >= options.Value.SourceMinimumScore && hit.Score <= 1.000001
+                && !string.IsNullOrWhiteSpace(hit.Text))
+            .OrderByDescending(hit => hit.Score).ToList();
+        var ids = hits.Select(hit => hit.Metadata!.MaterialId).Distinct().ToArray();
+        var allowed = await database.CourseMaterials.AsNoTracking()
+            .Where(m => m.CourseId == id && m.Status == MaterialStatus.Ready && ids.Contains(m.Id)
+                && Enrolled.Any(c => c.Id == m.CourseId))
+            .ToDictionaryAsync(m => m.Id, m => m.OriginalFileName, ct);
+        var sources = hits.Where(hit => allowed.ContainsKey(hit.Metadata!.MaterialId)).Take(3)
+            .Select(hit => new CourseSource(allowed[hit.Metadata!.MaterialId], hit.Metadata.PageNumber, hit.Text)).ToList();
+        if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
+        ViewData["CourseId"] = id;
+        if (!tutor) return View(sources);
+        var course = await Enrolled.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id, ct);
+        if (course == null) return NotFound();
+        var tutorSources = sources.Select((source, index) => new TutorSource($"s{index+1}", source.Text)).ToList();
+        var reply = await ai.PostJsonAsync<TutorRequest, TutorResponse>("tutor/answer",
+            new(question, new(id, course.EducationLevel.ToString(), course.GradeLevel), tutorSources), ct);
+        if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
+        if (!reply.Success || reply.Data == null || string.IsNullOrWhiteSpace(reply.Data.Explanation)
+            || reply.Data.Status is not ("answered" or "no_source" or "guidance_only")
+            || reply.Data.Citations == null
+            || reply.Data.Citations.Any(key => !tutorSources.Any(source => source.SourceId == key)))
+            return StatusCode(502, "Tutor yanıtı şu anda hazırlanamadı.");
+        ViewData["Sources"] = sources;
+        return View("Tutor", reply.Data);
     }
 }

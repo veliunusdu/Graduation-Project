@@ -1,0 +1,52 @@
+[
+  {
+    "id": "Q01",
+    "text": "C# dilinde 5 / 2 işlemi neden 2 verir? Sonucu 2,5 olarak elde etmek için tür seçimini nasıl düşünmeliyim?",
+    "source_key": "division",
+    "expected_concepts": [
+      "İki int operand ile tamsayı bölmesi",
+      "En az bir operandı uygun ondalıklı türe dönüştürme",
+      "Sonuç türü ve örnek çıktı"
+    ]
+  },
+  {
+    "id": "Q02",
+    "text": "Kullanıcının girdiği notun 0 ile 100 arasında olduğunu if/else ile nasıl kontrol ederim? Sınır değerlerini nasıl test etmeliyim?",
+    "source_key": "validation",
+    "expected_concepts": [
+      "0 ve 100 dahil",
+      "Aralık dışında kontrollü geri bildirim",
+      "Alt/üst sınır ve dış sınır testleri"
+    ]
+  },
+  {
+    "id": "Q03",
+    "text": "Bir sayı listesinin toplamını hesaplarken for ile foreach arasında nasıl seçim yaparım?",
+    "source_key": "loops",
+    "expected_concepts": [
+      "İndeks gereksinimi",
+      "Elemanlar üzerinde dolaşma",
+      "Toplayıcı başlangıç değeri"
+    ]
+  },
+  {
+    "id": "Q04",
+    "text": "Ortalama hesaplamayı ayrı bir fonksiyona taşımak ne kazandırır? Boş bir liste geldiğinde neyi düşünmeliyim?",
+    "source_key": "functions",
+    "expected_concepts": [
+      "Tek sorumluluk ve tekrar kullanım",
+      "Ayrı test edilebilirlik",
+      "Boş girdi davranışını açık belirleme"
+    ]
+  },
+  {
+    "id": "Q05",
+    "text": "C# uygulamasında hatalı kullanıcı girişini yönetirken doğrulama ile try/catch arasındaki fark nedir?",
+    "source_key": "errors",
+    "expected_concepts": [
+      "Beklenen hatalı girdiyi doğrulama veya TryParse ile yönetme",
+      "Exception akışını uygun yerde yakalama",
+      "Anlaşılır geri bildirim, hata ayrıntısını gelişigüzel göstermeme"
+    ]
+  }
+]

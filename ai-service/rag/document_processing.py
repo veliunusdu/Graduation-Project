@@ -128,7 +128,10 @@ def _extract_pptx(content: bytes) -> list[ExtractedPage]:
     for number, slide in enumerate(presentation.slides, start=1):
         parts = []
         for shape in slide.shapes:
-            if hasattr(shape, "text"):
+            if shape.has_table:
+                for row in shape.table.rows:
+                    parts.append(" ".join(cell.text for cell in row.cells if not cell.is_spanned))
+            elif shape.has_text_frame:
                 parts.append(shape.text)
         pages.append(ExtractedPage(number, "\n".join(parts)))
     return pages

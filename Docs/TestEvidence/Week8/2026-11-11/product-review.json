@@ -1,0 +1,184 @@
+{
+  "kind": "ASSISTANT_REVIEW_REAL_WEB_RAG_TUTOR",
+  "model": "qwen3:1.7b",
+  "model_settings": {
+    "num_ctx": 8192,
+    "num_predict": 1536,
+    "temperature": 0,
+    "seed": 42,
+    "think": true
+  },
+  "score_dimensions": [
+    "level_appropriateness",
+    "clarity",
+    "source_faithfulness",
+    "educational_usefulness"
+  ],
+  "scale": [
+    1,
+    5
+  ],
+  "reviewer": "assistant",
+  "rows": [
+    {
+      "id": "Q01",
+      "profile": "HighSchool",
+      "status": 200,
+      "seconds": 11.1566876,
+      "answer": "Tutor \r\n C# dilinde 5 / 2 işlemi tamsayı sonuç verir çünkü iki tamsayı bölünürken, sonuçta ondalık bir değer elde etmek için en az bir operand ondalıklı türe dönüştürülür. 5 / 2 = 2, ancak (double)5 / 2 = 2.5 olur. Türe dönüşümü, önceki işlemi değiştirmez. Sonuç değişkenini sonradan double seçmek, daha önce yapılmış int bölmesini değiştirmez. Öğrenci, bu durumda (double)5 / 2 ifadesini kullanarak 2.5 sonucunu elde edebilir. Sonraki adım, bu ifadeyi kodunun başka yerine yazarak test etmektir. Kaynak yetersiz ise, bu durumda öğrenci, C# dilinde ondalıklı sayılar nasıl kullanıldığını daha detaylı öğrenmeli ve kodu test etmeli. \r\n Kodunuzda (double)5 / 2 ifadesini kullanarak 2.5 sonucunu elde edin ve test edin. Sonraki adım, bu tür işlemi daha çok yerine getirmek için fonksiyonlara ayırarak kodu organize edebilirsiniz. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "notes": "Tamsayı bölmesi ve dönüşüm doğru.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q02",
+      "profile": "HighSchool",
+      "status": 200,
+      "seconds": 12.2029005,
+      "answer": "Tutor \r\n Kullanıcı girdiği notu 0 ile 100 arasında kontrol etmek için, önce notu string olarak okuyup, onu double türüne dönüştürün. Ardından, 0 ve 100 değerlerini kontrol ederek geçerli olup olmadığını test edin. Eğer geçersiz değer girilirse, kullanıcıya uygun not girin mesajı verin. Örneğin, -1 veya 101 değerlerini test edin. Sonraki adım, bu kodu bir fonksiyon içinde organize ederek daha kolay kullanabilirsiniz. \r\n Bu kodu bir fonksiyon içinde organize ederek daha kolay kullanabilirsiniz. Örneğin, NotUygunluk fonksiyonu oluşturarak, not değerini alıp kontrol ederek sonuç döndürebilirsiniz. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "notes": "Aralık belirtilmiş; sınırların dahil olması ve TryParse ayrımı yeterince açık değil.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q03",
+      "profile": "HighSchool",
+      "status": 200,
+      "seconds": 14.7602702,
+      "answer": "Tutor \r\n Sayı toplamı hesaplamak için, for döngüsü ve foreach döngüsünü seçerken, elemanların indeksine ihtiyaç duyulsa for döngüsünü, koleksiyonu dolaşmaya uygunsa foreach döngüsünü kullanın. For döngüsü, başlangıç değeri, koşul ve artış değerini kontrol ederek döngü yapar. While foreach döngüsü, koleksiyonun elemanlarını doğrudan dolaşır. Toplam hesaplamasında, foreach döngüsü daha kolaydır çünkü indeks kullanılmadan elemanları toplar. Örneğin, bir liste üzerinde toplamı hesaplamak için: int sum = 0; foreach (int number in numbers) { sum += number; } veya for (int i = 0; i < numbers.Count; i++) { sum += numbers[i]; } For döngüsü, elemanların indeksine ihtiyaç duyulsa (örneğin, elemanları değiştirmek istenirse) daha uygun olur. Bu durumda, for döngüsünü tercih edin. Kaynak: s1 \r\n Ödev: Bir liste üzerinde toplamı hesaplayan C# kodu yazın. For döngüsünü kullanarak ve foreach döngüsünü de kullanarak toplamı hesaplayıp karşılaştırın. Örneğin: for (int i = 0; i < numbers.Count; i++) { sum += numbers[i]; } veya foreach (int number in numbers) { sum += number; } Sonraki adım: Döngü seçimini daha iyi anlamak için, döngüye göre farklı durumlar örneğin eleman değişimleri, koleksiyon türleri gibi düşünün. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        3,
+        3,
+        4,
+        3
+      ],
+      "notes": "İndeks ihtiyacı doğru; anlatım ve tekrar örnekleri geliştirilmeli.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q04",
+      "profile": "HighSchool",
+      "status": 200,
+      "seconds": 2.6467652,
+      "answer": "Tutor \r\n Bu soru için uygun ders kaynağı bulunamadı. \r\n Öğretmeninden ilgili materyali paylaşmasını iste veya sorunu ders içeriğiyle sınırla.",
+      "scores": null,
+      "result": "RETRIEVAL_FALSE_NEGATIVE",
+      "notes": "Materyalde bulunan fonksiyon bilgisi 0.60 eşik nedeniyle kaynak olarak dönmedi."
+    },
+    {
+      "id": "Q05",
+      "profile": "HighSchool",
+      "status": 200,
+      "seconds": 12.3188374,
+      "answer": "Tutor \r\n Hatalı kullanıcı girişini yönetirken, doğrulama (validation) ve try/catch arasındaki fark şu şekilde açıklanabilir: \n\n1. **Doğrulama (Validation)**: Kullanıcı girdisi, belirlenen kurallar (örneğin, bir sayı olmalı, boş olmamalı) doğrulanır. Başarısız durumlarda, genellikle bir mesaj verilir. Örneğin, bir username boş olmamalı kontrol edilirken, boş girdi için bir hata mesajı gösterilir. \n\n2. **try/catch**: Hatalı girdilerin (örneğin, sıfıra bölme) genel hataların (Exception) yönetilmesi için kullanılır. Bu durumda, genel bir catch bloğu ile hata yönetilir. Ancak, doğrulama, hatalı girdilerin doğrulanması için özel hataların (örneğin, TryParse) kontrol edilmesiyle yapılır. \n\nDoğrulama, hatalı girdiye özel olarak hazırlanmış kurallarla kontrol edilirken, try/catch, genel hataların yönetilmesi için kullanılır. Doğrulama, kullanıcıya daha anlaşılır bir hata mesajı verirken, try/catch, hatalı girdilerin genel yönetilmesi için kullanılır. \n\nSonraki adım: Kullanıcı girdisi doğrulanırken, hatalı girdi için özel bir mesaj verilir. Bu, kullanıcıya daha net bir hata bilgisi verir. \r\n Kullanıcı girdisi doğrulanırken, hatalı girdi için özel bir mesaj verilir. Bu, kullanıcıya daha net bir hata bilgisi verir. Sonraki adım, hatalı girdi için özel bir mesaj verilir ve kullanıcıya daha net bir hata bilgisi verilir. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        3,
+        2,
+        2,
+        2
+      ],
+      "notes": "TryParse ile exception ayrımı karışıyor.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q01",
+      "profile": "University",
+      "status": 200,
+      "seconds": 11.4782858,
+      "answer": "Tutor \r\n C# dilinde 5 / 2 işlemi tamsayı bölme olarak gerçekleşir. Bu nedenle 5 / 2 = 2. Ondalıklı sonuç için en az bir operand ondalıklı türe dönüştürülür. Örneğin, (double)5 / 2 = 2.5 olur. Bu nedenle, tür seçimini yaparken, 5'i double olarak tanımlamak, 2'i int olarak tanımlamak veya 2'i double olarak tanımlamak gibi farklı durumlarda sonuç değişiklik gösterir. Öğrenci, 5 / 2 sonucunu int olarak saklamak istiyorsa, 2'i double olarak tanımlamak istiyorsa, 5'i double olarak tanımlamak istiyorsa, farklı sonuçlar elde edebilir. Sonraki adım, farklı türlerde işlem yapmak ve sonuçları kontrol etmek olabilir. Kaynak yetersiz ise, bu konuyla ilgili daha fazla bilgi almak gerekir. \r\n Öğrenci, farklı türlerde işlem yapmak ve sonuçları kontrol etmeyi deneyimleyebilir. Örneğin, 5 / 2 sonucunu int olarak saklamak için 2'i double olarak tanımlamak, 2.5 olarak elde etmek için 5'i double olarak tanımlamak gibi durumlarda deneyimleyebilir. Ayrıca, tür seçimini daha iyi anlamak için örneklerle çalışabilir. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "notes": "Başlangıç doğru; sonraki tür dönüşümü önerisi tutarsız.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q02",
+      "profile": "University",
+      "status": 200,
+      "seconds": 14.0955424,
+      "answer": "Tutor \r\n Kullanıcının girdiği notun 0 ile 100 arasında olduğunu kontrol etmek için C# dilinde if/else yapıları kullanılır. Not değerini int türüne dönüştürmek için (int) not ifadesi kullanılır. Sınır değerlerini test etmek için 0, 100, 101, -1 gibi değerler kullanılır. Eğer not 0 ile 100 arasında değilse, kullanıcıya hata mesajı gösterilir. Örneğin, not < 0 veya not > 100 durumunda hata mesajı verilir. Bu testler, not aralığının doğru şekilde kontrol edilmesini sağlar. Öğrenci, bu kodu test etmeden önce not değerlerini doğrulayarak uygulamayı tamamlamış olur. Kaynak yetersiz ise, öğrencinin sorunun daha detaylı açıklanmasını istiyor. JSON şemasına uygun şekilde cevap verilir. \r\n Kullanıcının girdiği notu 0 ile 100 arasında kontrol eden C# kodu yazın. Not değerlerini 0, 100, 101, -1 gibi test ederek uygulamayı tamamlayın. Bu kodu bir dosyada saklayarak, daha sonra test etmek için kullanabilirsiniz. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "notes": "Metinden sayıya dönüşüm için (int) not ifadesini öneriyor.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q03",
+      "profile": "University",
+      "status": 200,
+      "seconds": 13.979844,
+      "answer": "Tutor \r\n C# dilinde sayı toplamı hesaplamak için for ve foreach döngüsünü seçerken, döngüye ihtiyaç duyulan işlemi (eleman değerini veya indeksini) göz önünde bulundurulmalıdır. for döngüsü, eleman değerini doğrudan erişim sağlar, while döngüsü ise indeksle döngü yapar. Toplamı hesaplamak için, for döngüsü ile başlangıç değeri, koşul ve artış değerini belirtebilir. foreach döngüsü, koleksiyonun elemanlarını dolaşmaya uygun olup, toplamı hesaplamak için koleksiyonun başlangıç değeri belirtilmelidir. Döngü seçimi, yalnız eleman değerine mi yoksa indekse de mi ihtiyaç olduğuna göre açıklanır. Örneğin, eleman değerlerini toplamak için for döngüsü daha uygun olabilir, while döngüsü ise indeksle döngü yapmak için kullanılır. Öğrenci, döngü seçimi, döngüye ihtiyaç duyulan işlemi ve koleksiyonun yapılandırmasını göz önünde bulundurarak doğru seçim yapmalıdır. Sonraki adım, farklı durumlarda döngü seçimi yapmayı deneyerek beceri kazanmak olabilir. \r\n Öğrenci, farklı sayı listeleriyle döngü seçimi yaparak beceri kazanabilir. Örneğin, 1-100 arasında sayıları toplamak için for döngüsünü, 100 elemanlı bir liste için foreach döngüsünü kullanabilir. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "notes": "while/for/foreach ve indeks ayrımını karıştırıyor.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Q04",
+      "profile": "University",
+      "status": 200,
+      "seconds": 2.879242,
+      "answer": "Tutor \r\n Bu soru için uygun ders kaynağı bulunamadı. \r\n Öğretmeninden ilgili materyali paylaşmasını iste veya sorunu ders içeriğiyle sınırla.",
+      "scores": null,
+      "result": "RETRIEVAL_FALSE_NEGATIVE",
+      "notes": "Materyalde bulunan fonksiyon bilgisi 0.60 eşik nedeniyle kaynak olarak dönmedi."
+    },
+    {
+      "id": "Q05",
+      "profile": "University",
+      "status": 200,
+      "seconds": 13.9134231,
+      "answer": "Tutor \r\n C# uygulamasında hatalı kullanıcı girişini yönetirken, doğrulama (validation) ve try/catch arasındaki fark şu şekilde açıklanabilir: \n\n1. **Doğrulama (Validation)**: Kullanıcı girdisi, uygulamanın gereksinimlerine (örneğin, boş olmamalı, geçerli format) uygun olup olmadığını kontrol eder. Bu, uygulamanın gereksinimlerini karşılamak için önceden tanımlanmış kurallarla çalışır. Doğrulama, girdinin geçerli olup olmadığını belirler, ancak bu girdiyi doğrudan işleme yapmaz. Örneğin, bir string girilirse, doğrulama boş olmamayı kontrol eder, ancak işleme yapmaz. Bu, kullanıcıya anlaşılır bir hata mesajı verir. \n\n2. **try/catch**: Uygulama, bir hata ya da iş kurallarına (örneğin, sıfıra bölme) karşılaştığında, bu hataları yakalamak için kullanılır. try/catch, genel hataları yakalamak için kullanılır, ancak bu hataları doğrudan işleme yapmaz. Örneğin, tryParse gibi yöntemler, sayısal dönüşümü başarısız yapsa da, bu dönüşümü normal bir sonuçla bildirebilir. try/catch, genel hataları yakalamak için kullanılır, ancak bu hataları doğrudan işleme yapmaz. \n\n**Farklar**: \n- Doğrulama, uygulamanın gereksinimlerini karşılamak için önceden tanımlanmış kurallarla çalışır. \n- try/catch, uygulama tarafından kontrol edilebilen hataları yakalar. \n- Doğrulama, girdinin geçerli olup olmadığını belirler, ancak işleme yapmaz. \n- try/catch, genel hataları yakalar, ancak bu hataları doğrudan işleme yapmaz. \n\n**Sonraki Adım**: Kullanıcı girdisi doğrulanmış olunca, uygulama, girdinin geçerli olup olmadığını kontrol ederek işlem yapar. Eğer girdi geçersiz ise, doğrulama sonucu bir hata mesajı verilir. Bu, kullanıcıya anlaşılır bir hata yönetimi sağlar. \n\nKaynak: s1 \r\n Kullanıcı girdisi doğrulanmış olunca, uygulama, girdinin geçerli olup olmadığını kontrol ederek işlem yapar. Eğer girdi geçersiz ise, doğrulama sonucu bir hata mesajı verilir. Bu, kullanıcıya anlaşılır bir hata yönetimi sağlar. \r\n         notes.txt · Sayfa 1",
+      "scores": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "notes": "Temel fark var; yüzeysel ve tekrarlı.",
+      "result": "REVIEWED"
+    },
+    {
+      "id": "Ödevimin tamamını yaz",
+      "profile": "HighSchool",
+      "status": 200,
+      "answer": "Tutor \r\n Ödevi birlikte adımlara ayıralım. Önce ne denediğini ve takıldığın bölümü paylaş. \r\n İlk adımı kendin dene, ardından küçük bir parçayı birlikte inceleyelim.",
+      "scores": null,
+      "result": "PASS_EXPLICIT_BEHAVIOR",
+      "notes": "Kontrollü uygulama yanıtı, üretim çağrısı yapılmadı."
+    },
+    {
+      "id": "Satürn halkalarının bileşimi nedir?",
+      "profile": "HighSchool",
+      "status": 200,
+      "answer": "Tutor \r\n Bu soru için uygun ders kaynağı bulunamadı. \r\n Öğretmeninden ilgili materyali paylaşmasını iste veya sorunu ders içeriğiyle sınırla.",
+      "scores": null,
+      "result": "PASS_EXPLICIT_BEHAVIOR",
+      "notes": "Kontrollü uygulama yanıtı, üretim çağrısı yapılmadı."
+    }
+  ],
+  "test_matrix_completed": true,
+  "quality_acceptance": "FAILED_FINDINGS_OPEN"
+}

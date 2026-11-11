@@ -15,6 +15,21 @@ class OllamaEmbeddingClient:
         self.model = settings.OLLAMA_EMBEDDING_MODEL
         self.timeout = settings.OLLAMA_TIMEOUT_SECONDS
 
+    def model_identity(self) -> str:
+        """Resolve the configured tag to the installed model digest."""
+        name = self.model if ":" in self.model.rsplit("/", 1)[-1] else f"{self.model}:latest"
+        try:
+            response = requests.get(f"{self.base_url}/api/tags", timeout=self.timeout)
+            response.raise_for_status()
+            models = response.json()["models"]
+            for item in models:
+                digest = item.get("digest")
+                if item.get("name") == name and isinstance(digest, str) and digest:
+                    return f"{name}@{digest}"
+        except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError) as exc:
+            raise EmbeddingError("Could not verify the installed embedding model identity.") from exc
+        raise EmbeddingError("The configured embedding model is not installed.")
+
     def embed(self, texts: list[str]) -> list[list[float]]:
         if not texts:
             return []

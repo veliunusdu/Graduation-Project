@@ -1,0 +1,112 @@
+{
+  "corruptPdf": "Failed",
+  "controlledHttp503": "Failed",
+  "retry": "Ready",
+  "retrieval": [
+    {
+      "courseId": 1,
+      "top1": [
+        {
+          "text": "Lise A s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: HS_A_ONLY_9F31\nBu metin yaln\u0131zca course 101 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.7047862240240871,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 1,
+            "page_number": 1,
+            "chunk_id": "1:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "Lise A s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: HS_A_ONLY_9F31\nBu metin yaln\u0131zca course 101 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.7047862240240871,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 1,
+            "page_number": 1,
+            "chunk_id": "1:1"
+          }
+        },
+        {
+          "text": "Bitkiler fotosentez yapar.",
+          "score": 0.33977426865665344,
+          "metadata": {
+            "course_id": 1,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 5,
+            "page_number": 1,
+            "chunk_id": "5:1"
+          }
+        }
+      ]
+    },
+    {
+      "courseId": 2,
+      "top1": [
+        {
+          "text": "Lise B s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: HS_B_ONLY_8C72\nBu metin yaln\u0131zca course 102 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.6998336713080139,
+          "metadata": {
+            "course_id": 2,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 2,
+            "page_number": 1,
+            "chunk_id": "2:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "Lise B s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: HS_B_ONLY_8C72\nBu metin yaln\u0131zca course 102 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.6998336713080139,
+          "metadata": {
+            "course_id": 2,
+            "education_level": "HighSchool",
+            "grade_level": 9,
+            "material_id": 2,
+            "page_number": 1,
+            "chunk_id": "2:1"
+          }
+        }
+      ]
+    },
+    {
+      "courseId": 3,
+      "top1": [
+        {
+          "text": "\u00DCniversite A s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: UNI_ONLY_7D64\nBu metin yaln\u0131zca course 201 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.6909221236144534,
+          "metadata": {
+            "course_id": 3,
+            "education_level": "University",
+            "grade_level": 1,
+            "material_id": 3,
+            "page_number": 1,
+            "chunk_id": "3:1"
+          }
+        }
+      ],
+      "top3": [
+        {
+          "text": "\u00DCniversite A s\u00FCreklilik notu\nBu sentetik derste ortak konu s\u00FCrekliliktir.\nBu dersin s\u00FCreklilik do\u011Frulama kodu: UNI_ONLY_7D64\nBu metin yaln\u0131zca course 201 kapsam\u0131nda kullan\u0131lmal\u0131d\u0131r.",
+          "score": 0.6909221236144534,
+          "metadata": {
+            "course_id": 3,
+            "education_level": "University",
+            "grade_level": 1,
+            "material_id": 3,
+            "page_number": 1,
+            "chunk_id": "3:1"
+          }
+        }
+      ]
+    }
+  ]
+}
