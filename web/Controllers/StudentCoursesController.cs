@@ -28,9 +28,13 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
     public record SourceHit(string Text, double Score, SourceMetadata? Metadata);
     public record SourceResponse(int CourseId, List<SourceHit>? Results);
     public record CourseSource(string FileName, int PageNumber, string Text);
+    public record TutorSource(string SourceId, string Text);
+    public record TutorContext(int CourseId, string EducationLevel, int GradeLevel);
+    public record TutorRequest(string Question, TutorContext Context, List<TutorSource> Sources);
+    public record TutorResponse(string Status, string Explanation, string NextStep, List<string>? Citations);
 
     [HttpPost]
-    public async Task<IActionResult> SearchSources([FromRoute] int id, string? question, CancellationToken ct)
+    public async Task<IActionResult> SearchSources([FromRoute] int id, string? question, CancellationToken ct, bool tutor = false)
     {
         if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
         question = question?.Trim();
@@ -55,6 +59,19 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
             .Select(hit => new CourseSource(allowed[hit.Metadata!.MaterialId], hit.Metadata.PageNumber, hit.Text)).ToList();
         if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
         ViewData["CourseId"] = id;
-        return View(sources);
+        if (!tutor) return View(sources);
+        var course = await Enrolled.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id, ct);
+        if (course == null) return NotFound();
+        var tutorSources = sources.Select((source, index) => new TutorSource($"s{index+1}", source.Text)).ToList();
+        var reply = await ai.PostJsonAsync<TutorRequest, TutorResponse>("tutor/answer",
+            new(question, new(id, course.EducationLevel.ToString(), course.GradeLevel), tutorSources), ct);
+        if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
+        if (!reply.Success || reply.Data == null || string.IsNullOrWhiteSpace(reply.Data.Explanation)
+            || reply.Data.Status is not ("answered" or "no_source" or "guidance_only")
+            || reply.Data.Citations == null
+            || reply.Data.Citations.Any(key => !tutorSources.Any(source => source.SourceId == key)))
+            return StatusCode(502, "Tutor yanıtı şu anda hazırlanamadı.");
+        ViewData["Sources"] = sources;
+        return View("Tutor", reply.Data);
     }
 }
