@@ -1,0 +1,15 @@
+@model HomeworkPlatform.Web.Controllers.StudentCoursesController.TutorResponse
+@{ ViewData["Title"] = "Tutor"; }
+<h1>Tutor</h1>
+<p style="white-space:pre-wrap">@Model.Explanation</p>
+<p>@Model.NextStep</p>
+@{ var sources = ViewData["Sources"] as IReadOnlyList<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource> ?? Array.Empty<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource>(); }
+@foreach (var key in Model.Citations ?? new())
+{
+    var index = int.TryParse(key.TrimStart('s'),out var number) ? number-1 : -1;
+    if (index >= 0 && index < sources.Count)
+    {
+        <p>@sources[index].FileName · Sayfa @sources[index].PageNumber</p>
+    }
+}
+<a asp-action="Details" asp-route-id="@ViewData["CourseId"]">Derse dön</a>

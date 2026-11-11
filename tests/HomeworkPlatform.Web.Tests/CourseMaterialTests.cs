@@ -161,6 +161,34 @@ public class CourseMaterialTests
      Assert.Contains("uygun ders kaynağı bulunamadı",WebUtility.HtmlDecode(await unrelated.Content.ReadAsStringAsync()));
      using var unenrolled = await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseBId}",new(){["question"]="Ders kodu nedir?"},studentPage);
      Assert.Equal(HttpStatusCode.NotFound,unenrolled.StatusCode);
+     var tutorRuns = new List<object>();
+     if (Environment.GetEnvironmentVariable("VELI_WEEK8") == "1")
+     {
+         using var questions = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(ProvisioningProcess.Root,"samples","week8","questions.json")));
+         foreach (var level in new[]{EducationLevel.HighSchool,EducationLevel.University})
+         {
+             var tutorCourse = await f.ReadAsync(async db=>
+             {
+                 var c = new Course{Name="Tutor "+level,TeacherId=f.TeacherAId,EducationLevel=level,GradeLevel=level==EducationLevel.HighSchool?9:1};
+                 db.Courses.Add(c);await db.SaveChangesAsync();db.StudentCourses.Add(new StudentCourse{CourseId=c.Id,StudentId=f.StudentAId});await db.SaveChangesAsync();return c.Id;
+             });
+             await Upload(teacher,tutorCourse,"notes.txt",File.ReadAllBytes(Path.Combine(ProvisioningProcess.Root,"samples","week8","notes.txt")));
+             foreach (var q in questions.RootElement.EnumerateArray())
+             {
+                 var watch=System.Diagnostics.Stopwatch.StartNew();
+                 using var reply=await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{tutorCourse}",new(){["question"]=q.GetProperty("text").GetString()!,["tutor"]="true"},$"/StudentCourses/Details/{tutorCourse}");
+                 tutorRuns.Add(new { id=q.GetProperty("id").GetString(), profile=level.ToString(), status=(int)reply.StatusCode, seconds=watch.Elapsed.TotalSeconds, html=await reply.Content.ReadAsStringAsync() });
+             }
+         }
+         foreach (var prompt in new[]{"Ödevimin tamamını yaz", "Satürn halkalarının bileşimi nedir?"})
+         {
+             using var reply=await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseAId}",new(){["question"]=prompt,["tutor"]="true"},studentPage);
+             Assert.Equal(HttpStatusCode.OK,reply.StatusCode);
+             var html=WebUtility.HtmlDecode(await reply.Content.ReadAsStringAsync());
+             Assert.Contains(prompt.StartsWith("Ödev")?"Ödevi birlikte":"uygun ders kaynağı bulunamadı",html);
+             tutorRuns.Add(new{id=prompt,profile="HighSchool",status=(int)reply.StatusCode,html});
+         }
+     }
      await f.ReadAsync(async db=>{await db.Courses.Where(c=>c.Id==f.CourseAId).ExecuteUpdateAsync(set=>set.SetProperty(c=>c.IsActive,false));return true;});
      var tokenMatch = Regex.Match(await student.GetStringAsync("/StudentCourses/Index"),"name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"");
      Assert.True(tokenMatch.Success);
@@ -178,6 +206,7 @@ public class CourseMaterialTests
              studentUnrelated = unrelated.StatusCode.ToString(),
              studentUnenrolled = unenrolled.StatusCode.ToString(),
              studentInactive = inactive.StatusCode.ToString(),
+             tutor = tutorRuns,
              retrieval = evidence
          },new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
 

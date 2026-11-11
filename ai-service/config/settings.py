@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "AI-Supported Homework Platform - AI Service"
     OLLAMA_BASE_URL: HttpUrl = "http://localhost:11434"
 
+    TUTOR_MODEL: str = "qwen3:1.7b"
     OLLAMA_GENERAL_MODEL: str = "qwen3:8b"
     OLLAMA_CODE_REVIEW_MODEL: str = "qwen2.5-coder:7b"
     OLLAMA_EMBEDDING_MODEL: str = "bge-m3"

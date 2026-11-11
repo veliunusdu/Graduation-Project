@@ -1,0 +1,9 @@
+C# dilinde iki int değerin bölünmesi tamsayı sonucunu verir; 5 / 2 sonucu 2 olur. Ondalıklı sonuç için en az bir operand uygun ondalıklı türe dönüştürülür. (double)5 / 2 sonucu 2.5 olur. Sonuç değişkenini sonradan double seçmek, daha önce yapılmış int bölmesini değiştirmez.
+
+Geçerli not aralığı 0 <= not ve not <= 100 biçiminde iki sınırı da içerir. -1 ve 101 geçersiz; 0 ve 100 geçerlidir. Metinden sayıya dönüşüm başarısı ile sayı aralığı doğrulaması ayrı kontrollerdir.
+
+for, başlangıç/koşul/artış ve gerektiğinde indeksle erişim sağlar. foreach, koleksiyonun elemanlarını dolaşmaya uygundur. Sayı toplamı hesaplanırken toplayıcı uygun başlangıç değeriyle başlatılır. Döngü seçimi, yalnız eleman değerine mi yoksa indekse de mi ihtiyaç olduğuna göre açıklanır.
+
+Ortalama hesaplamasını ayrı fonksiyona taşımak tekrar kullanımı ve test etmeyi kolaylaştırır. Boş listede eleman sayısı sıfırdır; davranış önceden tanımlanmalıdır. Boş girdi için uygulamanın gereksinimine göre kontrollü sonuç veya açık hata politikası seçilir; sıfıra bölme göz ardı edilmez.
+
+Doğrulama, beklenen hatalı girdiyi ve iş kurallarını kontrol eder. TryParse gibi yöntemler başarısız sayısal dönüşümü normal bir sonuçla bildirebilir. try/catch uygun exception durumlarını ele alır; her girdiyi düşünmeden genel catch ile örtmek açıklayıcı hata yönetimi değildir. Kullanıcıya anlaşılır geri bildirim verilir.

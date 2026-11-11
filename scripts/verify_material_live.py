@@ -23,7 +23,7 @@ with tempfile.TemporaryDirectory(prefix="material-live-") as temp:
   else:raise RuntimeError("Python server not ready")
   env["VELI_MATERIAL_PYTHON_URL"]=url
   env["VELI_MATERIAL_EVIDENCE"]=str(out/"acceptance.json")
-  r=subprocess.run(["dotnet","test","tests/HomeworkPlatform.Web.Tests","--filter","FullyQualifiedName~ActualWebUploadReachesRealPythonAndBge","--logger","trx;LogFileName=live.trx","--results-directory",str(out)],cwd=root,env=env,capture_output=True,text=True,timeout=180)
+  r=subprocess.run(["dotnet","test","tests/HomeworkPlatform.Web.Tests","--filter","FullyQualifiedName~ActualWebUploadReachesRealPythonAndBge","--logger","trx;LogFileName=live.trx","--results-directory",str(out)],cwd=root,env=env,capture_output=True,text=True,timeout=600)
   (out/"dotnet.log").write_text(r.stdout+r.stderr,encoding="utf-8");print(r.stdout+r.stderr);code=r.returncode
  finally:
   proc.terminate()
