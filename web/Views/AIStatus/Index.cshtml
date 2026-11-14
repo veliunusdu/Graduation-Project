@@ -1,14 +1,5 @@
 @model HomeworkPlatform.Web.Services.AI.AIServiceResult<HomeworkPlatform.Web.Services.AI.AIHealthResponse>
-@{ ViewData["Title"] = "AI servis durumu"; }
-<h1>AI servis durumu</h1>
-@if (Model.Success)
-{
-    <div class="alert alert-success" role="status">Python AI servisine bağlantı başarılı. Durum: @Model.Data!.Status</div>
-    <p>Bu kontrol Python servisine erişimi doğrular. Model ve analiz özellikleri ayrıca kontrol edilir.</p>
-}
-else
-{
-    <div class="alert alert-warning" role="alert">@Model.Error?.Message</div>
-}
-<a asp-action="Index" class="btn btn-primary">Yeniden kontrol et</a>
-<a asp-controller="Teacher" asp-action="Index" class="btn btn-outline-secondary">Öğretmen paneline dön</a>
+@{ ViewData["Title"] = "AI service connection"; }
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">AI TOOLS</span><h1>AI service connection</h1><p>Check whether the AI service is reachable.</p></div></div>
+<div class="ep-form-card">@if (Model.Success){<div class="alert alert-success" role="status">Connected to the AI service. Status: @Model.Data!.Status</div><p class="ep-muted">This checks service availability. Model and analysis features may require additional checks.</p>}else{<div class="alert alert-warning" role="alert">The AI service could not be reached. Check that it is running, then try again.</div>}
+<a asp-action="Index" class="btn btn-primary">Check again</a></div>

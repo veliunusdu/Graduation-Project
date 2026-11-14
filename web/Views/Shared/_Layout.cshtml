@@ -1,18 +1,26 @@
+@{ var eduPilotPage = ViewData["EduPilotPage"] is true; }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HomeworkPlatform.Web</title>
+    <title>@ViewData["Title"] - EduPilot</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HomeworkPlatform.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/edupilot-auth.css" asp-append-version="true" />
 </head>
-<body>
+<body class="@(eduPilotPage ? "ep-page" : "")">
+    @if (eduPilotPage)
+    {
+        <main class="ep-main" id="main-content">@RenderBody()</main>
+    }
+    else
+    {
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HomeworkPlatform.Web</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EduPilot</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,8 +47,7 @@
                         }
                         else
                         {
-                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a></li>
-                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Sign in</a></li>
                         }
                     </ul>
                 </div>
@@ -55,12 +62,16 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - HomeworkPlatform.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - EduPilot - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    }
+    @if (ViewData["OnboardingPage"] is not true)
+    {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

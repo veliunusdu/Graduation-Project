@@ -1,5 +1,19 @@
 @model IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Course>
-@{ ViewData["Title"] = "My courses"; }
-<h1>My courses</h1>
-<p><a asp-action="Create" class="btn btn-primary">Create course</a> <a asp-controller="Assignments" asp-action="Index">My assignments</a></p>
-<ul>@foreach (var course in Model) { <li><a asp-action="Details" asp-route-id="@course.Id">@course.Name</a> — @course.EducationLevel / @course.GradeLevel · @(course.IsActive ? "Active" : "Inactive")</li> }</ul>
+@using HomeworkPlatform.Web.Models.Domain
+@{ ViewData["Title"] = "My courses"; var counts = ViewData["EnrollmentCounts"] as IReadOnlyDictionary<int, int> ?? new Dictionary<int, int>(); }
+<div class="ep-course-page">
+    <div class="ep-course-index-heading"><div><h1>My courses</h1><p>Manage your courses, assignments and enrolled students.</p></div><a asp-action="Create" class="btn ep-course-primary">Create course <partial name="_EduPilotIcon" model='@("arrow")' /></a></div>
+    @if (Model.Count == 0) { <div class="ep-course-panel ep-course-empty"><h2>No courses yet</h2><p>Create a course to get started.</p></div> }
+    <div class="ep-course-card-grid">
+    @foreach (var course in Model)
+    {
+        <article class="ep-course-panel ep-course-card" data-course-id="@course.Id" data-enrolled-count="@counts.GetValueOrDefault(course.Id)">
+            <div class="ep-course-badges"><span class="ep-course-badge">@EducationRules.Label(course.EducationLevel)</span><span class="ep-course-badge ep-course-badge-neutral">@(course.EducationLevel == EducationLevel.University ? "Year" : "Grade") @course.GradeLevel</span><span class="ep-course-badge @(course.IsActive ? "ep-course-badge-active" : "ep-course-badge-neutral")">@(course.IsActive ? "Active" : "Inactive")</span></div>
+            <h2><a asp-action="Details" asp-route-id="@course.Id">@course.Name</a></h2><p>@course.Description</p>
+            <div class="ep-course-card-bottom"><span><partial name="_EduPilotIcon" model='@("student")' /> @counts.GetValueOrDefault(course.Id) enrolled students</span></div>
+            <div class="ep-course-tools ep-ui-action-group"><a class="btn ep-secondary-link ep-ui-action" asp-action="Details" asp-route-id="@course.Id">Open course</a><a class="btn ep-secondary-link ep-ui-action" asp-action="Edit" asp-route-id="@course.Id">Edit course</a><a class="btn ep-danger-link ep-ui-action" asp-action="Delete" asp-route-id="@course.Id">Delete</a></div>
+        </article>
+    }
+    </div>
+    <a class="d-inline-block mt-4" asp-controller="Assignments" asp-action="Index">View all assignments</a>
+</div>

@@ -31,7 +31,7 @@ public class ProvisioningTests
     {
         using var app = new AuthWebApplicationFactory();
         using var client = app.NewClient();
-        await FormClient.RegisterAsync(client, "student@example.test");
+        await FormClient.CreateAccountAndLoginAsync(client, "student@example.test");
         var result = await ProvisioningProcess.RunAsync(app.DatabasePath, "Development", FormClient.TestPassword, "--provision-teacher", "student@example.test");
         Assert.False(result.TimedOut);
         Assert.NotEqual(0, result.ExitCode);

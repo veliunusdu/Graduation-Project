@@ -1,3 +1,6 @@
+using HomeworkPlatform.Web.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -18,11 +21,17 @@ public static class FormClient
         return await client.PostAsync(path, new FormUrlEncodedContent(fields));
     }
 
-    public static Task<HttpResponseMessage> RegisterAsync(HttpClient client, string email, Dictionary<string, string>? extra = null)
+    public static async Task<HttpResponseMessage> CreateAccountAndLoginAsync(HttpClient client, string email, Dictionary<string, string>? extra = null)
     {
-        var fields = new Dictionary<string, string> { ["Email"] = email, ["Password"] = TestPassword, ["ConfirmPassword"] = TestPassword };
-        if (extra != null) foreach (var field in extra) fields[field.Key] = field.Value;
-        return PostAsync(client, "/Account/Register", fields);
+        Assert.True(AuthWebApplicationFactory.Owners.TryGetValue(client, out var app));
+        using var scope = app!.Services.CreateScope();
+        var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var role = extra?.GetValueOrDefault("Role") ?? "Student";
+        var user = new ApplicationUser { UserName = email, Email = email, FirstName = "Test", LastName = "User",
+            StudentClass = role == "Student" ? "HighSchool10" : null, ProfileCompleted = true };
+        Assert.True((await users.CreateAsync(user, TestPassword)).Succeeded);
+        Assert.True((await users.AddToRoleAsync(user, role)).Succeeded);
+        return await LoginAsync(client, email);
     }
 
     public static Task<HttpResponseMessage> LoginAsync(HttpClient client, string email, string password = TestPassword, string? returnUrl = null)

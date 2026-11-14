@@ -1,0 +1,4 @@
+@model HomeworkPlatform.Web.Models.StudentSearchViewModel
+@{ViewData["Title"]="Search";}
+<div class="ep-teacher-heading"><div><h1>Search results</h1><p>@(Model.Query.Length==0?"Enter a course name, assignment title or requirements in the search box.":$"Results for: {Model.Query}")</p></div></div>
+<h2>Courses (@Model.Courses.Count)</h2><div class="ep-course-card-grid mb-4">@foreach(var c in Model.Courses){<partial name="_StudentCourseCard" model="c" />}</div>@if(Model.Courses.Count==0){<p class="ep-muted">No matching courses.</p>}<h2>Assignments (@Model.Assignments.Count)</h2><div class="ep-card"><partial name="_StudentAssignmentTable" model="Model.Assignments" /></div>

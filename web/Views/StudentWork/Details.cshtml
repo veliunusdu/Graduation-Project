@@ -1,9 +1,4 @@
 @model HomeworkPlatform.Web.Models.Domain.Assignment
-@{ ViewData["Title"] = Model.Title; }
-<h1>@Model.Title</h1><p>@Model.Description</p><p>Course: @Model.Course.Name</p>
-<partial name="_AssignmentRequirements" model="Model" />
-@if (ViewData["SubmissionId"] is int submissionId)
-{ <p><a asp-controller="Submissions" asp-action="Details" asp-route-id="@submissionId">My submission</a></p> }
-else
-{ <p><a asp-controller="Submissions" asp-action="Create" asp-route-assignmentId="@Model.Id">Create submission</a></p> }
-<p><a asp-action="Index">Enrolled assignments</a></p>
+@{ViewData["Title"]=Model.Title;}
+<div class="ep-teacher-heading mt-3"><div><span class="ep-eyebrow">@Model.Course.Name</span><h1>@Model.Title</h1><p>Due date: @(Model.DueDate?.ToString("dd MMM yyyy",System.Globalization.CultureInfo.InvariantCulture) ?? "No due date")</p></div></div>
+<div class="ep-student-cols"><div class="ep-card p-4 align-self-start ep-requirements-card"><h2 class="ep-requirements-heading">Requirements</h2><p class="ep-requirements-text">@Model.Description</p><partial name="_AssignmentAttachments" model="Model" /></div><div>@if(ViewData["SubmissionId"] is int id){<section class="ep-card p-4 mb-4"><h2>Your work is submitted</h2><p class="small ep-muted">View your submission, grade and teacher feedback.</p><div class="ep-action-row"><a asp-controller="Submissions" asp-action="Delete" asp-route-id="@id" class="btn ep-danger-link">Withdraw submission</a><a asp-controller="Submissions" asp-action="Details" asp-route-id="@id" class="btn ep-secondary-link">My submission</a></div></section>}else{<section class="ep-card p-4 mb-4"><h2>Ready to submit?</h2><p class="small ep-muted">Submit a file, text, or both.</p><a asp-controller="Submissions" asp-action="Create" asp-route-assignmentId="@Model.Id" class="btn btn-primary">Create submission</a></section>}<partial name="_StudentHelp" model="Model.CourseId" /></div></div>

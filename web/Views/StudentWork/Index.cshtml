@@ -1,4 +1,4 @@
-@model IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Assignment>
-@{ ViewData["Title"] = "Enrolled assignments"; }
-<h1>Enrolled assignments</h1><p><a asp-controller="Submissions" asp-action="Index">My submissions</a></p>
-<ul>@foreach (var assignment in Model) { <li><a asp-action="Details" asp-route-id="@assignment.Id">@assignment.Title</a> — @assignment.Course.Name</li> }</ul>
+@model HomeworkPlatform.Web.Models.StudentAssignmentsViewModel
+@{ViewData["Title"]="Assignments";}
+<div class="ep-teacher-heading"><div><h1>Assignments</h1><p>Keep track of coursework and your submission status.</p></div></div>
+<form asp-action="Index" method="get" class="ep-card ep-student-filter"><div><label asp-for="Status">Submission status</label><select asp-for="Status" class="form-select"><option value="">All statuses</option><option value="Pending">Not Submitted</option><option value="Submitted">Submitted</option><option value="Graded">Graded</option></select></div><div><label asp-for="CourseId">Course</label><select asp-for="CourseId" class="form-select"><option value="">All courses</option>@foreach(var c in Model.Courses){<option value="@c.Course.Id">@c.Course.Name</option>}</select></div><button type="submit" class="btn btn-primary">Apply filters</button><a asp-action="Index" class="btn btn-light">Clear</a></form><div class="ep-card"><partial name="_StudentAssignmentTable" model="Model.Items" /></div>

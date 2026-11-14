@@ -1,4 +1,7 @@
 @model IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Assignment>
-@{ ViewData["Title"] = "My assignments"; }
-<h1>My assignments</h1><p><a asp-controller="Courses" asp-action="Index">My courses</a></p>
-<ul>@foreach (var assignment in Model) { <li><a asp-action="Details" asp-route-id="@assignment.Id">@assignment.Title</a> — @assignment.Course.Name</li> }</ul>
+@{ ViewData["Title"] = "My assignments"; var counts=ViewData["SubmissionCounts"] as IReadOnlyDictionary<int,int> ?? new Dictionary<int,int>(); }
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">COURSEWORK</span><h1>My assignments</h1><p>All assignments from your courses, in one place.</p></div><a asp-controller="Courses" asp-action="Index" class="btn btn-primary">Open a course to add an assignment</a></div>
+<div class="ep-card">@if(Model.Count == 0){<div class="ep-empty"><h2>No assignments yet</h2><p>Open a course to create your first assignment.</p></div>}else{
+<div class="ep-table-wrap"><table class="ep-teacher-table"><thead><tr><th>Title</th><th>Course</th><th>Due date</th><th>Submissions</th><th>Actions</th></tr></thead><tbody>
+@foreach(var a in Model){<tr><td><a asp-action="Details" asp-route-id="@a.Id" class="fw-bold">@a.Title</a></td><td>@a.Course.Name</td><td>@(a.DueDate?.ToString("dd MMM yyyy",System.Globalization.CultureInfo.InvariantCulture) ?? "No due date")</td><td><a asp-action="Submissions" asp-route-id="@a.Id">@counts.GetValueOrDefault(a.Id) submissions</a></td><td><div class="ep-table-actions ep-ui-action-group"><a class="btn ep-secondary-link ep-ui-action" asp-action="Details" asp-route-id="@a.Id">View</a><a class="btn ep-secondary-link ep-ui-action" asp-action="Edit" asp-route-id="@a.Id">Edit</a><a asp-action="Delete" asp-route-id="@a.Id" class="btn ep-danger-link ep-ui-action">Delete</a></div></td></tr>}
+</tbody></table></div>}</div>

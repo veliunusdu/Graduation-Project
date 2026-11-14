@@ -2,7 +2,7 @@
 
 ## Current milestone
 
-The ASP.NET Core 8 MVC app now includes Identity authentication, SQLite migrations, and Teacher/Student role restrictions. See [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md) for registration, login, Teacher provisioning and tests. Ownership checks are implemented; see OWNERSHIP_SETUP.md. AI integration remains later work. The verification record below preserves the original foundation milestone.
+The ASP.NET Core 8 MVC app now includes Identity authentication, SQLite migrations, and Teacher/Student role restrictions. See [AUTHENTICATION_SETUP.md](AUTHENTICATION_SETUP.md) for prepared Student/Teacher accounts, initial courses/enrollments, sign-in and tests. Ownership checks are implemented; see OWNERSHIP_SETUP.md. AI integration remains later work. The verification record below preserves the original foundation milestone.
 
 ## Prerequisites
 

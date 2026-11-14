@@ -1,0 +1,10 @@
+@model HomeworkPlatform.Web.Models.StudentCourseCard
+@using HomeworkPlatform.Web.Models.Domain
+<article class="ep-course-panel ep-course-card ep-student-course-card">
+    <div class="ep-course-badges"><span class="ep-course-badge">@EducationRules.Label(Model.Course.EducationLevel) &middot; @(Model.Course.EducationLevel == EducationLevel.University ? "Year" : "Grade") @Model.Course.GradeLevel</span><span class="ep-course-badge ep-course-badge-neutral">Active</span></div>
+    <h2><a asp-controller="StudentCourses" asp-action="Details" asp-route-id="@Model.Course.Id">@Model.Course.Name</a></h2>
+    <p>@Model.Course.Description</p>
+    <div class="ep-course-card-bottom"><span>@Model.PendingCount not submitted</span><a asp-controller="StudentCourses" asp-action="Details" asp-route-id="@Model.Course.Id">Open course &rarr;</a></div>
+    <div class="ep-course-tools"><a asp-controller="StudentWork" asp-action="Index" asp-route-courseId="@Model.Course.Id">Assignments</a><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Course.Id">Course materials</a></div>
+    <div class="ep-student-course-teacher">Teacher: @Model.TeacherName</div>
+</article>

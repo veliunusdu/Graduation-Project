@@ -20,11 +20,11 @@ public class RoleAccessTests
     }
 
     [Fact]
-    public async Task ForgedTeacherRegistrationCannotAccessTeacherPage()
+    public async Task PreloadedStudentCannotAccessTeacherPage()
     {
         using var app = new AuthWebApplicationFactory();
         using var client = app.NewClient();
-        await FormClient.RegisterAsync(client, "forged@example.test", new() { ["Role"] = "Teacher" });
+        await FormClient.CreateAccountAndLoginAsync(client, "forged@example.test", new() { ["Role"] = "Student", ["Roles"] = "Teacher" });
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/Student")).StatusCode);
         using var denied = await client.GetAsync("/Teacher");
         Assert.Equal(HttpStatusCode.Redirect, denied.StatusCode);
@@ -53,7 +53,7 @@ public class RoleAccessTests
     {
         using var app = new AuthWebApplicationFactory { EnvironmentName = "Production" };
         using var client = app.NewClient();
-        using var registration = await FormClient.RegisterAsync(client, "secure@example.test");
+        using var registration = await FormClient.CreateAccountAndLoginAsync(client, "secure@example.test");
         var cookie = Assert.Single(registration.Headers.GetValues("Set-Cookie"), value => value.StartsWith(".AspNetCore.Identity.Application="));
         Assert.Contains("secure", cookie, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("httponly", cookie, StringComparison.OrdinalIgnoreCase);
