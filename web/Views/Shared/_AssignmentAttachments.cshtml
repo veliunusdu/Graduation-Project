@@ -1,0 +1,14 @@
+@model HomeworkPlatform.Web.Models.Domain.Assignment
+@if(Model.Attachments.Count > 0)
+{
+    <section class="ep-assignment-attachments" aria-label="Requirements attachments">
+        <h2>Requirements attachments</h2>
+        @foreach(var file in Model.Attachments)
+        {
+            <div class="ep-attachment">
+                <a asp-controller="AssignmentFiles" asp-action="Download" asp-route-id="@file.Id"><span class="ep-attachment-icon"><partial name="_EduPilotIcon" model='@("file")' /></span><span class="ep-attachment-name">@file.OriginalFileName</span></a>
+                <span class="ep-attachment-size">@((file.FileSize/1024.0).ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)) KB</span>
+            </div>
+        }
+    </section>
+}

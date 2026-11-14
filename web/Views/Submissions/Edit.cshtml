@@ -1,3 +1,4 @@
 @model HomeworkPlatform.Web.Models.Work.SubmissionForm
-@{ ViewData["Title"] = "Edit submission"; }
-<h1>Edit submission</h1><form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form>
+@{ViewData["Title"]="Edit submission";var assignment=ViewData["Assignment"] as HomeworkPlatform.Web.Models.Domain.Assignment;}
+<div class="ep-teacher-heading"><div><h1>Edit submission</h1><p>@assignment?.Title</p></div><a asp-action="Index" class="btn btn-light">My submissions</a></div>
+<div class="ep-student-cols"><div class="ep-form-card"><form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form></div>@if(assignment!=null){<section class="ep-card p-4 align-self-start"><h2>Requirements</h2><p class="ep-student-requirements">@assignment.Description</p><partial name="_AssignmentAttachments" model="assignment" /><a asp-controller="StudentWork" asp-action="Details" asp-route-id="@assignment.Id" class="btn btn-light mt-3">View assignment and learning tools</a></section>}</div>

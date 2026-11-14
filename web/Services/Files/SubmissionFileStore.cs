@@ -6,7 +6,7 @@ namespace HomeworkPlatform.Web.Services.Files;
 
 public class SubmissionFileStore
 {
-    public static readonly string[] AllowedExtensions = [".pdf", ".zip", ".txt", ".md", ".cs", ".py", ".java", ".js", ".ts", ".tsx", ".jsx",
+    public static readonly string[] AllowedExtensions = [".pdf", ".doc", ".docx", ".zip", ".txt", ".md", ".cs", ".py", ".java", ".js", ".ts", ".tsx", ".jsx",
         ".c", ".cpp", ".h", ".hpp", ".html", ".css", ".sql", ".json", ".xml", ".ipynb", ".razor", ".cshtml", ".sln", ".csproj", ".yml", ".yaml"];
     public string RootPath { get; }
     public long MaxBytes { get; }
@@ -30,7 +30,7 @@ public class SubmissionFileStore
         if (string.IsNullOrWhiteSpace(originalName) || originalName.Length > 200 || originalName.Any(char.IsControl))
             throw new SubmissionFileException("Geçerli ve en fazla 200 karakterli bir dosya adı kullanın.");
         if (!AllowedExtensions.Contains(extension))
-            throw new SubmissionFileException("Bu dosya türü desteklenmiyor. PDF, ZIP veya desteklenen bir metin/kod dosyası seçin.");
+            throw new SubmissionFileException("Bu dosya türü desteklenmiyor. PDF, DOC, DOCX, ZIP veya desteklenen bir metin/kod dosyası seçin.");
         if (file.Length <= 0) throw new SubmissionFileException("Boş dosya yüklenemez.");
         if (file.Length > MaxBytes) throw new SubmissionFileException($"Dosya en fazla {MaxBytes / 1024 / 1024} MB olabilir.");
 
@@ -72,11 +72,17 @@ public class SubmissionFileStore
             if (input.Read(signature) != 5 || !signature.SequenceEqual("%PDF-"u8))
                 throw new SubmissionFileException("Dosyanın içeriği PDF biçiminde değil.");
         }
-        else if (extension == ".zip")
+        else if (extension == ".doc")
+        {
+            WordDocumentValidator.ValidateDoc(path);
+        }
+        else if (extension is ".zip" or ".docx")
         {
             try
             {
                 using var archive = ZipFile.OpenRead(path);
+                if (extension == ".docx" && (archive.GetEntry("[Content_Types].xml") == null || archive.GetEntry("word/document.xml") == null))
+                    throw new SubmissionFileException("Choose a valid DOCX document.");
                 if (archive.Entries.Count is < 1 or > 2000 || archive.Entries.Sum(e => (decimal)e.Length) > 200 * 1024 * 1024)
                     throw new SubmissionFileException("ZIP boş olmamalı; en fazla 2000 kayıt ve açılmış halde 200 MB içermelidir.");
                 foreach (var entry in archive.Entries)

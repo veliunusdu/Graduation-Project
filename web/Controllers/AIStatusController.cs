@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeworkPlatform.Web.Controllers;
 
-[Authorize(Roles = AppRoles.Teacher)]
+[Authorize(Roles = AppRoles.Teacher + "," + AppRoles.Student)]
 public class AIStatusController(AIServiceClient client) : Controller
 {
     [HttpGet]

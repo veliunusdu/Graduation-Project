@@ -1,0 +1,77 @@
+{
+  "Key": "edupilot-starter-v1",
+  "Accounts": [
+    {
+      "Email": "teacher@edupilot.local",
+      "Password": "Teacher-Start8!",
+      "Role": "Teacher",
+      "FirstName": "Deniz",
+      "LastName": "Kaya",
+      "EducationLevel": "University"
+    },
+    {
+      "Email": "student1@edupilot.local",
+      "Password": "Student-Start8!",
+      "Role": "Student",
+      "FirstName": "Ayşe",
+      "LastName": "Yılmaz",
+      "StudentClass": "University2",
+      "EducationLevel": "University"
+    },
+    {
+      "Email": "student2@edupilot.local",
+      "Password": "Student-Start8!",
+      "Role": "Student",
+      "FirstName": "Mert",
+      "LastName": "Demir",
+      "StudentClass": "University2",
+      "EducationLevel": "University"
+    },
+    {
+      "Email": "student3@edupilot.local",
+      "Password": "Student-Start8!",
+      "Role": "Student",
+      "FirstName": "Elif",
+      "LastName": "Aydın",
+      "StudentClass": "University2",
+      "EducationLevel": "University"
+    }
+  ],
+  "Courses": [
+    {
+      "Code": "CS201",
+      "Name": "Introduction to Programming",
+      "Description": "Introductory course in algorithms and programming fundamentals.",
+      "TeacherEmail": "teacher@edupilot.local",
+      "EducationLevel": "University",
+      "GradeLevel": 2,
+      "StudentEmails": [
+        "student1@edupilot.local",
+        "student2@edupilot.local"
+      ]
+    },
+    {
+      "Code": "CS202",
+      "Name": "Database Management",
+      "Description": "Introductory course in data modeling and SQL.",
+      "TeacherEmail": "teacher@edupilot.local",
+      "EducationLevel": "University",
+      "GradeLevel": 2,
+      "StudentEmails": [
+        "student1@edupilot.local",
+        "student2@edupilot.local"
+      ]
+    },
+    {
+      "Code": "MATH201",
+      "Name": "Mathematics",
+      "Description": "Introductory course in university mathematics.",
+      "TeacherEmail": "teacher@edupilot.local",
+      "EducationLevel": "University",
+      "GradeLevel": 2,
+      "StudentEmails": [
+        "student3@edupilot.local"
+      ]
+    }
+  ]
+}

@@ -1,16 +1,73 @@
-@model HomeworkPlatform.Web.Models.Domain.Course
-@{ ViewData["Title"] = Model.Name; }
-<h1>@Model.Name</h1><p>@Model.Description</p>
-<p>@Model.EducationLevel · Grade / year @Model.GradeLevel · @(Model.IsActive ? "Active" : "Inactive")</p>
-<p><a asp-action="Edit" asp-route-id="@Model.Id">Edit course</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete course</a> | <a asp-action="Index">My courses</a></p>
-<p><a asp-controller="Assignments" asp-action="Index" asp-route-courseId="@Model.Id">Assignments</a> | <a asp-controller="Assignments" asp-action="Create" asp-route-courseId="@Model.Id">Create assignment</a></p>
-<h2>Enroll a Student</h2>
-<form asp-action="Enroll" asp-route-id="@Model.Id" method="post">
-<div asp-validation-summary="All" class="text-danger"></div>
-<label for="Email">Existing Student email</label><input id="Email" name="Email" type="email" class="form-control" required />
-<button type="submit" class="btn btn-primary mt-2">Enroll</button>
-</form>
-<h2>Enrolled Students</h2>
-<ul>@foreach (var email in ViewData["Students"] as IReadOnlyList<string> ?? Array.Empty<string>()) { <li>@email</li> }</ul>
-
-<p><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Id">Ders materyalleri</a></p>
+@model HomeworkPlatform.Web.Models.CourseRosterViewModel
+@using HomeworkPlatform.Web.Models.Domain
+@{ ViewData["Title"] = Model.Course.Name; var course = Model.Course; }
+<div class="ep-course-page">
+    <nav aria-label="Breadcrumb" class="ep-course-breadcrumb"><a asp-action="Index">My courses</a><span aria-hidden="true">/</span><span>@course.Name</span></nav>
+    <section class="ep-course-hero">
+        <div class="ep-course-heading">
+            <div class="ep-course-symbol"><partial name="_EduPilotIcon" model='@("book")' /></div>
+            <div>
+                <div class="ep-course-badges"><span class="ep-course-badge">@EducationRules.Label(course.EducationLevel)</span><span class="ep-course-badge ep-course-badge-neutral">@(course.EducationLevel == EducationLevel.University ? "Year" : "Grade") @course.GradeLevel</span><span class="ep-course-badge @(course.IsActive ? "ep-course-badge-active" : "ep-course-badge-neutral")">@(course.IsActive ? "Active" : "Inactive")</span></div>
+                <h1>@course.Name</h1>
+                @if (!string.IsNullOrWhiteSpace(course.Description)) { <p class="ep-course-description">@course.Description</p> }
+            </div>
+        </div>
+        <div class="ep-course-actions">
+            <a class="btn ep-course-primary" asp-controller="Assignments" asp-action="Create" asp-route-courseId="@course.Id">Create assignment <partial name="_EduPilotIcon" model='@("arrow")' /></a>
+            <a class="btn ep-course-secondary" asp-action="Edit" asp-route-id="@course.Id">Edit course</a>
+        </div>
+    </section>
+    @if (TempData["CourseNotice"] is string notice) { <div class="alert alert-success mt-3" role="status">@notice</div> }
+    <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+    <div class="ep-course-stats">
+        <div class="ep-course-stat"><span class="ep-course-stat-icon"><partial name="_EduPilotIcon" model='@("student")' /></span><div><strong id="enrolled-count" data-count="@Model.EnrolledStudents.Count">@Model.EnrolledStudents.Count</strong><span>Enrolled students</span></div></div>
+        <a class="ep-course-stat" asp-controller="Assignments" asp-action="Index" asp-route-courseId="@course.Id"><span class="ep-course-stat-icon"><partial name="_EduPilotIcon" model='@("file")' /></span><div><strong>@Model.AssignmentCount</strong><span>Assignments</span></div><partial name="_EduPilotIcon" model='@("arrow")' /></a>
+        <a class="ep-course-stat" asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@course.Id"><span class="ep-course-stat-icon"><partial name="_EduPilotIcon" model='@("book")' /></span><div><strong>@Model.MaterialCount</strong><span>Course materials</span></div><partial name="_EduPilotIcon" model='@("arrow")' /></a>
+    </div>
+    <div class="ep-course-columns">
+        <section class="ep-course-panel" aria-labelledby="roster-heading">
+            <div class="ep-course-panel-heading"><div><h2 id="roster-heading">Enrolled students <span class="ep-course-count">@Model.EnrolledStudents.Count</span></h2><p>Students who already have access to this course.</p></div></div>
+            @if (Model.EnrolledStudents.Count == 0)
+            {
+                <div class="ep-course-empty"><partial name="_EduPilotIcon" model='@("student")' /><h3>No students enrolled yet</h3><p>Add a student to give them access to this course.</p></div>
+            }
+            else
+            {
+                <div class="ep-course-table-wrap"><table class="ep-course-table" id="enrolled-students"><thead><tr><th scope="col">Student</th><th scope="col">Class</th></tr></thead><tbody>
+                @foreach (var student in Model.EnrolledStudents)
+                {
+                    <tr data-student-id="@student.Id"><td><div class="ep-course-student"><span class="ep-course-avatar" aria-hidden="true">@student.Initials</span><div><span class="ep-course-student-name">@student.FullName</span><span class="ep-course-student-email">@student.Email</span></div></div></td><td><span class="ep-course-class">@student.ClassLabel</span></td></tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+        <aside class="ep-course-panel ep-course-add" aria-labelledby="enroll-heading">
+            <div class="ep-course-panel-heading"><div><span class="ep-course-eyebrow">MANAGE ENROLLMENT</span><h2 id="enroll-heading">Add a student</h2><p>Only students not yet enrolled appear here.</p></div></div>
+            @if (!course.IsActive)
+            {
+                <div class="ep-course-note">Activate this course before adding students.</div>
+            }
+            else if (Model.AvailableStudents.Count == 0)
+            {
+                <div class="ep-course-note"><partial name="_EduPilotIcon" model='@("check")' /> No additional students are available at this education level.</div>
+            }
+            else
+            {
+                <form asp-action="Enroll" asp-route-id="@course.Id" method="post" id="enroll-form">
+                    <label for="Email" class="form-label">Select a student</label>
+                    <select id="Email" name="Email" class="form-select" required aria-describedby="available-count">
+                        <option value="">Choose a student</option>
+                        @foreach (var student in Model.AvailableStudents)
+                        {
+                            <option value="@student.Email">@student.FullName — @student.Email</option>
+                        }
+                    </select>
+                    <p class="ep-course-helper" id="available-count" data-count="@Model.AvailableStudents.Count">@Model.AvailableStudents.Count @(Model.AvailableStudents.Count == 1 ? "student available" : "students available") to add</p>
+                    <button type="submit" class="btn ep-course-primary w-100">Enroll student <partial name="_EduPilotIcon" model='@("arrow")' /></button>
+                    <p class="ep-course-helper ep-course-helper-bottom">The course will appear automatically in the student's dashboard.</p>
+                </form>
+            }
+        </aside>
+    </div>
+    <div class="ep-course-bottom"><a class="ep-course-delete btn ep-danger-link" asp-action="Delete" asp-route-id="@course.Id">Delete course</a></div>
+</div>

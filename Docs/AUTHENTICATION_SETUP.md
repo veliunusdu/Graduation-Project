@@ -1,16 +1,10 @@
-# Authentication setup
+# Authentication and prepared data
 
-Run these commands in PowerShell from the main project folder:
+The app uses ASP.NET Core Identity with SQLite. Accounts are prepared in advance. There is no public registration or profile-completion endpoint. `/Account/Login` signs in using the stored account's email and password; the role is read from Identity. Existing incomplete-profile accounts can also sign in directly.
 
-```powershell
-Set-Location 'C:\Codes\Projects\Graduation Project'
-dotnet restore HomeworkPlatform.sln
-dotnet build HomeworkPlatform.sln --no-restore
-```
+Passwords are hashed by Identity. Email addresses are unique, password requirements are unchanged, and five failed attempts lock an account for five minutes. Login accepts only safe local return URLs. All unsafe MVC actions require antiforgery tokens. Cookies are HttpOnly and SameSite=Lax, and require HTTPS outside Development.
 
-The web app uses ASP.NET Core Identity, EF Core SQLite, and the checked-in InitialIdentity migration. Startup applies pending migrations and ensures Teacher and Student roles exist. It preserves existing accounts. The default database is `web/App_Data/homework.db`, resolved against the web content root. Database files and sidecars are ignored by Git; migration source stays tracked.
-
-Start the local web app:
+## Local startup
 
 ```powershell
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
@@ -18,104 +12,33 @@ $env:DOTNET_ENVIRONMENT = 'Development'
 dotnet run --project web/HomeworkPlatform.Web.csproj --no-launch-profile --urls http://localhost:5080
 ```
 
-Open http://localhost:5080. Stop the server with Ctrl+C. The explicit HTTP Development workflow can report that no HTTPS redirect port is configured. Outside Development, authentication cookies require HTTPS.
+Open http://localhost:5080/Account/Login. Full setup and example credentials are in `KURULUM_VE_DEGISIKLIKLER.md` at the project root.
 
-## Account flows
+## Prepared accounts, courses and enrollments
 
-- `/Account/Register`: public Student registration. It accepts email, password and password confirmation; callers cannot choose Teacher through form fields.
-- `/Account/Login`: cookie login with a local return URL or the account's role dashboard.
-- `/Student` and `/Teacher`: minimal pages requiring their respective role. Anonymous visitors are sent to login. Authenticated wrong-role requests end at an access-denied page with HTTP 403.
-- Logout uses the navigation's POST form with an antiforgery token. GET logout does not sign users out.
+In Development, `InitialData:Enabled` enables `InitialDataSeeder`, which reads `web/Data/initial-data.json`. It creates named accounts using `UserManager.CreateAsync`, assigns Student/Teacher roles, creates the teacher's initial courses, and records each student's course enrollments. The bundled accounts are local examples and are never automatically loaded in Production.
 
-Passwords require at least 8 characters, including uppercase, lowercase, a digit, and a symbol. Identity stores password hashes. Email addresses must be unique. Five failed login attempts lock an account for five minutes. Login uses a generic failure message. Cookies are HttpOnly and SameSite=Lax, and unsafe account forms require antiforgery validation.
+The seed runs in one transaction and records its version key in `DataInitializations` after success. Repeating the same key does not duplicate records, reset passwords, overwrite existing profiles, or resurrect deleted courses. Failed initialization rolls back its partial changes. Existing accounts are matched by email; a different role is rejected rather than promoted. A new key can add further prepared data; it is not an account-editing mechanism.
 
-## Provision a local Teacher
+The `InitialDataHistory` migration adds this completion ledger. Startup applies pending migrations. Existing users, passwords, profiles and course data are preserved. The old `ProfileCompleted` database field remains for schema compatibility and no longer controls sign-in.
 
-Public registration creates Students. Provision Teachers through the Development-only command below. The password comes from a hidden prompt and a temporary environment setting; it is never a command argument or a literal in this guide.
+Teachers see their assigned courses immediately and can create additional owned courses. The create form accepts selected existing Student IDs; the controller checks role membership and saves the course plus enrollments together. Teachers can also enroll an existing student from a dropdown on their own course's details page. Students only see their active enrolled courses. There is no administrator role or page.
 
-Run this in a separate terminal while the server is stopped for the simplest setup:
-
-```powershell
-Set-Location 'C:\Codes\Projects\Graduation Project'
-$authPreviousAspnetEnvironment = $env:ASPNETCORE_ENVIRONMENT
-$authPreviousDotnetEnvironment = $env:DOTNET_ENVIRONMENT
-$authPreviousTeacherPassword = $env:PROVISION_TEACHER_PASSWORD
-$authSecurePassword = Read-Host 'New Teacher password' -AsSecureString
-$authPasswordPointer = [IntPtr]::Zero
-try {
-    $env:ASPNETCORE_ENVIRONMENT = 'Development'
-    $env:DOTNET_ENVIRONMENT = 'Development'
-    $authPasswordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($authSecurePassword)
-    $env:PROVISION_TEACHER_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($authPasswordPointer)
-    dotnet run --project web/HomeworkPlatform.Web.csproj --no-launch-profile -- --provision-teacher teacher@example.test
-    if ($LASTEXITCODE -ne 0) { throw 'Teacher provisioning failed; see the safe command message above.' }
-}
-finally {
-    $env:PROVISION_TEACHER_PASSWORD = $authPreviousTeacherPassword
-    $env:ASPNETCORE_ENVIRONMENT = $authPreviousAspnetEnvironment
-    $env:DOTNET_ENVIRONMENT = $authPreviousDotnetEnvironment
-    if ($authPasswordPointer -ne [IntPtr]::Zero) {
-        [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($authPasswordPointer)
-    }
-    $authSecurePassword.Dispose()
-    $authPreviousTeacherPassword = $null
-}
-```
-
-The command exits without starting an HTTP server. A new valid account gets Teacher. An existing Teacher keeps its current password. An existing Student or other non-Teacher is refused rather than promoted. Invalid usage, invalid email/password, a missing password, or a non-Development environment returns nonzero. Invalid-input checks run before migration/database creation. The command gives safe messages and does not print the password.
-
-After provisioning, start the web app and sign in with that Teacher's email and the password you entered. If it already existed, use its original password.
-
-## Database overrides and migrations
-
-To use a separate database, set this before either startup or provisioning:
-
-```powershell
-$env:ConnectionStrings__DefaultConnection = 'Data Source=C:\Codes\Projects\Graduation Project\web\App_Data\my-local.db'
-```
-
-Relative SQLite paths are resolved against the web content root. Memory-mode strings are preserved. Remove a temporary override when finished:
-
-```powershell
-Remove-Item Env:ConnectionStrings__DefaultConnection -ErrorAction SilentlyContinue
-```
-
-Startup applies existing migrations automatically for this local milestone. For future schema changes, restore the repository's local EF tool and generate a new migration, preserving the existing migration history:
-
-```powershell
-dotnet tool restore
-dotnet ef migrations add YourMigrationName --project web --startup-project web --output-dir Data/Migrations
-```
-
-The design-time context factory generates the model without starting the server or modifying the local database. Do not delete the database to apply ordinary schema changes.
+The legacy Development-only `--provision-teacher` command remains compatible with existing scripts; normal local startup does not require it.
 
 ## Verification
 
 ```powershell
-dotnet test HomeworkPlatform.sln
-dotnet test HomeworkPlatform.sln -c Release
-Push-Location ai-service
-try { & '.\.venv\Scripts\python.exe' -m pytest -q }
-finally { Pop-Location }
+dotnet test tests/HomeworkPlatform.Web.Tests/HomeworkPlatform.Web.Tests.csproj
+node --test scripts/test_edupilot_auth.cjs
 ```
 
-Web tests use real Identity accounts, SQLite migrations, form tokens and cookies. Each host owns an isolated temporary database. Provisioning process tests override their database and environment and bound their process lifetime. Test passwords are synthetic test-only fixtures, not account defaults.
+Tests cover prepared accounts, hashing, automatic enrollments, idempotent initialization, rollback, production seed exclusion, removed public routes, existing-account compatibility, teacher-selected enrollment, invalid selected accounts, ownership, login failures, lockout, cookies and antiforgery. Live Python/Ollama/BGE checks retain their external-service opt-in requirements.
 
-Verified October 9, 2026:
+## Education levels
 
-- Solution restore/build passed with zero build warnings or errors.
-- All 27 web tests passed in Debug and also in Release with the web Debug output temporarily set aside and restored: migration/roles, hashing, invalid/duplicate registration, forged roles, login/lockout, return URLs, provisioning success/refusals/idempotence, role access, cookie flags, antiforgery and logout.
-- All 8 existing Python tests passed.
-- A live HTTP server using a disposable database passed Student registration/login/logout, Teacher login after provisioning, and both wrong-role checks ending at HTTP 403. Its owned process was stopped. The real local database was unchanged.
+`ApplicationUser.EducationLevel` stores each teacher's and student's education level. All bundled accounts now use University and all bundled students are University2. All three example courses are University / Year 2, including Mathematics.
 
-## Milestone boundaries
+The create/edit course form reads the current teacher record from the database on every request. EducationLevel is not bound from user input. The form displays a read-only level and offers years 1–4 for University or grades 9–12 for HighSchool. The server validates the year and rejects attempts to override the teacher's level. Student selectors and enrollment validation also require the student's level to match the course.
 
-Email confirmation and email delivery are not implemented; an account's email is not verified. Production Teacher provisioning and production migration orchestration remain later deployment work. Course, assignment and submission ownership enforcement is now implemented in the subsequent Step 4; see OWNERSHIP_SETUP.md. Role-protected dashboard pages alone did not establish ownership protection.
-
-## Independent review and completion
-
-One independent read-only review found no Critical or Minor defects and one Important test defect: provisioning process tests selected a fixed Debug executable. A Release-only regression reproduced the failure, then the helper was changed to run the referenced web assembly from the current test output, alongside its copied runtime configuration and dependencies. All 27 tests then passed in both build configurations. No findings remain unresolved; no second review was used to substitute for regression evidence.
-
-Implementation stayed in Veli's chosen main folder on `feature/authentication`, with local commits only. Native Windows bookkeeping replaced shell-only skill scripts. The EF design-time factory prevents database initialization during migration generation. Supported host options remain usable, including the `--key=value` form passed by MVC Testing; malformed application commands still fail without serving HTTP. Default storage is resolved by DatabaseConfiguration rather than duplicated in appsettings.
-
-The Step 3 reviewer set aside resource ownership, production account/migration management, and email confirmation/delivery. Resource ownership was subsequently completed in Step 4. Production administration and email confirmation/delivery remain pending. This Step 3 record covers authentication and roles. Subsequent ownership and final verification now complete the defined first-two-weeks work; see WEEKS_1_2_COMPLETION.md.
+The `AccountEducationLevels` migration backfills existing student levels from their stored class and teacher levels from their existing courses. It updates the known example accounts and the example teacher's old high school courses to University while preserving account passwords, course IDs and enrollments. High school support and its tests remain available for a later deployment.

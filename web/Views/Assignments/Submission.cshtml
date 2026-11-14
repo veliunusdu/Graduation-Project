@@ -1,13 +1,7 @@
 @model HomeworkPlatform.Web.Models.Domain.Submission
 @{ ViewData["Title"] = "Submission review"; }
-<h1>@Model.Assignment.Title</h1>
-<p><strong>Öğrenci:</strong> @(ViewData["StudentEmail"] as string ?? "Bilinmeyen öğrenci")</p>
-<p><strong>Teslim numarası:</strong> @Model.Id</p><pre class="border rounded p-3" style="white-space:pre-wrap">@Model.Content</pre>
-<partial name="_SubmissionFile" model="Model" />
-<div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="Review" asp-route-id="@Model.Id" method="post">
-<label for="Feedback">Teacher feedback</label><textarea id="Feedback" name="Feedback" maxlength="10000" required class="form-control">@Model.TeacherFeedback</textarea>
-<label for="Grade">Grade (0-100)</label><input id="Grade" name="Grade" type="number" min="0" max="100" required value="@Model.TeacherGrade" class="form-control" />
-<button class="btn btn-primary" type="submit">Save review</button>
-</form>
-<p><a asp-action="Submissions" asp-route-id="@Model.AssignmentId">Back to submissions</a></p>
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">STUDENT WORK</span><h1>Review submission</h1><p>@Model.Assignment.Title</p></div><a asp-controller="Teacher" asp-action="Submissions" class="btn btn-light">All submissions</a></div>
+<div class="ep-review-grid"><div class="ep-card p-4"><h2>Submitted work</h2><p class="ep-review-meta">Student: @(ViewData["StudentEmail"] as string ?? "Unknown student")<br />Submitted: @Model.CreatedAt.ToString("dd MMM yyyy, HH:mm",System.Globalization.CultureInfo.InvariantCulture) UTC</p><pre class="ep-review-content">@Model.Content</pre><partial name="_SubmissionFile" model="Model" /><div class="mt-4"><h3 class="h6">Check with AI Agent</h3><p class="small ep-muted">Automated submission checking is coming soon. Review and grade the submission manually.</p><button class="btn btn-ai" type="button" disabled>AI review — Coming soon</button></div></div>
+<form asp-action="Review" asp-route-id="@Model.Id" method="post" class="ep-form-card"><h2 class="mt-0">Grade and feedback</h2><div asp-validation-summary="All" class="text-danger"></div><div class="mb-3"><label for="Grade">Grade (0-100)</label><input id="Grade" name="Grade" type="number" min="0" max="100" required value="@(ViewData.ModelState.TryGetValue("Grade", out var gradeState) ? gradeState.AttemptedValue : Model.TeacherGrade?.ToString())" class="form-control" /></div><div class="mb-3"><label for="Feedback">Teacher feedback</label><textarea id="Feedback" name="Feedback" maxlength="10000" required class="form-control" rows="9">@(ViewData.ModelState.TryGetValue("Feedback", out var feedbackState) ? feedbackState.AttemptedValue : Model.TeacherFeedback)</textarea></div><button id="save-review" class="btn @(Model.ReviewedAt.HasValue && ViewData.ModelState.IsValid ? "ep-button-saved" : "btn-primary")" type="submit" data-saved="@(Model.ReviewedAt.HasValue && ViewData.ModelState.IsValid ? "true" : "false")" aria-live="polite">@(Model.ReviewedAt.HasValue && ViewData.ModelState.IsValid ? "Saved" : "Save grade and feedback")</button></form></div>
+
+@section Scripts { <script src="~/js/edupilot-feedback.js" asp-append-version="true"></script> }

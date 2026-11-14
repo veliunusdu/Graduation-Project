@@ -20,7 +20,7 @@ public class CourseMaterialTests
   form.Add(new ByteArrayContent(data??"Türkçe ders notu"u8.ToArray()),"upload",name);
   return await c.PostAsync($"/CourseMaterials/Upload?courseId={courseId}",form);
  }
- [Fact] public async Task OwnerUploadReadyStudentAccessAndOwnership()
+ [Fact] public async Task UploadAutomaticallyProcessesAndKeepsStudentFileAccessAndOwnershipChecks()
  {
   var p=new Processor();using var f=await OwnershipFixture.CreateAsync(a=>a.ConfigureServices=s=>s.AddSingleton<IMaterialProcessor>(p));using var c=await f.TeacherAsync();
   Assert.Equal(HttpStatusCode.OK,(await c.GetAsync($"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
@@ -31,13 +31,14 @@ public class CourseMaterialTests
   Assert.Equal(HttpStatusCode.NotFound,(await other.GetAsync($"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
   using var student=await f.StudentAsync();Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{m.Id}")).StatusCode);
   Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Index?courseId={f.CourseBId}")).StatusCode);
-  Assert.Equal(HttpStatusCode.Conflict,(await FormClient.PostAsync(c,$"/CourseMaterials/Retry/{m.Id}",new(),$"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
+  var html=await student.GetStringAsync($"/CourseMaterials/Index?courseId={f.CourseAId}");
+  Assert.Contains("AI processing",html);Assert.Contains("AI processing status: Ready",html);Assert.DoesNotContain("/Retry/",html);
  }
- [Fact] public async Task FailedProcessingCanRetryAndStudentCannotSeeFailed()
+ [Fact] public async Task AutomaticProcessingFailureKeepsStudentDownloadsAndCanBeRetried()
  {
   var p=new Processor{Fail=true};using var f=await OwnershipFixture.CreateAsync(a=>a.ConfigureServices=s=>s.AddSingleton<IMaterialProcessor>(p));using var c=await f.TeacherAsync();
   await Upload(c,f.CourseAId);var m=await f.ReadAsync(d=>d.CourseMaterials.SingleAsync());Assert.Equal(MaterialStatus.Failed,m.Status);
-  using var student=await f.StudentAsync();Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Download/{m.Id}")).StatusCode);
+  using var student=await f.StudentAsync();Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{m.Id}")).StatusCode);
   p.Fail=false;var url=$"/CourseMaterials/Retry/{m.Id}";
   Assert.Equal(HttpStatusCode.Redirect,(await FormClient.PostAsync(c,url,new(),$"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
   m=await f.ReadAsync(d=>d.CourseMaterials.SingleAsync());Assert.Equal(MaterialStatus.Ready,m.Status);Assert.Null(m.ErrorMessage);Assert.Equal(2,p.Calls);
@@ -119,11 +120,11 @@ public class CourseMaterialTests
      var recovery = await f.ReadAsync(db=>db.CourseMaterials.SingleAsync(m=>m.OriginalFileName=="recovery.txt"));
      Assert.Equal(MaterialStatus.Failed,recovery.Status);
      using var student = await f.StudentAsync();
-     Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Download/{recovery.Id}")).StatusCode);
+     Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{recovery.Id}")).StatusCode);
      Assert.Equal(HttpStatusCode.Redirect,(await FormClient.PostAsync(teacher,$"/CourseMaterials/Retry/{recovery.Id}",new(),$"/CourseMaterials/Index?courseId={f.CourseAId}")).StatusCode);
      Assert.Equal(MaterialStatus.Ready,await f.ReadAsync(db=>db.CourseMaterials.Where(m=>m.Id==recovery.Id).Select(m=>m.Status).SingleAsync()));
      Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{recovery.Id}")).StatusCode);
-     Assert.Equal(HttpStatusCode.NotFound,(await student.GetAsync($"/CourseMaterials/Download/{ready[1].Id}")).StatusCode);
+     Assert.Equal(HttpStatusCode.OK,(await student.GetAsync($"/CourseMaterials/Download/{ready[1].Id}")).StatusCode);
      using var api = new HttpClient { BaseAddress=new Uri(url), Timeout=TimeSpan.FromSeconds(120) };
      var evidence = new List<object>();
      foreach (var (courseId, _, name, marker) in courses)

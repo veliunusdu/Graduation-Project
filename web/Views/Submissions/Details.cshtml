@@ -1,9 +1,3 @@
 @model HomeworkPlatform.Web.Models.Domain.Submission
-@{ ViewData["Title"] = "My submission"; }
-<h1>@Model.Assignment.Title — my submission</h1><pre class="border rounded p-3" style="white-space:pre-wrap">@Model.Content</pre>
-<partial name="_SubmissionFile" model="Model" />
-<p><a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> | <a asp-action="Index">My submissions</a></p>
-
-@if(Model.ReviewedAt.HasValue) {
-<h2>Teacher review</h2><p>Grade: @Model.TeacherGrade / 100</p><p>@Model.TeacherFeedback</p>
-}
+@{ViewData["Title"]="My submission";}
+<div class="ep-teacher-heading"><div><h1>My submission</h1><p>Your submitted work and review status.</p></div><a asp-action="Index" class="btn btn-light">All submissions</a></div><partial name="_StudentSubmissionCard" model="Model" />

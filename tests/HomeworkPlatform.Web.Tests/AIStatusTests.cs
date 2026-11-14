@@ -26,7 +26,7 @@ public class AIStatusTests
     }
 
     [Fact]
-    public async Task OnlyTeacherCanSeeStatusAndFailureIsRenderedInPage()
+    public async Task TeacherAndStudentCanCheckConnectionAndFailureIsRenderedInTheirLayouts()
     {
         using var app = new App(); using var teacher = app.NewClient(); using var student = app.NewClient();
         using var anonymous = app.NewClient();
@@ -34,15 +34,21 @@ public class AIStatusTests
             Assert.True((await scope.ServiceProvider.GetRequiredService<TeacherProvisioner>()
                 .ProvisionAsync("status-teacher@example.test", FormClient.TestPassword)).Success);
         Assert.Equal(HttpStatusCode.Redirect, (await FormClient.LoginAsync(teacher, "status-teacher@example.test")).StatusCode);
-        Assert.Equal(HttpStatusCode.Redirect, (await FormClient.RegisterAsync(student, "status-student@example.test")).StatusCode);
+        Assert.Equal(HttpStatusCode.Redirect, (await FormClient.CreateAccountAndLoginAsync(student, "status-student@example.test")).StatusCode);
         var page = await teacher.GetAsync("/AIStatus");
         Assert.Equal(HttpStatusCode.OK, page.StatusCode);
         var html = await page.Content.ReadAsStringAsync();
         Assert.Contains("alert alert-warning", html); Assert.DoesNotContain("private traceback", html);
         Assert.Contains("/AIStatus", await teacher.GetStringAsync("/Teacher"));
-        var denied = await student.GetAsync("/AIStatus");
-        Assert.Equal(HttpStatusCode.Redirect, denied.StatusCode);
-        Assert.Contains("AccessDenied", denied.Headers.Location!.ToString());
+        var studentPage = await student.GetAsync("/AIStatus");
+        Assert.Equal(HttpStatusCode.OK, studentPage.StatusCode);
+        var studentHtml = await studentPage.Content.ReadAsStringAsync();
+        Assert.Contains("student-sidebar", studentHtml);
+        Assert.Contains("alert alert-warning", studentHtml);
+        Assert.DoesNotContain("private traceback", studentHtml);
+        Assert.Contains("href=\"/Student\"", studentHtml);
+        Assert.Contains("teacher-sidebar", html);
+        Assert.Contains("href=\"/Teacher\"", html);
         Assert.Equal(HttpStatusCode.Redirect, (await anonymous.GetAsync("/AIStatus")).StatusCode);
     }
 }

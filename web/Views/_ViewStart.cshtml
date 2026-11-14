@@ -1,3 +1,7 @@
-﻿@{
-    Layout = "_Layout";
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var teacherPages = new[] { "Teacher", "Courses", "Assignments", "CourseMaterials", "AIStatus" };
+    Layout = User.IsInRole(HomeworkPlatform.Web.Security.AppRoles.Teacher) && teacherPages.Contains(controller)
+        ? "_TeacherLayout" : User.IsInRole(HomeworkPlatform.Web.Security.AppRoles.Student) && new[] { "Student", "StudentCourses", "StudentWork", "Submissions", "CourseMaterials", "AIStatus" }.Contains(controller)
+        ? "_StudentLayout" : "_Layout";
 }

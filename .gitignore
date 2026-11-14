@@ -20,3 +20,7 @@ web/App_Data/SubmissionFiles/
 
 # Private teacher course material uploads
 web/App_Data/CourseMaterials/
+
+# Local databases, assignment attachments and runtime uploads
+web/App_Data/
+**/TestResults/
