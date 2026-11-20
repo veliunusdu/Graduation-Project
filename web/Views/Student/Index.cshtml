@@ -1,4 +1,9 @@
-@{ ViewData["Title"] = "Student dashboard"; }
-<h1>Student dashboard</h1>
-<p>You are signed in as a Student.</p>
-<p><a asp-controller="StudentCourses" asp-action="Index">My enrolled courses</a> | <a asp-controller="StudentWork" asp-action="Index">Enrolled assignments</a> | <a asp-controller="Submissions" asp-action="Index">My submissions</a></p>
+@model HomeworkPlatform.Web.Models.StudentDashboardViewModel
+@{ViewData["Title"]="Student dashboard";}
+<div class="ep-teacher-heading"><div><h1>Welcome, @Model.DisplayName</h1><p>Your courses, assignments and progress in one place.</p></div><a asp-controller="StudentWork" asp-action="Index" class="btn btn-primary">View assignments</a></div>
+<div class="ep-summary-grid"><div class="ep-summary"><strong id="student-course-count">@Model.Courses.Count</strong><span>Enrolled courses</span></div><a class="ep-summary text-decoration-none text-reset" asp-controller="StudentWork" asp-action="Index" asp-route-status="Submitted"><strong id="student-submitted-count">@Model.SubmittedCount</strong><span>Submitted assignments</span></a><a class="ep-summary text-decoration-none text-reset" asp-controller="StudentWork" asp-action="Index" asp-route-status="Pending"><strong id="student-pending-count">@Model.PendingCount</strong><span>Not Submitted</span></a></div>
+<div class="ep-ai-banner"><div><h2>Your AI learning tools</h2><p>Check the AI service connection before using the AI Tutor and course source search.</p></div><a asp-controller="AIStatus" asp-action="Index" class="btn">Check AI service connection</a></div>
+<div class="ep-teacher-heading"><h2>My courses</h2><a asp-controller="StudentCourses" asp-action="Index" class="small text-decoration-none">View all courses</a></div>
+@if(Model.Courses.Count==0){<div class="ep-card ep-empty"><h2>No enrolled courses yet</h2><p>Ask your teacher to enroll you in a course.</p></div>}
+<div class="ep-course-card-grid">@foreach(var c in Model.Courses.Take(6)){<partial name="_StudentCourseCard" model="c" />}</div>
+<div class="ep-teacher-heading mt-4"><h2>Assignments to complete</h2><a asp-controller="StudentWork" asp-action="Index" asp-route-status="Pending" class="small text-decoration-none">View not submitted assignments</a></div><div class="ep-card"><partial name="_StudentAssignmentTable" model="Model.Assignments.Where(a=>a.Submission==null).Take(5).ToList()" /></div>

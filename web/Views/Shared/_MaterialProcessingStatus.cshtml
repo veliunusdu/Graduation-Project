@@ -1,0 +1,4 @@
+@model HomeworkPlatform.Web.Models.Domain.MaterialStatus
+@using HomeworkPlatform.Web.Models.Domain
+@{var label=Model switch{MaterialStatus.Uploaded=>"Pending",MaterialStatus.Processing=>"Processing",MaterialStatus.Ready=>"Ready",_=>"Failed"};}
+<span class="ep-material-status ep-material-status-@Model.ToString().ToLowerInvariant()" aria-label="AI processing status: @label">@label</span>

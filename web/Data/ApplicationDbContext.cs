@@ -5,9 +5,11 @@ namespace HomeworkPlatform.Web.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
+    public DbSet<DataInitialization> DataInitializations => Set<DataInitialization>();
     public DbSet<CourseMaterial> CourseMaterials => Set<CourseMaterial>();
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<AssignmentRequirement> AssignmentRequirements => Set<AssignmentRequirement>();
+    public DbSet<AssignmentAttachment> AssignmentAttachments => Set<AssignmentAttachment>();
     public DbSet<Assignment> Assignments => Set<Assignment>();
     public DbSet<StudentCourse> StudentCourses => Set<StudentCourse>();
     public DbSet<Submission> Submissions => Set<Submission>();
@@ -15,6 +17,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<DataInitialization>().HasKey(x => x.Key);
+        builder.Entity<DataInitialization>().Property(x => x.Key).HasMaxLength(100);
         builder.Entity<CourseMaterial>().HasOne(m=>m.Course).WithMany().HasForeignKey(m=>m.CourseId).OnDelete(DeleteBehavior.Restrict);
         builder.Entity<CourseMaterial>().HasIndex(m=>new {m.CourseId,m.Status});
         builder.Entity<CourseMaterial>().ToTable("CourseMaterials",t=>t.HasCheckConstraint("CK_Material_Status","Status BETWEEN 0 AND 3"));
@@ -24,6 +28,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.Entity<Course>().HasOne<ApplicationUser>().WithMany().HasForeignKey(c => c.TeacherId).OnDelete(DeleteBehavior.Restrict);
         builder.Entity<Assignment>().HasOne(a => a.Course).WithMany().HasForeignKey(a => a.CourseId).OnDelete(DeleteBehavior.Restrict);
         builder.Entity<Assignment>().ToTable("Assignments", t => t.HasCheckConstraint("CK_Assignments_Difficulty", "Difficulty BETWEEN 0 AND 2"));
+        builder.Entity<AssignmentAttachment>().HasOne(a => a.Assignment).WithMany(a => a.Attachments).HasForeignKey(a => a.AssignmentId).OnDelete(DeleteBehavior.Cascade);
         builder.Entity<AssignmentRequirement>().HasOne(r => r.Assignment).WithMany(a => a.Requirements).HasForeignKey(r => r.AssignmentId).OnDelete(DeleteBehavior.Cascade);
         builder.Entity<AssignmentRequirement>().HasIndex(r => new { r.AssignmentId, r.Order }).IsUnique();
         builder.Entity<AssignmentRequirement>().ToTable("AssignmentRequirements", t => {

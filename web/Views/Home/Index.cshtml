@@ -1,8 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{ ViewData["Title"] = "Welcome to EduPilot"; ViewData["EduPilotPage"] = true; ViewData["OnboardingPage"] = true; }
+    <div class="ep-onboard container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <partial name="_EduPilotBrand" />
+            <a asp-controller="Account" asp-action="Login" class="ep-muted text-decoration-none small">Skip</a>
+        </div>
+        <div id="onboardCarousel" class="carousel" aria-roledescription="carousel" aria-label="Welcome to EduPilot">
+            <div class="carousel-inner">
+                <div class="carousel-item active" role="group" aria-roledescription="slide" aria-label="1 of 2">
+                    <div class="ep-slide-art" aria-hidden="true">
+                        <span class="ep-chip c1"><partial name="_EduPilotIcon" model='@("file")' />Assignments</span>
+                        <span class="ep-chip c2"><partial name="_EduPilotIcon" model='@("calendar")' />Due dates</span>
+                        <span class="ep-chip c3"><partial name="_EduPilotIcon" model='@("progress")' />Progress</span>
+                        <div class="ep-art-core"><partial name="_EduPilotIcon" model='@("student")' /></div>
+                    </div>
+                    <h1 class="h3 ep-form-title text-center mt-3">All your homework in one place</h1>
+                    <p class="text-center ep-muted mx-auto">Teachers assign work, students turn it in, and EduPilot keeps everyone on schedule.</p>
+                </div>
+                <div class="carousel-item" hidden role="group" aria-roledescription="slide" aria-label="2 of 2">
+                    <div class="ep-slide-art" style="height:110px" aria-hidden="true">
+                        <div class="ep-art-core" style="width:84px;height:84px;font-size:2.2rem;border-radius:1.4rem"><partial name="_EduPilotIcon" model='@("sparkles")' /></div>
+                    </div>
+                    <h2 class="h3 ep-form-title text-center mt-2">Learn with your course materials</h2>
+                    <p class="text-center ep-muted mb-3">Your notes, sources and AI tutor, connected.</p>
+                    <div class="d-grid gap-2">
+                        <div class="ep-card ep-hover ep-agent"><div class="ep-agent-icon"><partial name="_EduPilotIcon" model='@("file")' /></div><div><div class="ep-agent-title">Course files</div><div class="small ep-muted">Keep learning materials together with your course.</div></div></div>
+                        <div class="ep-card ep-hover ep-agent"><div class="ep-agent-icon"><partial name="_EduPilotIcon" model='@("search")' /></div><div><div class="ep-agent-title">Source search</div><div class="small ep-muted">Find relevant passages in your course documents.</div></div></div>
+                        <div class="ep-card ep-hover ep-agent"><div class="ep-agent-icon"><partial name="_EduPilotIcon" model='@("book")' /></div><div><div class="ep-agent-title">AI tutor</div><div class="small ep-muted">Explore questions using your own notes and sources.</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators ep-dots position-static mb-3">
+                <button type="button" data-onboard-slide="0" class="active" aria-current="true" aria-label="Show introduction"></button>
+                <button type="button" data-onboard-slide="1" aria-label="Show learning tools"></button>
+            </div>
+        </div>
+        <a id="onboardNext" asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg w-100">Next <partial name="_EduPilotIcon" model='@("arrow")' /></a>
+        <a id="onboardStart" asp-controller="Account" asp-action="Login" class="btn btn-ai btn-lg w-100" hidden>Sign in <partial name="_EduPilotIcon" model='@("arrow")' /></a>
+        <noscript><a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg w-100">Sign in</a></noscript>
+        <p class="text-center small ep-muted mt-4 mb-0">Your account is ready. <a asp-controller="Account" asp-action="Login" class="fw-bold text-decoration-none">Sign in</a></p>
+    </div>
+@section Scripts { <script src="~/js/edupilot-auth.js" asp-append-version="true"></script> }

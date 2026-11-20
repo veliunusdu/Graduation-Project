@@ -1,0 +1,49 @@
+@using HomeworkPlatform.Web.Models.Domain
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+    var teacher = User.IsInRole(HomeworkPlatform.Web.Security.AppRoles.Teacher);
+    var targetController = teacher ? "Teacher" : "Student";
+    var targetAction = "Index";
+    int? targetId = null;
+    int? courseFilter = null;
+    var label = "Back to dashboard";
+    int.TryParse(ViewContext.RouteData.Values["id"]?.ToString(), out var routeId);
+    int.TryParse(Context.Request.Query["courseId"].ToString(), out var queryCourse);
+    var model = ViewData.Model;
+    var assignment = model as Assignment;
+    var submission = model as Submission;
+    var show = !(controller == (teacher ? "Teacher" : "Student") && action == "Index");
+    if (controller == "Courses") {
+        targetController = "Courses"; label = "Back to courses";
+        if (action is "Edit" or "Delete") { targetAction = "Details"; targetId = routeId; label = "Back to course"; }
+        else if (action == "Index") { targetController = "Teacher"; label = "Back to dashboard"; }
+    }
+    else if (controller == "Assignments") {
+        targetController = "Assignments"; label = "Back to assignments";
+        if (action == "Create") { targetController = "Courses"; targetAction = "Details"; targetId = ViewData["CourseId"] as int?; label = "Back to course"; }
+        else if (action is "Edit" or "Delete" or "Submissions") { targetAction = "Details"; targetId = routeId; label = "Back to assignment"; }
+        else if (action is "Submission" or "Review") { targetAction = "Submissions"; targetId = submission?.AssignmentId; label = "Back to assignment submissions"; }
+        else if (action == "Details") { courseFilter = assignment?.CourseId; }
+        else if (queryCourse > 0) { targetController = "Courses"; targetAction = "Details"; targetId = queryCourse; label = "Back to course"; }
+        else { targetController = "Courses"; label = "Back to courses"; }
+    }
+    else if (controller == "StudentCourses") {
+        targetController = "StudentCourses"; label = "Back to courses";
+        if (action == "Index") { targetController = "Student"; label = "Back to dashboard"; }
+        else if (action is "Tutor" or "SearchSources") { targetAction = "Details"; targetId = ViewData["CourseId"] as int? ?? (model as int?) ?? routeId; label = "Back to course"; }
+    }
+    else if (controller == "StudentWork") {
+        targetController = "StudentWork"; label = "Back to assignments";
+        if (action == "Index") { targetController = queryCourse > 0 ? "StudentCourses" : "Student"; targetAction = queryCourse > 0 ? "Details" : "Index"; targetId = queryCourse > 0 ? queryCourse : null; label = queryCourse > 0 ? "Back to course" : "Back to dashboard"; }
+    }
+    else if (controller == "Submissions") {
+        targetController = "Submissions"; label = "Back to submissions";
+        if (action == "Index") { targetController = "Student"; label = "Back to dashboard"; }
+        else if (action is "Edit" or "Delete") { targetAction = "Details"; targetId = routeId; label = "Back to submission"; }
+        else if (action is "Create" or "Details") { targetController = "StudentWork"; targetAction = "Details"; targetId = submission?.AssignmentId ?? ViewData["AssignmentId"] as int?; label = "Back to assignment"; }
+    }
+    else if (controller == "CourseMaterials") { targetController = teacher ? "Courses" : "StudentCourses"; targetAction = "Details"; targetId = (ViewData["Course"] as Course)?.Id; label = "Back to course"; }
+    var href = Url.Action(targetAction, targetController, new { id = targetId, courseId = courseFilter });
+}
+@if(show){<nav class="ep-back-nav" aria-label="Back navigation"><a class="btn ep-back-link" href="@href"><span class="ep-back-icon"><partial name="_EduPilotIcon" model='@("arrow")' /></span>@label</a></nav>}

@@ -1,15 +1,7 @@
 @model IReadOnlyList<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource>
-@{ ViewData["Title"] = "Ders kaynakları"; }
-<h1>Ders kaynakları</h1>
-@if (Model.Count == 0)
-{
-    <p>Bu soru için uygun ders kaynağı bulunamadı.</p>
-}
-@foreach (var source in Model)
-{
-    <article class="mb-3">
-        <h2 class="h5">@source.FileName · Sayfa @source.PageNumber</h2>
-        <p>@source.Text</p>
-    </article>
-}
-<a asp-action="Details" asp-route-id="@ViewData["CourseId"]">Derse dön</a>
+@{ViewData["Title"]="Course sources";var id=ViewData["CourseId"] as int? ?? 0;var ready=ViewData["ReadyMaterialCount"] as int? ?? 0;}
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">@ViewData["CourseName"]</span><h1>Course sources</h1><p>Relevant passages from the processed materials in this course.</p></div></div>
+@if(ViewData["Question"] is string question){<div class="ep-rag-question"><span>Your question</span><p>@question</p></div>}
+@if(Model.Count==0){<div class="ep-card ep-empty">@if(ready==0){<h2>No ready course materials yet</h2><p>Your teacher needs to upload and process course materials before source search is available.</p><a class="btn ep-secondary-link" asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@id">View course materials</a>}else{<h2>No matching course sources found</h2><p>Try a more specific question. Only relevant sources from this course are shown.</p>}</div>}
+@foreach(var source in Model){<partial name="_CourseSourceCard" model="source" />}
+<section class="ep-card p-4 mt-4"><h2 class="h6 mb-3">Ask another question</h2><partial name="_CourseQuestionForm" model="id" /></section>

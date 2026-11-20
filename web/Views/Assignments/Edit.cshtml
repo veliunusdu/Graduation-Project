@@ -1,3 +1,5 @@
 @model HomeworkPlatform.Web.Models.Work.AssignmentForm
 @{ ViewData["Title"] = "Edit assignment"; }
-<h1>Edit assignment</h1><form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post"><partial name="_Form" model="Model" /></form>
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">YOUR WORKSPACE</span><h1>Edit assignment</h1></div></div><div class="ep-form-card"><form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form></div>
+
+@if(Model.ExistingAttachments.Count > 0){<div class="ep-form-card mt-3"><h2 class="mt-0">Manage attachments</h2>@foreach(var file in Model.ExistingAttachments){<form asp-action="RemoveAttachment" asp-route-id="@file.Id" method="post" class="ep-attachment"><span>@file.OriginalFileName</span><button type="submit" class="btn btn-outline-danger btn-sm">Remove attachment</button></form>}</div>}

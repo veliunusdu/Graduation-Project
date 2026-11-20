@@ -1,0 +1,2 @@
+@model HomeworkPlatform.Web.Models.StudentAssignmentRow
+<span class="ep-status @(Model.Status == "Graded" ? "ep-status-graded" : Model.Status == "Overdue" ? "ep-status-late" : Model.Status == "Pending" ? "ep-status-pending" : "")">@(Model.Status == "Pending" ? "Not Submitted" : Model.Status)</span>

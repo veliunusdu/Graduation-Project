@@ -8,12 +8,21 @@ using Microsoft.EntityFrameworkCore;
 namespace HomeworkPlatform.Web.Controllers;
 
 [Authorize(Roles = AppRoles.Student)]
-public class StudentWorkController(ApplicationDbContext database) : Controller
+public class StudentWorkController(ApplicationDbContext database, HomeworkPlatform.Web.Services.StudentPanelReader panel) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-    private IQueryable<Assignment> Enrolled => database.Assignments.Include(a => a.Course).Include(a => a.Requirements)
+    private IQueryable<Assignment> Enrolled => database.Assignments.Include(a => a.Course).Include(a => a.Requirements).Include(a => a.Attachments)
         .Where(a => a.Course.IsActive && database.StudentCourses.Any(e => e.CourseId == a.CourseId && e.StudentId == UserId));
-    [HttpGet] public async Task<IActionResult> Index() => View(await Enrolled.AsNoTracking().OrderBy(a => a.Title).ToListAsync());
+    [HttpGet] public async Task<IActionResult> Index(string? status, int? courseId)
+    {
+        var courses = await panel.Courses(UserId);
+        if (courseId.HasValue && !courses.Any(c => c.Course.Id == courseId)) return NotFound();
+        var rows = await panel.Assignments(UserId);
+        if (courseId.HasValue) rows = rows.Where(a => a.Assignment.CourseId == courseId).ToList();
+        status = status?.ToLowerInvariant() switch { "pending" => "Pending", "submitted" => "Submitted", "graded" => "Graded", _ => null };
+        rows = rows.Where(a => status switch { "Pending" => a.Submission == null, "Submitted" => a.Submission != null, "Graded" => a.Submission?.ReviewedAt != null, _ => true }).ToList();
+        return View(new HomeworkPlatform.Web.Models.StudentAssignmentsViewModel(status, courseId, courses, rows));
+    }
     [HttpGet] public async Task<IActionResult> Details([FromRoute] int id)
     {
         var assignment = await Enrolled.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);

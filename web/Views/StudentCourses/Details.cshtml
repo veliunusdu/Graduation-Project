@@ -1,17 +1,4 @@
-@model HomeworkPlatform.Web.Models.Domain.Course
-@{ ViewData["Title"] = Model.Name; }
-<h1>@Model.Name</h1><p>@Model.Description</p>
-<p>@Model.EducationLevel · Grade / year @Model.GradeLevel</p>
-<h2>Assignments</h2>
-<ul>@foreach (var assignment in ViewData["Assignments"] as IReadOnlyList<HomeworkPlatform.Web.Models.Domain.Assignment> ?? Array.Empty<HomeworkPlatform.Web.Models.Domain.Assignment>()) { <li><a asp-controller="StudentWork" asp-action="Details" asp-route-id="@assignment.Id">@assignment.Title</a></li> }</ul>
-<a asp-action="Index">My enrolled courses</a>
-
-<p><a asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@Model.Id">Ders materyalleri</a></p>
-
-<h2>Ders kaynaklarında ara</h2>
-<form asp-action="SearchSources" asp-route-id="@Model.Id" method="post">
-    <label for="question">Sorun</label>
-    <input class="form-control" id="question" name="question" required maxlength="4000" />
-    <button type="submit" class="btn btn-primary mt-2">Kaynak ara</button>
-    <button type="submit" name="tutor" value="true" class="btn btn-secondary mt-2">Tutor ile açıkla</button>
-</form>
+@model HomeworkPlatform.Web.Models.StudentCourseDetailViewModel
+@{var c=Model.Card.Course;ViewData["Title"]=c.Name;}
+<div class="ep-card p-4 mt-3 mb-4"><span class="ep-course-badge">@Model.Card.ClassLabel</span><h1 class="h3 mt-3">@c.Name</h1><p class="small ep-muted">Teacher: @Model.Card.TeacherName</p><p class="ep-muted mb-0">@c.Description</p></div>
+<div class="ep-student-cols"><div><section class="ep-card mb-4"><div class="p-4 pb-0"><h2>Assignments</h2></div><partial name="_StudentAssignmentTable" model="Model.Assignments" /></section><partial name="_StudentHelp" model="c.Id" /></div><section class="ep-card p-4 align-self-start"><h2>Course materials</h2>@if(Model.Materials.Count==0){<p class="ep-muted small">No materials uploaded yet.</p>}@foreach(var m in Model.Materials){<div class="ep-material-item"><a asp-controller="CourseMaterials" asp-action="Download" asp-route-id="@m.Id">@m.OriginalFileName</a><partial name="_MaterialProcessingStatus" model="m.Status" /></div>}<a class="btn btn-light mt-3" asp-controller="CourseMaterials" asp-action="Index" asp-route-courseId="@c.Id">All course materials</a></section></div>

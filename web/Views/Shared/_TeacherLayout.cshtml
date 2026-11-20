@@ -1,0 +1,36 @@
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+    string Active(string c, string? a = null) => controller == c && (a == null || a == action) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@ViewData["Title"] - EduPilot</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/edupilot-auth.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/edupilot-teacher.css" asp-append-version="true" />
+</head><body class="ep-teacher-body">
+<a href="#main-content" class="visually-hidden-focusable">Skip to content</a>
+<div class="ep-shell">
+<aside class="ep-sidebar" id="teacher-sidebar" aria-label="Teacher navigation">
+<div class="ep-sidebar-brand"><partial name="_EduPilotBrand" /><span class="ep-workspace-label">TEACHER WORKSPACE</span></div>
+<nav class="ep-teacher-nav">
+<a class="@Active("Teacher", "Index")" asp-controller="Teacher" asp-action="Index"><partial name="_EduPilotIcon" model='@("progress")' />Overview</a>
+<a class="@Active("Courses")" asp-controller="Courses" asp-action="Index"><partial name="_EduPilotIcon" model='@("book")' />Courses</a>
+<a class="@Active("Assignments")" asp-controller="Assignments" asp-action="Index"><partial name="_EduPilotIcon" model='@("file")' />Assignments</a>
+<a class="@Active("Teacher", "Submissions")" asp-controller="Teacher" asp-action="Submissions"><partial name="_EduPilotIcon" model='@("check")' />Assignments submitted</a>
+<a class="@Active("AIStatus")" asp-controller="AIStatus" asp-action="Index"><partial name="_EduPilotIcon" model='@("sparkles")' />Check AI service connection</a>
+</nav>
+<div class="ep-sidebar-bottom">@await Component.InvokeAsync("TeacherProfile")
+<form asp-controller="Account" asp-action="Logout" method="post"><button class="ep-logout" type="submit">Logout <partial name="_EduPilotIcon" model='@("arrow")' /></button></form></div>
+</aside>
+<div class="ep-teacher-main"><header class="ep-topbar">
+<button type="button" class="btn btn-light ep-menu-toggle" aria-expanded="false" aria-controls="teacher-sidebar" id="teacher-menu">Menu</button>
+<form asp-controller="Teacher" asp-action="Search" method="get" role="search" class="ep-search"><label for="teacher-search" class="visually-hidden">Search your courses and assignments</label><partial name="_EduPilotIcon" model='@("search")' /><input id="teacher-search" type="search" name="q" value="@Context.Request.Query["q"]" placeholder="Search courses and assignments" maxlength="200" class="form-control" /><button class="btn btn-light" type="submit">Search</button></form>
+
+</header>
+<main class="ep-content" id="main-content"><partial name="_PanelBack" />@RenderBody()</main></div></div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script><script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/edupilot-teacher.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body></html>

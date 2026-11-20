@@ -1,15 +1,7 @@
 @model HomeworkPlatform.Web.Controllers.StudentCoursesController.TutorResponse
-@{ ViewData["Title"] = "Tutor"; }
-<h1>Tutor</h1>
-<p style="white-space:pre-wrap">@Model.Explanation</p>
-<p>@Model.NextStep</p>
-@{ var sources = ViewData["Sources"] as IReadOnlyList<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource> ?? Array.Empty<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource>(); }
-@foreach (var key in Model.Citations ?? new())
-{
-    var index = int.TryParse(key.TrimStart('s'),out var number) ? number-1 : -1;
-    if (index >= 0 && index < sources.Count)
-    {
-        <p>@sources[index].FileName · Sayfa @sources[index].PageNumber</p>
-    }
-}
-<a asp-action="Details" asp-route-id="@ViewData["CourseId"]">Derse dön</a>
+@{ViewData["Title"]="AI Tutor";var sources=ViewData["Sources"] as IReadOnlyList<HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource> ?? [];var id=ViewData["CourseId"] as int? ?? 0;}
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">@ViewData["CourseName"]</span><h1>AI Tutor</h1><p>Learning guidance based on your course sources.</p></div></div>
+@if(ViewData["Question"] is string question){<div class="ep-rag-question"><span>Your question</span><p>@question</p></div>}
+<div class="ep-form-card"><p class="ep-student-requirements">@Model.Explanation</p><div class="ep-feedback"><strong>Next step</strong><div>@Model.NextStep</div></div></div>
+@if(Model.Citations?.Count>0){<h2 class="h6 mt-4 mb-3">Sources used</h2>@foreach(var key in Model.Citations.Distinct()){var index=int.TryParse(key.TrimStart('s'),out var number)?number-1:-1;if(index>=0 && index<sources.Count){<partial name="_CourseSourceCard" model="sources[index]" />}}}
+<section class="ep-card p-4 mt-4"><h2 class="h6 mb-3">Ask another question</h2><partial name="_CourseQuestionForm" model="id" /></section>

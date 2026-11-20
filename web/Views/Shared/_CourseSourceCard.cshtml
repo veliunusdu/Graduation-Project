@@ -1,0 +1,6 @@
+@model HomeworkPlatform.Web.Controllers.StudentCoursesController.CourseSource
+<article class="ep-card ep-rag-source">
+    <div class="ep-rag-source-heading"><div><span class="ep-eyebrow">COURSE SOURCE</span><h2>@Model.FileName</h2><span class="ep-rag-page">Page @Model.PageNumber</span></div>
+    @if(Model.MaterialId>0){<a class="btn ep-secondary-link btn-sm" asp-controller="CourseMaterials" asp-action="Download" asp-route-id="@Model.MaterialId">Download material</a>}</div>
+    <p class="ep-rag-source-text">@Model.Text</p>
+</article>

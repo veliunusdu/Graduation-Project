@@ -33,8 +33,8 @@ public sealed class OwnershipFixture : IDisposable
             Assert.True((await provisioner.ProvisionAsync("teacher-b@example.test", FormClient.TestPassword)).Success);
             using var first = fixture.App.NewClient();
             using var second = fixture.App.NewClient();
-            Assert.Equal(System.Net.HttpStatusCode.Redirect, (await FormClient.RegisterAsync(first, "student-a@example.test")).StatusCode);
-            Assert.Equal(System.Net.HttpStatusCode.Redirect, (await FormClient.RegisterAsync(second, "student-b@example.test")).StatusCode);
+            Assert.Equal(System.Net.HttpStatusCode.Redirect, (await FormClient.CreateAccountAndLoginAsync(first, "student-a@example.test")).StatusCode);
+            Assert.Equal(System.Net.HttpStatusCode.Redirect, (await FormClient.CreateAccountAndLoginAsync(second, "student-b@example.test")).StatusCode);
             var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             fixture.TeacherAId = (await users.FindByEmailAsync("teacher-a@example.test"))!.Id;
             fixture.TeacherBId = (await users.FindByEmailAsync("teacher-b@example.test"))!.Id;

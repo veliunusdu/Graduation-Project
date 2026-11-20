@@ -23,7 +23,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
@@ -33,6 +32,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always;
 });
 builder.Services.AddScoped<TeacherProvisioner>();
+builder.Services.AddScoped<InitialDataSeeder>();
+builder.Services.AddScoped<HomeworkPlatform.Web.Services.StudentPanelReader>();
 builder.Services.AddOptions<AIServiceOptions>().BindConfiguration(AIServiceOptions.SectionName)
     .ValidateDataAnnotations().Validate(o => o.HasValidBaseUrl(), "AIService:BaseUrl must be an HTTP(S) URL without credentials, query or fragment.").ValidateOnStart();
 builder.Services.AddHttpClient<AIServiceClient>((services, client) =>
@@ -46,6 +47,8 @@ builder.Services.AddOptions<SubmissionFileOptions>().BindConfiguration(Submissio
 builder.Services.AddScoped<SubmissionFileStore>();
 builder.Services.AddOptions<MaterialFileOptions>().BindConfiguration(MaterialFileOptions.SectionName).ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddScoped<MaterialFileStore>();
+builder.Services.AddOptions<AssignmentFileOptions>().BindConfiguration(AssignmentFileOptions.SectionName).ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddScoped<AssignmentFileStore>();
 builder.Services.AddScoped<IMaterialProcessor, MaterialProcessor>();
 var app = builder.Build();
 if (commandMode)
@@ -56,6 +59,7 @@ if (commandMode)
     return;
 }
 await IdentityInitializer.InitializeAsync(app.Services);
+await InitialDataSeeder.InitializeAsync(app.Services);
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

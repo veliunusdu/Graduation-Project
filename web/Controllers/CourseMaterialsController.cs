@@ -18,7 +18,7 @@ public class CourseMaterialsController(ApplicationDbContext db,MaterialFileStore
  {
   var course=await Accessible.AsNoTracking().SingleOrDefaultAsync(c=>c.Id==courseId);if(course==null)return NotFound();
   ViewData["Course"]=course;ViewData["Teacher"]=Teacher;
-  return View(await db.CourseMaterials.AsNoTracking().Where(m=>m.CourseId==courseId && (Teacher || m.Status==MaterialStatus.Ready)).OrderByDescending(m=>m.Id).ToListAsync());
+  return View(await db.CourseMaterials.AsNoTracking().Where(m=>m.CourseId==courseId).OrderByDescending(m=>m.Id).ToListAsync());
  }
  [HttpPost,Authorize(Roles=AppRoles.Teacher),RequestSizeLimit(SubmissionFileOptions.RequestSizeLimit),RequestFormLimits(MultipartBodyLengthLimit=SubmissionFileOptions.RequestSizeLimit)]
  public async Task<IActionResult> Upload(int courseId,IFormFile? upload)
@@ -31,7 +31,12 @@ public class CourseMaterialsController(ApplicationDbContext db,MaterialFileStore
   var m=new CourseMaterial{CourseId=courseId,Course=course,OriginalFileName=saved.OriginalName,StoredFileName=saved.StoredName,FileSize=saved.Size};
   db.CourseMaterials.Add(m);
   try{await db.SaveChangesAsync();}catch{files.DeleteIfPresent(saved.StoredName);throw;}
-  await Process(m);return RedirectToAction(nameof(Index),new{courseId});
+  await Process(m);
+  var status=await db.CourseMaterials.AsNoTracking().Where(x=>x.Id==m.Id).Select(x=>x.Status).SingleAsync();
+  TempData["MaterialNotice"]=status==MaterialStatus.Ready
+   ? "Material uploaded and AI processing completed."
+   : "Material uploaded. AI processing did not complete; the file remains available to your students.";
+  return RedirectToAction(nameof(Index),new{courseId});
  }
  [HttpPost,Authorize(Roles=AppRoles.Teacher)] public async Task<IActionResult> Retry(int id)
  {
@@ -58,7 +63,7 @@ public class CourseMaterialsController(ApplicationDbContext db,MaterialFileStore
  }
  [HttpGet] public async Task<IActionResult> Download(int id)
  {
-  var m=await db.CourseMaterials.AsNoTracking().SingleOrDefaultAsync(m=>m.Id==id && Accessible.Any(c=>c.Id==m.CourseId) && (Teacher || m.Status==MaterialStatus.Ready));
+  var m=await db.CourseMaterials.AsNoTracking().SingleOrDefaultAsync(m=>m.Id==id && Accessible.Any(c=>c.Id==m.CourseId));
   if(m==null)return NotFound();var stream=files.OpenRead(m.StoredFileName);if(stream==null)return NotFound();
   Response.Headers["X-Content-Type-Options"]="nosniff";Response.Headers.CacheControl="no-store";
   return File(stream,"application/octet-stream",m.OriginalFileName);

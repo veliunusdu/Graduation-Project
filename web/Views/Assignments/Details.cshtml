@@ -1,5 +1,5 @@
 @model HomeworkPlatform.Web.Models.Domain.Assignment
 @{ ViewData["Title"] = Model.Title; }
-<h1>@Model.Title</h1><p>@Model.Description</p><p>Course: @Model.Course.Name</p>
-<partial name="_AssignmentRequirements" model="Model" />
-<p><a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> | <a asp-action="Submissions" asp-route-id="@Model.Id">Student submissions</a> | <a asp-action="Index" asp-route-courseId="@Model.CourseId">Assignments</a></p>
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">@Model.Course.Name</span><h1>@Model.Title</h1><p>Due date: @(Model.DueDate?.ToString("dd MMM yyyy",System.Globalization.CultureInfo.InvariantCulture) ?? "No due date")</p></div><div class="d-flex gap-2"><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-light">Edit assignment</a><a asp-action="Submissions" asp-route-id="@Model.Id" class="btn btn-primary">Student submissions</a></div></div>
+<div class="ep-form-card ep-requirements-card"><h2 class="ep-requirements-heading">Requirements</h2><p class="ep-requirements-text">@Model.Description</p><partial name="_AssignmentAttachments" model="Model" /></div>
+<div class="d-flex gap-3 mt-4"><a asp-action="Delete" asp-route-id="@Model.Id" class="text-danger btn ep-danger-link">Delete assignment</a></div>

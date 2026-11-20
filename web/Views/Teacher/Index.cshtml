@@ -1,6 +1,13 @@
+@model HomeworkPlatform.Web.Models.DashboardViewModel
+@using HomeworkPlatform.Web.Models.Domain
 @{ ViewData["Title"] = "Teacher dashboard"; }
-<h1>Teacher dashboard</h1>
-<p>You are signed in as a Teacher.</p>
-<p><a asp-controller="Courses" asp-action="Index">My courses</a> | <a asp-controller="Assignments" asp-action="Index">My assignments</a></p>
-
-<p><a asp-controller="AIStatus" asp-action="Index">AI servis bağlantısını kontrol et</a></p>
+<div class="ep-teacher-heading"><div><h1>Welcome, @Model.DisplayName</h1><p>A clear view of your courses and everything that comes next.</p></div><a asp-controller="Courses" asp-action="Create" class="btn btn-primary">+ Add course</a></div>
+<div class="ep-summary-grid"><div class="ep-summary"><strong>@Model.Courses.Count</strong><span>Your courses</span></div><div class="ep-summary"><strong>@Model.Courses.Count(c => c.IsActive)</strong><span>Active courses</span></div><div class="ep-summary"><strong>@Model.PendingReviews</strong><span>Pending Reviews</span></div></div>
+<div class="ep-ai-banner"><div><h2>Your AI teaching tools</h2><p>Check the AI service connection before using course material tools.</p></div><a asp-controller="AIStatus" asp-action="Index" class="btn">Check AI service connection</a></div>
+<div class="ep-teacher-heading"><h2 class="mb-0">My courses</h2><a asp-controller="Courses" asp-action="Index" class="text-decoration-none small">View all courses →</a></div>
+@if (Model.Courses.Count == 0) { <div class="ep-card ep-empty"><h2>No courses yet</h2><p>Create a course to enroll students and add assignments.</p><a asp-controller="Courses" asp-action="Create" class="btn btn-primary">Add course</a></div> }
+<div class="ep-course-page"><div class="ep-course-card-grid">
+@foreach (var c in Model.Courses) {
+<article class="ep-course-panel ep-course-card" data-course-id="@c.Id" data-enrolled-count="@Model.EnrollmentCounts.GetValueOrDefault(c.Id)"><div class="ep-course-badges"><span class="ep-course-badge">@EducationRules.Label(c.EducationLevel) · @(c.EducationLevel == EducationLevel.University ? "Year" : "Grade") @c.GradeLevel</span><span class="ep-course-badge ep-course-badge-neutral">@(c.IsActive ? "Active" : "Inactive")</span></div><h2><a asp-controller="Courses" asp-action="Details" asp-route-id="@c.Id">@c.Name</a></h2><p>@c.Description</p><div class="ep-course-card-bottom"><span>@Model.EnrollmentCounts.GetValueOrDefault(c.Id) enrolled students</span></div><div class="ep-course-tools ep-ui-action-group"><a class="btn ep-secondary-link ep-ui-action" asp-controller="Courses" asp-action="Details" asp-route-id="@c.Id">Open course</a><a class="btn ep-secondary-link ep-ui-action" asp-controller="Courses" asp-action="Edit" asp-route-id="@c.Id">Edit course</a><a class="btn ep-danger-link ep-ui-action" asp-controller="Courses" asp-action="Delete" asp-route-id="@c.Id">Delete</a></div></article>
+}
+</div></div>

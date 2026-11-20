@@ -29,12 +29,23 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("EducationLevel")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -59,7 +70,14 @@ namespace HomeworkPlatform.Web.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("ProfileCompleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StudentClass")
+                        .HasMaxLength(32)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -79,6 +97,20 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("HomeworkPlatform.Web.Data.DataInitialization", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CompletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("DataInitializations");
                 });
 
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.Assignment", b =>
@@ -120,6 +152,35 @@ namespace HomeworkPlatform.Web.Data.Migrations
                         {
                             t.HasCheckConstraint("CK_Assignments_Difficulty", "Difficulty BETWEEN 0 AND 2");
                         });
+                });
+
+            modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.AssignmentAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(39)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignmentId");
+
+                    b.ToTable("AssignmentAttachments");
                 });
 
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.AssignmentRequirement", b =>
@@ -467,6 +528,17 @@ namespace HomeworkPlatform.Web.Data.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.AssignmentAttachment", b =>
+                {
+                    b.HasOne("HomeworkPlatform.Web.Models.Domain.Assignment", "Assignment")
+                        .WithMany("Attachments")
+                        .HasForeignKey("AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Assignment");
+                });
+
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.AssignmentRequirement", b =>
                 {
                     b.HasOne("HomeworkPlatform.Web.Models.Domain.Assignment", "Assignment")
@@ -585,6 +657,8 @@ namespace HomeworkPlatform.Web.Data.Migrations
 
             modelBuilder.Entity("HomeworkPlatform.Web.Models.Domain.Assignment", b =>
                 {
+                    b.Navigation("Attachments");
+
                     b.Navigation("Requirements");
                 });
 #pragma warning restore 612, 618

@@ -16,7 +16,7 @@ public class OwnershipSchemaTests
     {
         using var app = new AuthWebApplicationFactory();
         using var client = app.NewClient();
-        await FormClient.RegisterAsync(client, "preserved@example.test");
+        await FormClient.CreateAccountAndLoginAsync(client, "preserved@example.test");
         await IdentityInitializer.InitializeAsync(app.Services);
         await using var connection = new SqliteConnection($"Data Source={app.DatabasePath}");
         await connection.OpenAsync();
@@ -42,7 +42,11 @@ public class OwnershipSchemaTests
             await migrator.MigrateAsync(oldDatabase.Database.GetMigrations().First());
             var user = new ApplicationUser { Id = "existing-user", UserName = "existing@example.test", NormalizedUserName = "EXISTING@EXAMPLE.TEST", Email = "existing@example.test", NormalizedEmail = "EXISTING@EXAMPLE.TEST", SecurityStamp = Guid.NewGuid().ToString(), LockoutEnabled = true };
             user.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(user, FormClient.TestPassword);
-            oldDatabase.Users.Add(user);
+            await oldDatabase.Database.ExecuteSqlInterpolatedAsync($@"INSERT INTO AspNetUsers
+                (Id, UserName, NormalizedUserName, Email, NormalizedEmail, PasswordHash, SecurityStamp,
+                 AccessFailedCount, EmailConfirmed, LockoutEnabled, PhoneNumberConfirmed, TwoFactorEnabled)
+                VALUES ({user.Id}, {user.UserName}, {user.NormalizedUserName}, {user.Email}, {user.NormalizedEmail},
+                        {user.PasswordHash}, {user.SecurityStamp}, 0, 0, 1, 0, 0)");
             oldDatabase.Roles.Add(new IdentityRole { Id = "existing-student-role", Name = "Student", NormalizedName = "STUDENT" });
             oldDatabase.UserRoles.Add(new IdentityUserRole<string> { UserId = user.Id, RoleId = "existing-student-role" });
             await oldDatabase.SaveChangesAsync();

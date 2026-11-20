@@ -1,24 +1,9 @@
 @using HomeworkPlatform.Web.Models.Domain
 @model IReadOnlyList<CourseMaterial>
-@{ var course=(Course)ViewData["Course"]!;var teacher=(bool)ViewData["Teacher"]!;ViewData["Title"]="Ders materyalleri"; }
-<h1>@course.Name — Ders materyalleri</h1>
-@if(TempData["MaterialError"] is string error){<p role="alert" class="text-danger">@error</p>}
-@if(teacher && course.IsActive){
-<form asp-action="Upload" asp-route-courseId="@course.Id" method="post" enctype="multipart/form-data">
-<label for="upload">PDF, DOCX, PPTX veya UTF-8 TXT (en fazla 20 MB)</label>
-<input type="file" name="upload" id="upload" accept=".pdf,.docx,.pptx,.txt" required />
-<button type="submit">Yükle ve işle</button>
-<p>İşlem tamamlanana kadar bekleyin. Durumu başka bir sekmede bu sayfadan kontrol edebilirsiniz.</p>
-</form>}
-<table class="table"><thead><tr><th>Dosya</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody>
-@foreach(var m in Model){
-<tr><td>@m.OriginalFileName</td><td>
-@(m.Status switch{MaterialStatus.Uploaded=>"Yüklendi",MaterialStatus.Processing=>"İşleniyor",MaterialStatus.Ready=>"Hazır",_=>"Başarısız"})
-@if(m.Status==MaterialStatus.Ready){<span> (@m.ChunkCount parça)</span>}
-@if(teacher && m.ErrorMessage!=null){<p role="alert">@m.ErrorMessage</p>}
-</td><td><a asp-action="Download" asp-route-id="@m.Id">İndir</a>
-@if(teacher && course.IsActive && (m.Status==MaterialStatus.Failed || m.Status==MaterialStatus.Uploaded || m.Status==MaterialStatus.Processing && m.ProcessingStartedAt<DateTime.UtcNow.AddMinutes(-5))){
-<form asp-action="Retry" asp-route-id="@m.Id" method="post"><button type="submit">Yeniden dene</button></form>}
-</td></tr>}
-</tbody></table>
-<a asp-action="Index" asp-route-courseId="@course.Id">Durumu yenile</a>
+@{var course=(Course)ViewData["Course"]!;var teacher=(bool)ViewData["Teacher"]!;ViewData["Title"]="Course materials";var cutoff=DateTime.UtcNow.AddMinutes(-5);var refresh=Model.Any(m=>m.Status==MaterialStatus.Processing && m.ProcessingStartedAt>=cutoff);}
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">@course.Name</span><h1>Course materials</h1><p>Shared course files and their AI processing status.</p></div><a asp-action="Index" asp-route-courseId="@course.Id" class="btn ep-secondary-link">Refresh status</a></div>
+@if(TempData["MaterialError"] is string error){<div role="alert" class="alert alert-warning">@error</div>}
+@if(TempData["MaterialNotice"] is string notice){<div role="status" class="alert alert-info">@notice</div>}
+@if(teacher && course.IsActive){<form class="ep-form-card mb-4" asp-action="Upload" asp-route-courseId="@course.Id" method="post" enctype="multipart/form-data" data-material-processing-form><label for="upload">Course material</label><input type="file" name="upload" id="upload" class="form-control" accept=".pdf,.docx,.pptx,.txt" required /><p class="small ep-muted mt-2">PDF, DOCX, PPTX or UTF-8 TXT, up to 20 MB. AI processing starts automatically after upload. Students can still download the file if processing fails.</p><button type="submit" class="btn btn-primary">Upload and process</button><p id="material-progress" class="small ep-muted mt-3 mb-0" role="status" aria-live="polite" hidden>Uploading and processing your material. Please keep this page open.</p></form>}
+<div class="ep-card" data-material-auto-refresh="@(refresh?"true":"false")"><div class="ep-table-wrap"><table class="ep-teacher-table"><thead><tr><th>File</th><th>Size</th><th>AI processing</th><th>Actions</th></tr></thead><tbody>@foreach(var m in Model){<tr data-material-id="@m.Id"><td><strong>@m.OriginalFileName</strong></td><td>@((m.FileSize/1024.0).ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)) KB</td><td><partial name="_MaterialProcessingStatus" model="m.Status" />@if(m.Status==MaterialStatus.Failed){<p class="ep-material-status-note">AI processing failed. The uploaded file is still available.</p>}</td><td><div class="ep-action-row"><a class="btn ep-secondary-link btn-sm" asp-action="Download" asp-route-id="@m.Id">Download</a>@if(teacher && course.IsActive && (m.Status is MaterialStatus.Uploaded or MaterialStatus.Failed || m.Status==MaterialStatus.Processing && m.ProcessingStartedAt<cutoff)){<form asp-action="Retry" asp-route-id="@m.Id" method="post" data-material-processing-form><button type="submit" class="btn ep-secondary-link btn-sm">Retry processing</button></form>}</div></td></tr>}</tbody></table></div>@if(Model.Count==0){<div class="ep-empty">No materials uploaded yet.</div>}</div>
+@section Scripts {<script src="~/js/edupilot-materials.js" asp-append-version="true"></script>}

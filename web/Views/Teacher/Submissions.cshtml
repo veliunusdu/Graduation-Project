@@ -1,0 +1,8 @@
+@model IReadOnlyList<HomeworkPlatform.Web.Models.TeacherSubmissionRow>
+@{ ViewData["Title"] = "Assignments submitted"; }
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">STUDENT WORK</span><h1>Assignments submitted</h1><p>Review student work and save grades and feedback.</p></div></div>
+<div class="ep-card">@if(Model.Count == 0){<div class="ep-empty"><h2>No submissions yet</h2><p>Student submissions for your courses will appear here.</p></div>}else{
+<div class="ep-table-wrap"><table class="ep-teacher-table"><thead><tr><th>Student</th><th>Assignment</th><th>Submitted (UTC)</th><th>Status</th><th>Grade</th><th>Actions</th></tr></thead><tbody>
+@foreach(var row in Model){var s=row.Submission;var late=s.Assignment.DueDate.HasValue && s.CreatedAt.Date>s.Assignment.DueDate.Value.Date;var status=s.ReviewedAt.HasValue?"Graded":late?"Late":"Pending";
+<tr><td><strong>@(string.IsNullOrWhiteSpace(row.StudentName)?row.StudentEmail:row.StudentName)</strong><small>@row.StudentEmail</small></td><td><a asp-controller="Assignments" asp-action="Submission" asp-route-id="@s.Id">@s.Assignment.Title</a><small>@s.Assignment.Course.Name</small></td><td>@s.CreatedAt.ToString("dd MMM yyyy, HH:mm", System.Globalization.CultureInfo.InvariantCulture)</td><td><span class="ep-status @(status=="Graded"?"ep-status-graded":status=="Late"?"ep-status-late":"")">@status</span></td><td>@(s.TeacherGrade?.ToString() ?? "—")</td><td><a class="btn btn-light btn-sm" asp-controller="Assignments" asp-action="Submission" asp-route-id="@s.Id">Review</a></td></tr>
+}</tbody></table></div>}</div>

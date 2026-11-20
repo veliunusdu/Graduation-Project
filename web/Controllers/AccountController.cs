@@ -7,30 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeworkPlatform.Web.Controllers;
 
-public class AccountController(UserManager<ApplicationUser> users, SignInManager<ApplicationUser> signIn, ApplicationDbContext database) : Controller
+public class AccountController(UserManager<ApplicationUser> users, SignInManager<ApplicationUser> signIn) : Controller
 {
-    [HttpGet, AllowAnonymous]
-    public IActionResult Register() => View(new RegisterViewModel());
-
-    [HttpPost, AllowAnonymous]
-    public async Task<IActionResult> Register(RegisterViewModel model)
-    {
-        if (!ModelState.IsValid) return View(model);
-        var user = new ApplicationUser { UserName = model.Email.Trim(), Email = model.Email.Trim() };
-        await using var transaction = await database.Database.BeginTransactionAsync();
-        var result = await users.CreateAsync(user, model.Password);
-        if (result.Succeeded) result = await users.AddToRoleAsync(user, AppRoles.Student);
-        if (!result.Succeeded)
-        {
-            await transaction.RollbackAsync();
-            foreach (var error in result.Errors) ModelState.AddModelError("", error.Description);
-            return View(model);
-        }
-        await transaction.CommitAsync();
-        await signIn.SignInAsync(user, isPersistent: false);
-        return RedirectToAction("Index", "Student");
-    }
-
     [HttpGet, AllowAnonymous]
     public IActionResult Login(string? returnUrl = null) => View(new LoginViewModel { ReturnUrl = returnUrl });
 
@@ -38,14 +16,16 @@ public class AccountController(UserManager<ApplicationUser> users, SignInManager
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
-        var result = await signIn.PasswordSignInAsync(model.Email.Trim(), model.Password, isPersistent: false, lockoutOnFailure: true);
+        var user = await users.FindByEmailAsync(model.Email.Trim());
+        var result = user == null ? Microsoft.AspNetCore.Identity.SignInResult.Failed
+            : await signIn.CheckPasswordSignInAsync(user!, model.Password, lockoutOnFailure: true);
         if (!result.Succeeded)
         {
-            ModelState.AddModelError("", "Unable to sign in. Check your credentials or try again later.");
+            ModelState.AddModelError("", "Unable to sign in. Check your email and password, or try again later if your account is temporarily locked.");
             return View(model);
         }
+        await signIn.SignInAsync(user!, isPersistent: false);
         if (Url.IsLocalUrl(model.ReturnUrl)) return LocalRedirect(model.ReturnUrl!);
-        var user = await users.FindByEmailAsync(model.Email.Trim());
         return RedirectToAction("Index", await users.IsInRoleAsync(user!, AppRoles.Teacher) ? "Teacher" : "Student");
     }
 
@@ -53,7 +33,7 @@ public class AccountController(UserManager<ApplicationUser> users, SignInManager
     public async Task<IActionResult> Logout()
     {
         await signIn.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction(nameof(Login));
     }
 
     [HttpGet, AllowAnonymous]

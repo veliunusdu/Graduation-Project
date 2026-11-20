@@ -13,7 +13,8 @@ public class TeacherProvisioner(UserManager<ApplicationUser> users, ApplicationD
         email = email.Trim();
         if (!new EmailAddressAttribute().IsValid(email) || string.IsNullOrWhiteSpace(password))
             return new(false, false, "A valid email and password are required.");
-        var candidate = new ApplicationUser { UserName = email, Email = email };
+        // Keep the optional legacy development command compatible with existing accounts.
+        var candidate = new ApplicationUser { UserName = email, Email = email, ProfileCompleted = true };
         foreach (var validator in users.PasswordValidators)
             if (!(await validator.ValidateAsync(users, candidate, password)).Succeeded)
                 return new(false, false, "Password does not meet the configured policy.");

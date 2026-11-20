@@ -14,6 +14,7 @@ public class CourseEducationTests
     public async Task TeacherCreatesAndEditsCourseWithEducation(string level, string grade)
     {
         using var fixture = await OwnershipFixture.CreateAsync();
+        await fixture.ReadAsync(async db => { await db.Users.Where(u => u.Id == fixture.TeacherAId).ExecuteUpdateAsync(update => update.SetProperty(u => u.EducationLevel, (EducationLevel)int.Parse(level))); return true; });
         using var teacher = await fixture.TeacherAsync();
         var response = await FormClient.PostAsync(teacher, "/Courses/Create", new() { ["Name"] = "Level course", ["EducationLevel"] = level, ["GradeLevel"] = grade, ["IsActive"] = "true", ["TeacherId"] = fixture.TeacherBId });
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -22,11 +23,11 @@ public class CourseEducationTests
         Assert.Equal(int.Parse(grade), course.GradeLevel);
         Assert.True(course.IsActive);
         Assert.Equal(fixture.TeacherAId, course.TeacherId);
-        var edit = await FormClient.PostAsync(teacher, $"/Courses/Edit/{course.Id}", new() { ["Name"] = "Updated level course", ["EducationLevel"] = "1", ["GradeLevel"] = "2", ["IsActive"] = "false" });
+        var edit = await FormClient.PostAsync(teacher, $"/Courses/Edit/{course.Id}", new() { ["Name"] = "Updated level course", ["EducationLevel"] = level, ["GradeLevel"] = level == "1" ? "2" : "10", ["IsActive"] = "false" });
         Assert.Equal(HttpStatusCode.Redirect, edit.StatusCode);
         var updated = await fixture.ReadAsync(db => db.Courses.SingleAsync(c => c.Id == course.Id));
-        Assert.Equal(EducationLevel.University, updated.EducationLevel);
-        Assert.Equal(2, updated.GradeLevel);
+        Assert.Equal((EducationLevel)int.Parse(level), updated.EducationLevel);
+        Assert.Equal(level == "1" ? 2 : 10, updated.GradeLevel);
         Assert.False(updated.IsActive);
         Assert.Equal(course.CreatedAt, updated.CreatedAt);
     }

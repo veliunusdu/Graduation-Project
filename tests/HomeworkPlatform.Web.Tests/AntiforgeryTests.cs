@@ -6,7 +6,6 @@ namespace HomeworkPlatform.Web.Tests;
 public class AntiforgeryTests
 {
     [Theory]
-    [InlineData("/Account/Register")]
     [InlineData("/Account/Login")]
     public async Task AccountPostWithoutTokenIsRejected(string path)
     {
@@ -22,7 +21,7 @@ public class AntiforgeryTests
     {
         using var app = new AuthWebApplicationFactory();
         using var client = app.NewClient();
-        await FormClient.RegisterAsync(client, "stay@example.test");
+        await FormClient.CreateAccountAndLoginAsync(client, "stay@example.test");
         Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsync("/Account/Logout", new FormUrlEncodedContent(new Dictionary<string, string>()))).StatusCode);
         var get = await client.GetAsync("/Account/Logout");
         Assert.True(get.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.MethodNotAllowed);
@@ -34,11 +33,11 @@ public class AntiforgeryTests
     {
         using var app = new AuthWebApplicationFactory();
         using var client = app.NewClient();
-        await FormClient.RegisterAsync(client, "logout@example.test");
+        await FormClient.CreateAccountAndLoginAsync(client, "logout@example.test");
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/Student")).StatusCode);
         using var logout = await FormClient.PostAsync(client, "/Account/Logout", new(), "/Student");
         Assert.Equal(HttpStatusCode.Redirect, logout.StatusCode);
-        Assert.Equal("/", logout.Headers.Location?.OriginalString);
+        Assert.Equal("/Account/Login", logout.Headers.Location?.OriginalString);
         var protectedPage = await client.GetAsync("/Student");
         Assert.Equal(HttpStatusCode.Redirect, protectedPage.StatusCode);
         Assert.StartsWith("/Account/Login", protectedPage.Headers.Location?.AbsolutePath);

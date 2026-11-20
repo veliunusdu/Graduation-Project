@@ -1,10 +1,28 @@
 @model HomeworkPlatform.Web.Models.Account.LoginViewModel
-@{ ViewData["Title"] = "Login"; }
-<h1>Login</h1>
-<form asp-action="Login" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <input asp-for="ReturnUrl" type="hidden" />
-    <div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" autocomplete="username" /></div>
-    <div class="mb-3"><label asp-for="Password" class="form-label"></label><input asp-for="Password" class="form-control" autocomplete="current-password" /></div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+@{ ViewData["Title"] = "Sign in"; ViewData["EduPilotPage"] = true; }
+<div class="ep-auth-wrap"><div class="ep-card ep-auth-card">
+    <div class="text-center mb-4">
+        <partial name="_EduPilotBrand" />
+        <h1 class="h4 ep-form-title mt-4 mb-2">Welcome back</h1>
+        <p class="ep-muted small mb-0">Sign in with the account prepared for you.</p>
+    </div>
+    <form asp-action="Login" method="post">
+        <input asp-for="ReturnUrl" type="hidden" />
+        <div asp-validation-summary="All" class="alert alert-danger border-0 rounded-3 small py-2" role="alert"></div>
+        <div class="form-floating mb-3">
+            <input asp-for="Email" class="form-control" placeholder="Email" autocomplete="username" required />
+            <label asp-for="Email">Email</label><span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-floating mb-4 position-relative">
+            <input asp-for="Password" class="form-control ep-password-input" placeholder="Password" autocomplete="current-password" required />
+            <label asp-for="Password">Password</label>
+            <button type="button" class="ep-pw-toggle" data-target="Password" aria-label="Show password" aria-pressed="false"><partial name="_EduPilotIcon" model='@("eye")' /></button>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Sign in</button>
+    </form>
+</div></div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/edupilot-auth.js" asp-append-version="true"></script>
+}

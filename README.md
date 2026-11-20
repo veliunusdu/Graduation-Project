@@ -17,7 +17,7 @@ $env:DOTNET_ENVIRONMENT = 'Development'
 dotnet run --project web/HomeworkPlatform.Web.csproj --no-build --no-launch-profile --urls http://localhost:5080
 ```
 
-Open http://localhost:5080. Register Students in the browser. Provision Teachers using the hidden-password procedure in [authentication setup](Docs/AUTHENTICATION_SETUP.md). Then follow [ownership setup](Docs/OWNERSHIP_SETUP.md) to create courses/assignments, enroll Students and test separate submissions. Migrations apply on startup; no credentials or example accounts are seeded.
+Open http://localhost:5080. Sign in with the prepared Student or Teacher accounts listed in [the setup guide](KURULUM_VE_DEGISIKLIKLER.md). Profiles, initial teacher courses and student enrollments are created on the first Development startup. Teachers can also create additional courses and select students. See [authentication setup](Docs/AUTHENTICATION_SETUP.md). Then follow [ownership setup](Docs/OWNERSHIP_SETUP.md) to create courses/assignments, enroll Students and test separate submissions. Migrations apply on startup. Bundled example accounts are enabled only in Development; their passwords are hashed by Identity.
 
 ## Python quickstart
 

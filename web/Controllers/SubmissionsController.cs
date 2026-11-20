@@ -15,7 +15,7 @@ namespace HomeworkPlatform.Web.Controllers;
 public class SubmissionsController(ApplicationDbContext database, SubmissionFileStore files, ILogger<SubmissionsController> logger) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-    private IQueryable<Submission> Owned => database.Submissions.Include(s => s.Assignment).Where(s => s.StudentId == UserId);
+    private IQueryable<Submission> Owned => database.Submissions.Include(s => s.Assignment).ThenInclude(a => a.Course).Include(s => s.Assignment).ThenInclude(a => a.Attachments).Where(s => s.StudentId == UserId);
     private Task<bool> CanSubmit(int assignmentId) => database.Assignments.AnyAsync(a => a.Id == assignmentId && a.Course.IsActive
         && database.StudentCourses.Any(e => e.CourseId == a.CourseId && e.StudentId == UserId));
 
@@ -28,13 +28,17 @@ public class SubmissionsController(ApplicationDbContext database, SubmissionFile
     [HttpGet] public async Task<IActionResult> Create([FromQuery] int assignmentId)
     {
         if (!await CanSubmit(assignmentId)) return NotFound();
+        var existingId = await Owned.Where(s => s.AssignmentId == assignmentId).Select(s => (int?)s.Id).SingleOrDefaultAsync();
+        if (existingId.HasValue) return RedirectToAction(nameof(Details), new { id = existingId.Value });
         ViewData["AssignmentId"] = assignmentId;
+        ViewData["Assignment"] = await database.Assignments.AsNoTracking().Include(a => a.Course).Include(a => a.Attachments).SingleAsync(a => a.Id == assignmentId);
         return View(new SubmissionForm());
     }
     [HttpPost] public async Task<IActionResult> Create([FromQuery] int assignmentId, SubmissionForm model)
     {
         if (!await CanSubmit(assignmentId)) return NotFound();
         ViewData["AssignmentId"] = assignmentId;
+        ViewData["Assignment"] = await database.Assignments.AsNoTracking().Include(a => a.Course).Include(a => a.Attachments).SingleAsync(a => a.Id == assignmentId);
         ValidateContents(model, false);
         if (!ModelState.IsValid) return View(model);
         if (await database.Submissions.AnyAsync(s => s.AssignmentId == assignmentId && s.StudentId == UserId))
@@ -48,21 +52,25 @@ public class SubmissionsController(ApplicationDbContext database, SubmissionFile
         catch (DbUpdateException)
         {
             files.DeleteIfPresent(upload?.StoredName);
-            ModelState.AddModelError("", "Teslim kaydedilemedi. Teslimlerinizi kontrol edip tekrar deneyin.");
+            ModelState.AddModelError("", "Your submission could not be saved. Check your submissions and try again.");
             return View(model);
         }
+        TempData["SubmissionNotice"] = "Your assignment was submitted successfully.";
         return RedirectToAction(nameof(Details), new { id = submission.Id });
     }
     [HttpGet] public async Task<IActionResult> Edit([FromRoute] int id)
     {
         var submission = await Owned.AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
-        return submission == null ? NotFound() : View(new SubmissionForm { Content = submission.Content, ExistingFileName = submission.OriginalFileName });
+        if (submission == null) return NotFound();
+        ViewData["Assignment"] = submission.Assignment;
+        return View(new SubmissionForm { Content = submission.Content, ExistingFileName = submission.OriginalFileName });
     }
     [HttpPost] public async Task<IActionResult> Edit([FromRoute] int id, SubmissionForm model)
     {
         var submission = await Owned.SingleOrDefaultAsync(s => s.Id == id);
         if (submission == null) return NotFound();
         model.ExistingFileName = submission.OriginalFileName;
+        ViewData["Assignment"] = submission.Assignment;
         ValidateContents(model, submission.StoredFileName != null);
         if (!ModelState.IsValid) return View(model);
         var upload = await SaveUpload(model);
@@ -76,10 +84,11 @@ public class SubmissionsController(ApplicationDbContext database, SubmissionFile
         catch (DbUpdateException)
         {
             files.DeleteIfPresent(upload?.StoredName);
-            ModelState.AddModelError("", "Teslim değişiklikleri kaydedilemedi. Lütfen tekrar deneyin.");
+            ModelState.AddModelError("", "Your changes could not be saved. Please try again.");
             return View(model);
         }
         if (oldFile != submission.StoredFileName) files.DeleteIfPresent(oldFile);
+        TempData["SubmissionNotice"] = "Your submission was updated and is awaiting review.";
         return RedirectToAction(nameof(Details), new { id });
     }
     [HttpGet] public async Task<IActionResult> Delete([FromRoute] int id)
@@ -95,30 +104,32 @@ public class SubmissionsController(ApplicationDbContext database, SubmissionFile
         try { await database.SaveChangesAsync(); }
         catch (DbUpdateException)
         {
-            ModelState.AddModelError("", "Teslim silinemedi. Lütfen tekrar deneyin.");
+            ModelState.AddModelError("", "Your submission could not be deleted. Please try again.");
             return View("Delete", submission);
         }
         files.DeleteIfPresent(submission.StoredFileName);
+        TempData["SubmissionNotice"] = "Your submission was withdrawn. You can submit your work again.";
+        if (await CanSubmit(submission.AssignmentId)) return RedirectToAction("Details", "StudentWork", new { id = submission.AssignmentId });
         return RedirectToAction(nameof(Index));
     }
 
     private void ValidateContents(SubmissionForm model, bool hasExistingFile)
     {
         if (string.IsNullOrWhiteSpace(model.Content) && model.Upload == null && !(hasExistingFile && !model.RemoveFile))
-            ModelState.AddModelError("", "Teslim metni yazın veya bir ödev dosyası seçin.");
+            ModelState.AddModelError("", "Write your answer or choose a file to submit.");
         if (model.RemoveFile && model.Upload != null)
-            ModelState.AddModelError(nameof(model.Upload), "Yeni dosya yüklerken mevcut dosyayı kaldır seçeneğini işaretlemeyin; dosya otomatik değiştirilir.");
+            ModelState.AddModelError(nameof(model.Upload), "Do not select Remove current file when uploading a replacement.");
     }
 
     private async Task<StoredSubmissionFile?> SaveUpload(SubmissionForm model)
     {
         if (model.Upload == null) return null;
         try { return await files.SaveAsync(model.Upload, HttpContext.RequestAborted); }
-        catch (SubmissionFileException exception) { ModelState.AddModelError(nameof(model.Upload), exception.Message); }
+        catch (SubmissionFileException) { ModelState.AddModelError(nameof(model.Upload), "Choose a valid PDF, DOC, DOCX, ZIP or supported UTF-8 code/text file within the size limit."); }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
             logger.LogError(exception, "Submission file could not be stored.");
-            ModelState.AddModelError(nameof(model.Upload), "Dosya kaydedilemedi. Lütfen tekrar deneyin.");
+            ModelState.AddModelError(nameof(model.Upload), "The file could not be saved. Please try again.");
         }
         return null;
     }

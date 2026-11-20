@@ -10,6 +10,7 @@ public class Assignment
     public Difficulty Difficulty { get; set; } = Difficulty.Beginner;
     public DateTime? DueDate { get; set; }
     public bool CreatedByAI { get; set; }
+    public List<AssignmentAttachment> Attachments { get; set; } = [];
     public List<AssignmentRequirement> Requirements { get; set; } = [];
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
