@@ -2,4 +2,15 @@
 @{ ViewData["Title"] = Model.Title; }
 <div class="ep-teacher-heading"><div><span class="ep-eyebrow">@Model.Course.Name</span><h1>@Model.Title</h1><p>Due date: @(Model.DueDate?.ToString("dd MMM yyyy",System.Globalization.CultureInfo.InvariantCulture) ?? "No due date")</p></div><div class="d-flex gap-2"><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-light">Edit assignment</a><a asp-action="Submissions" asp-route-id="@Model.Id" class="btn btn-primary">Student submissions</a></div></div>
 <div class="ep-form-card ep-requirements-card"><h2 class="ep-requirements-heading">Requirements</h2><p class="ep-requirements-text">@Model.Description</p><partial name="_AssignmentAttachments" model="Model" /></div>
+<section class="ep-form-card mt-4">
+    <h2 class="h6">Test this assignment</h2>
+    <p class="small ep-muted">The test agent checks the saved assignment against the uploaded course materials. It does not grade student work.</p>
+    @if (ViewData["ReviewError"] is string reviewError) { <div class="alert alert-warning" role="alert">@reviewError</div> }
+    @if (ViewData["Review"] is HomeworkPlatform.Web.Controllers.AssignmentsController.ReviewResponse review)
+    {
+        <div class="alert @(review.Status == "ready" ? "alert-success" : "alert-warning")" role="status"><strong>@review.Status</strong><div>@review.Summary</div></div>
+        @if (review.Findings?.Count > 0) { <ul>@foreach (var finding in review.Findings) { <li>@finding</li> }</ul> }
+    }
+    <form asp-action="Check" asp-route-id="@Model.Id" method="post"><button class="btn btn-ai" type="submit">Test with AI Agent</button></form>
+</section>
 <div class="d-flex gap-3 mt-4"><a asp-action="Delete" asp-route-id="@Model.Id" class="text-danger btn ep-danger-link">Delete assignment</a></div>
