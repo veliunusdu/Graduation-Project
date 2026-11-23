@@ -44,11 +44,20 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
     }
     public record TutorSource(string SourceId, string Text);
     public record TutorContext(int CourseId, string EducationLevel, int GradeLevel);
-    public record TutorRequest(string Question, TutorContext Context, List<TutorSource> Sources);
+    public record TutorAssignmentContext(int AssignmentId, string Title, string Description);
+    public record TutorRequest(string Question, TutorContext Context, List<TutorSource> Sources, TutorAssignmentContext? Assignment);
     public record TutorResponse(string Status, string Explanation, string NextStep, List<string>? Citations);
 
+    private static string BuildRetrievalQuestion(string question, Assignment? assignment)
+    {
+        if (assignment == null) return question;
+        var userQuestion = question.Length > 1800 ? question[..1800] : question;
+        var description = assignment.Description.Length > 1800 ? assignment.Description[..1800] : assignment.Description;
+        return $"{userQuestion}\n\nAssignment title: {assignment.Title}\nAssignment requirements: {description}";
+    }
+
     [HttpPost]
-    public async Task<IActionResult> SearchSources([FromRoute] int id, string? question, CancellationToken ct, bool tutor = false)
+    public async Task<IActionResult> SearchSources([FromRoute] int id, string? question, CancellationToken ct, bool tutor = false, int? assignmentId = null)
     {
         var course = await Enrolled.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id, ct);
         if (course == null) return NotFound();
@@ -59,6 +68,15 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
             return AIUnavailable(id, "Enter a question between 1 and 4000 characters.", 400);
 
         ViewData["Question"] = question;
+        Assignment? assignment = null;
+        if (assignmentId.HasValue)
+        {
+            assignment = await database.Assignments.AsNoTracking().SingleOrDefaultAsync(a =>
+                a.Id == assignmentId && a.CourseId == id && a.Course.IsActive
+                && database.StudentCourses.Any(e => e.CourseId == a.CourseId && e.StudentId == UserId), ct);
+            if (assignment == null) return NotFound();
+            ViewData["AssignmentId"] = assignment.Id;
+        }
         var readyCount = await database.CourseMaterials.CountAsync(m => m.CourseId == id && m.Status == MaterialStatus.Ready, ct);
         ViewData["ReadyMaterialCount"] = readyCount;
         if (readyCount == 0)
@@ -67,7 +85,8 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
             return View("SearchSources", new List<CourseSource>());
         }
 
-        var response = await ai.PostJsonAsync<SourceRequest, SourceResponse>("rag/retrieve", new(question, id, 20), ct);
+        var retrievalQuestion = BuildRetrievalQuestion(question, assignment);
+        var response = await ai.PostJsonAsync<SourceRequest, SourceResponse>("rag/retrieve", new(retrievalQuestion, id, 20), ct);
         if (!response.Success || response.Data?.CourseId != id || response.Data.Results is null)
             return AIUnavailable(id, "Course sources could not be searched right now. Check that the AI service is running and try again.");
 
@@ -92,8 +111,12 @@ public class StudentCoursesController(ApplicationDbContext database, AIServiceCl
         course = await Enrolled.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id, ct);
         if (course == null) return NotFound();
         var tutorSources = sources.Select((source, index) => new TutorSource($"s{index+1}", source.Text)).ToList();
+        var tutorAssignment = assignment == null ? null : new TutorAssignmentContext(
+            assignment.Id,
+            assignment.Title,
+            assignment.Description.Length > 4000 ? assignment.Description[..4000] : assignment.Description);
         var reply = await ai.PostJsonAsync<TutorRequest, TutorResponse>("tutor/answer",
-            new(question, new(id, course.EducationLevel.ToString(), course.GradeLevel), tutorSources), ct);
+            new(question, new(id, course.EducationLevel.ToString(), course.GradeLevel), tutorSources, tutorAssignment), ct);
         if (!await Enrolled.AnyAsync(c => c.Id == id, ct)) return NotFound();
         if (!reply.Success || reply.Data == null || string.IsNullOrWhiteSpace(reply.Data.Explanation)
             || reply.Data.Status is not ("answered" or "no_source" or "guidance_only")

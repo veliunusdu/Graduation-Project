@@ -1,4 +1,6 @@
-from tutor.service import TutorRequest, TutorSource, answer
+import json
+
+from tutor.service import TutorAssignmentContext, TutorRequest, TutorSource, answer
 from schemas.context import AgentContext
 
 
@@ -41,3 +43,78 @@ def test_generated_answer_requires_complete_valid_source_references(monkeypatch,
             answer(data)
     else:
         assert answer(data).citations == ["s1"]
+
+
+def test_assignment_context_is_included_in_grounded_model_prompt(monkeypatch):
+    captured = {}
+
+    class Response:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {
+                "done": True,
+                "done_reason": "stop",
+                "message": {
+                    "content": '{"explanation":"Açıklama","next_step":"Dene","citations":["s1"]}'
+                },
+            }
+
+    def post(*args, **kwargs):
+        captured.update(kwargs["json"])
+        return Response()
+
+    monkeypatch.setattr("tutor.service.requests.post", post)
+    data = TutorRequest(
+        question="Bu ödeve nasıl başlamalıyım?",
+        context=AgentContext(course_id=1, education_level="University", grade_level=2),
+        sources=[TutorSource(source_id="s1", text="Döngüler ve fonksiyonlar ders notu")],
+        assignment=TutorAssignmentContext(
+            assignment_id=7,
+            title="Öğrenci notlarını işleme",
+            description="Ortalama ve geçen öğrenci sayısını hesapla.",
+        ),
+    )
+
+    assert answer(data).citations == ["s1"]
+    user_payload = json.loads(captured["messages"][1]["content"])
+    assert user_payload["question"] == "Bu ödeve nasıl başlamalıyım?"
+    assert user_payload["assignment"] == {
+        "assignment_id": 7,
+        "title": "Öğrenci notlarını işleme",
+        "description": "Ortalama ve geçen öğrenci sayısını hesapla.",
+    }
+
+
+def test_assignment_help_falls_back_to_safe_grounded_guidance_for_invalid_model_output(monkeypatch):
+    class Response:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {
+                "done": True,
+                "done_reason": "stop",
+                "message": {
+                    "content": '{"explanation":"Açıklama","next_step":"Dene","citations":["invented"]}'
+                },
+            }
+
+    monkeypatch.setattr("tutor.service.requests.post", lambda *args, **kwargs: Response())
+    data = TutorRequest(
+        question="Bu ödeve yardım et",
+        context=AgentContext(course_id=1, education_level="University", grade_level=2),
+        sources=[TutorSource(source_id="s1", text="Döngüler ve fonksiyonlar ders notu")],
+        assignment=TutorAssignmentContext(
+            assignment_id=7,
+            title="Öğrenci notlarını işleme",
+            description="Ortalama hesapla.",
+        ),
+    )
+
+    result = answer(data)
+    assert result.status == "answered"
+    assert result.citations == ["s1"]
+    assert "Öğrenci notlarını işleme" in result.explanation
+    assert "Tam çözümü" in result.explanation
