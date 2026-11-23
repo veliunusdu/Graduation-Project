@@ -50,7 +50,7 @@ public class StudentPanelTests
     {
         using var f=await OwnershipFixture.CreateAsync(app=>app.ConfigureServices=services=>services.AddHttpClient<AIServiceClient>().ConfigurePrimaryHttpMessageHandler(()=>new OfflineHandler()));using var student=await f.StudentAsync();
         await f.ReadAsync(async db=>{db.CourseMaterials.Add(new HomeworkPlatform.Web.Models.Domain.CourseMaterial{CourseId=f.CourseAId,OriginalFileName="ready-notes.txt",Status=HomeworkPlatform.Web.Models.Domain.MaterialStatus.Ready});await db.SaveChangesAsync();return true;});
-        var route=$"/StudentCourses/Details/{f.CourseAId}";var html=await student.GetStringAsync(route);Assert.Contains($"/StudentCourses/SearchSources/{f.CourseAId}",html);Assert.Contains("Ask AI Tutor",html);Assert.Contains("Code Agent - Coming soon",html);
+        var route=$"/StudentCourses/Details/{f.CourseAId}";var html=await student.GetStringAsync(route);Assert.Contains($"/StudentCourses/SearchSources/{f.CourseAId}",html);Assert.Contains("Ask AI Tutor",html);Assert.Contains("course materials uploaded for this class",html);Assert.DoesNotContain("Code Agent",html);
         var response=await FormClient.PostAsync(student,$"/StudentCourses/SearchSources/{f.CourseAId}",new(){["question"]="Explain this topic",["tutor"]="true"},route);Assert.Equal(HttpStatusCode.BadGateway,response.StatusCode);var error=await response.Content.ReadAsStringAsync();Assert.Contains("student-sidebar",error);Assert.Contains("AI service",error);Assert.DoesNotContain("private traceback",error);
         using var teacher=await f.TeacherAsync();Assert.Equal(HttpStatusCode.Redirect,(await teacher.GetAsync("/Student/Search?q=private")).StatusCode);
     }

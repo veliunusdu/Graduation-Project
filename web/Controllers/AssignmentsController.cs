@@ -3,6 +3,7 @@ using HomeworkPlatform.Web.Data;
 using HomeworkPlatform.Web.Models.Domain;
 using HomeworkPlatform.Web.Models.Work;
 using HomeworkPlatform.Web.Security;
+using HomeworkPlatform.Web.Services.AI;
 using HomeworkPlatform.Web.Services.Files;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace HomeworkPlatform.Web.Controllers;
 [Authorize(Roles = AppRoles.Teacher)]
 [RequestSizeLimit(SubmissionFileOptions.RequestSizeLimit)]
 [RequestFormLimits(MultipartBodyLengthLimit = SubmissionFileOptions.RequestSizeLimit)]
-public class AssignmentsController(ApplicationDbContext database, AssignmentFileStore files, ILogger<AssignmentsController> logger) : Controller
+public class AssignmentsController(ApplicationDbContext database, AssignmentFileStore files, AIServiceClient ai, ILogger<AssignmentsController> logger) : Controller
 {
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
     private IQueryable<Assignment> Owned => database.Assignments.Include(a => a.Course).Include(a => a.Requirements).Include(a => a.Attachments).Where(a => a.Course.TeacherId == UserId);
@@ -83,6 +84,73 @@ public class AssignmentsController(ApplicationDbContext database, AssignmentFile
         ViewData["CourseName"] = await database.Courses.Where(c => c.Id == courseId && c.TeacherId == UserId).Select(c => c.Name).SingleAsync();
         return View(new AssignmentForm());
     }
+
+    public record AgentContext(int CourseId, string EducationLevel, int GradeLevel);
+    public record DraftRequest(string Topic, AgentContext Context);
+    public record DraftResponse(string Status, string? Title, string? Description, string? Difficulty, List<string>? SourceIds);
+    public record ReviewRequest(string Title, string Description, AgentContext Context);
+    public record ReviewResponse(string Status, string Summary, List<string>? Findings, List<string>? SourceIds);
+
+    [HttpPost]
+    public async Task<IActionResult> Draft([FromQuery] int courseId, string topic, CancellationToken cancellationToken)
+    {
+        var course = await database.Courses.AsNoTracking().SingleOrDefaultAsync(c => c.Id == courseId && c.TeacherId == UserId, cancellationToken);
+        if (course == null) return NotFound();
+        ViewData["CourseId"] = course.Id;
+        ViewData["CourseName"] = course.Name;
+        topic = topic?.Trim() ?? "";
+        if (topic.Length is < 1 or > 500)
+        {
+            ModelState.AddModelError("Topic", "Enter a topic of up to 500 characters.");
+            return View("Create", new AssignmentForm());
+        }
+        var result = await ai.PostJsonAsync<DraftRequest, DraftResponse>("assignments/draft",
+            new(topic, new(course.Id, course.EducationLevel.ToString(), course.GradeLevel)), cancellationToken);
+        if (!result.Success || result.Data == null || result.Data.Status is not ("drafted" or "no_source"))
+        {
+            ModelState.AddModelError("", "The assignment agent could not draft from the course materials. Check that the AI service is running and try again.");
+            return View("Create", new AssignmentForm());
+        }
+        if (result.Data.Status == "no_source")
+        {
+            ModelState.AddModelError("", "No ready course material matched this topic. Upload and process materials, then try again.");
+            return View("Create", new AssignmentForm { });
+        }
+        var title = result.Data.Title?.Trim() ?? "";
+        var description = result.Data.Description?.Trim() ?? "";
+        if (title.Length is < 1 or > 200 || description.Length is < 1 or > 10000
+            || result.Data.Difficulty is not ("Beginner" or "Intermediate" or "Advanced"))
+        {
+            ModelState.AddModelError("", "The assignment agent returned an incomplete draft.");
+            return View("Create", new AssignmentForm());
+        }
+        TempData["AiDraftTitle"] = title;
+        TempData["AiDraftDescription"] = description;
+        TempData["AiDraftDifficulty"] = result.Data.Difficulty;
+        ViewData["DraftNotice"] = "Review the draft, set a due date, then save it.";
+        return View("Create", new AssignmentForm { Title = title, Description = description });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Check([FromRoute] int id, CancellationToken cancellationToken)
+    {
+        var assignment = await Owned.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id, cancellationToken);
+        if (assignment == null) return NotFound();
+        if (string.IsNullOrWhiteSpace(assignment.Title) || string.IsNullOrWhiteSpace(assignment.Description))
+        {
+            ViewData["ReviewError"] = "Add a title and requirements before testing this assignment.";
+            return View("Details", assignment);
+        }
+        var result = await ai.PostJsonAsync<ReviewRequest, ReviewResponse>("assignments/review",
+            new(assignment.Title, assignment.Description, new(assignment.CourseId, assignment.Course.EducationLevel.ToString(), assignment.Course.GradeLevel)), cancellationToken);
+        if (!result.Success || result.Data == null || result.Data.Status is not ("ready" or "revise" or "no_source")
+            || string.IsNullOrWhiteSpace(result.Data.Summary))
+            ViewData["ReviewError"] = "The test agent could not check this assignment. Check that the AI service is running and try again.";
+        else
+            ViewData["Review"] = result.Data;
+        return View("Details", assignment);
+    }
+
     [HttpPost] public async Task<IActionResult> Create([FromQuery] int courseId, AssignmentForm model)
     {
         if (!await OwnsCourse(courseId)) return NotFound();
@@ -92,6 +160,14 @@ public class AssignmentsController(ApplicationDbContext database, AssignmentFile
         var assignment = new Assignment { CourseId = courseId, Title = model.Title.Trim(), Description = model.Description ?? "" };
         ApplyForm(assignment, model);
         if (!await AddFiles(assignment, model)) return View(model);
+        var draftedTitle = TempData["AiDraftTitle"] as string;
+        var draftedDescription = TempData["AiDraftDescription"] as string;
+        var draftedDifficulty = TempData["AiDraftDifficulty"] as string;
+        if (draftedTitle == assignment.Title && draftedDescription == assignment.Description)
+        {
+            assignment.CreatedByAI = true;
+            if (Enum.TryParse<Difficulty>(draftedDifficulty, out var difficulty)) assignment.Difficulty = difficulty;
+        }
         database.Assignments.Add(assignment);
         try { await database.SaveChangesAsync(); }
         catch (DbUpdateException exception)

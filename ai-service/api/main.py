@@ -4,6 +4,9 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
+from agents.author import DraftRequest, DraftResponse, draft
+from agents.chat import AgentError
+from agents.reviewer import ReviewRequest, ReviewResponse, review
 from config.settings import settings
 from tutor.service import TutorAnswer, TutorError, TutorRequest, answer
 from llm.ollama_client import OllamaClientError, ollama_client
@@ -105,6 +108,36 @@ async def retrieve_chunks(request: RetrievalRequest):
         ) from exc
 
 
+
+
+@app.post("/assignments/draft", response_model=DraftResponse)
+def draft_assignment(request: DraftRequest):
+    """Draft one assignment from the course materials retrieved for the teacher's topic."""
+    try:
+        return draft(request)
+    except AgentError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except EmbeddingError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except VectorStoreError as exc:
+        raise HTTPException(status_code=500, detail="Vector store operation failed.") from exc
+
+
+@app.post("/assignments/review", response_model=ReviewResponse)
+def review_assignment(request: ReviewRequest):
+    """Check a saved assignment against the same course's retrieved materials."""
+    try:
+        return review(request)
+    except AgentError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except IndexCompatibilityError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except EmbeddingError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except VectorStoreError as exc:
+        raise HTTPException(status_code=500, detail="Vector store operation failed.") from exc
 
 
 @app.post("/tutor/answer", response_model=TutorAnswer)

@@ -1,0 +1,36 @@
+INTRODUCTION TO PROGRAMMING - LOOPS AND FUNCTIONS
+
+A loop repeats a block of code. A for loop is useful when iterating over a collection or a known range:
+
+scores = [65, 80, 92, 74]
+total = 0
+for score in scores:
+    total = total + score
+
+average = total / len(scores)
+
+A while loop repeats while its condition remains true. The loop body must update the condition so that the loop can eventually stop.
+
+A function groups reusable behavior. Parameters are inputs to a function, and return sends a result back to the caller.
+
+Example:
+
+def calculate_average(scores):
+    if len(scores) == 0:
+        return 0
+    return sum(scores) / len(scores)
+
+def count_passing(scores, pass_mark=60):
+    count = 0
+    for score in scores:
+        if score >= pass_mark:
+            count += 1
+    return count
+
+Programs should handle an empty list to avoid division by zero. Functions should have one clear responsibility and descriptive names. Test functions with normal input, an empty list, boundary values, and invalid values.
+
+Practice goals:
+- Use a loop to process every score.
+- Write functions that return calculated values.
+- Combine loops and conditions.
+- Display the average and number of passing students without hard-coding the results.

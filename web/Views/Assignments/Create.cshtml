@@ -1,3 +1,21 @@
 @model HomeworkPlatform.Web.Models.Work.AssignmentForm
 @{ ViewData["Title"] = "Create assignment"; }
-<div class="ep-teacher-heading"><div><span class="ep-eyebrow">YOUR WORKSPACE</span><h1>Create assignment</h1></div></div><p class="ep-muted">Course: @ViewData["CourseName"]</p><div class="ep-ai-banner"><div><h2>Create with AI Agent</h2><p>AI assignment drafting from course materials is coming soon. You can create assignments manually below.</p></div><button type="button" class="btn" disabled>Coming soon</button></div><div class="ep-form-card"><form asp-action="Create" asp-route-courseId="@ViewData["CourseId"]" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form></div>
+<div class="ep-teacher-heading"><div><span class="ep-eyebrow">YOUR WORKSPACE</span><h1>Create assignment</h1></div></div>
+<p class="ep-muted">Course: @ViewData["CourseName"]</p>
+<div class="ep-ai-banner">
+    <div>
+        <h2>Create with AI Agent</h2>
+        <p>Draft an assignment from the course materials already uploaded for this class. The draft stays on this page until you save it.</p>
+    </div>
+</div>
+<div class="ep-form-card mb-4">
+    <form asp-action="Draft" asp-route-courseId="@ViewData["CourseId"]" method="post">
+        @if (ViewData["DraftNotice"] is string notice) { <div class="alert alert-success" role="status">@notice</div> }
+        <div class="mb-3">
+            <label for="Topic">Topic</label>
+            <textarea id="Topic" name="Topic" class="form-control" rows="3" maxlength="500" required placeholder="What should the assignment cover?"></textarea>
+        </div>
+        <button class="btn btn-ai" type="submit">Draft from course materials</button>
+    </form>
+</div>
+<div class="ep-form-card"><form asp-action="Create" asp-route-courseId="@ViewData["CourseId"]" method="post" enctype="multipart/form-data"><partial name="_Form" model="Model" /></form></div>
