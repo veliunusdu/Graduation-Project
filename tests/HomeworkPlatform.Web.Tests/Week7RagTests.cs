@@ -173,6 +173,50 @@ public class Week7RagTests
     }
 
     [Fact]
+    public async Task AssignmentHelpUsesAuthorizedAssignmentContextForRetrievalAndTutor()
+    {
+        var handler = new Handler(); using var f = await Fixture(handler); var ids = await Materials(f); using var student = await f.StudentAsync();
+        await f.ReadAsync(async db =>
+        {
+            var assignment = await db.Assignments.SingleAsync(a => a.Id == f.AssignmentAId);
+            assignment.Description = "Calculate an average with a loop and handle an empty list.";
+            await db.SaveChangesAsync();
+            return true;
+        });
+        handler.Reply = (path, _, _) => Task.FromResult(path.EndsWith("rag/retrieve")
+            ? Json(new { course_id = f.CourseAId, results = new[] { Hit(f.CourseAId, ids.Ready, "valid", "Use a loop to calculate the average.") } })
+            : Json(new { status = "answered", explanation = "Start by planning the loop.", next_step = "Test an empty list.", citations = new[] { "s1" } }));
+
+        var detailsRoute = $"/StudentWork/Details/{f.AssignmentAId}";
+        var details = await student.GetStringAsync(detailsRoute);
+        Assert.Contains("name=\"assignmentId\"", details);
+        Assert.Contains($"value=\"{f.AssignmentAId}\"", details);
+
+        var response = await Ask(student, f.CourseAId, "Bu ödeve yardım et", true, detailsRoute,
+            new() { ["assignmentId"] = f.AssignmentAId.ToString() });
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        using var retrieval = JsonDocument.Parse(handler.Requests.Single(r => r.Path == "/rag/retrieve").Body);
+        var retrievalQuestion = retrieval.RootElement.GetProperty("question").GetString()!;
+        Assert.Contains("Bu ödeve yardım et", retrievalQuestion);
+        Assert.Contains("Alpha-private-assignment", retrievalQuestion);
+        Assert.Contains("Calculate an average with a loop and handle an empty list.", retrievalQuestion);
+
+        using var tutor = JsonDocument.Parse(handler.Requests.Single(r => r.Path == "/tutor/answer").Body);
+        Assert.Equal("Bu ödeve yardım et", tutor.RootElement.GetProperty("question").GetString());
+        var assignmentContext = tutor.RootElement.GetProperty("assignment");
+        Assert.Equal(f.AssignmentAId, assignmentContext.GetProperty("assignment_id").GetInt32());
+        Assert.Equal("Alpha-private-assignment", assignmentContext.GetProperty("title").GetString());
+        Assert.Contains("Calculate an average", assignmentContext.GetProperty("description").GetString());
+
+        var requestCount = handler.Requests.Count;
+        var denied = await Ask(student, f.CourseAId, "Bu ödeve yardım et", true, detailsRoute,
+            new() { ["assignmentId"] = f.AssignmentBId.ToString() });
+        Assert.Equal(HttpStatusCode.NotFound, denied.StatusCode);
+        Assert.Equal(requestCount, handler.Requests.Count);
+    }
+
+    [Fact]
     public async Task MissingAntiforgeryAndWrongRoleDoNotReachAI()
     {
         var handler = new Handler(); using var f = await Fixture(handler); await Materials(f); using var student = await f.StudentAsync(); using var teacher = await f.TeacherAsync(); using var anonymous = f.App.NewClient();
