@@ -1,0 +1,28 @@
+INTRODUCTION TO PROGRAMMING - VARIABLES AND CONDITIONS
+
+Variables store values that a program can use later. In Python, a variable is created by assigning a value:
+
+student_name = "Ayse"
+exam_score = 78
+attendance = 85
+
+Common data types include str for text, int for whole numbers, float for decimal numbers, and bool for True or False.
+
+Conditional statements let a program make decisions. An if statement runs a block only when its condition is true. elif checks another condition, and else handles the remaining cases.
+
+Example:
+
+if exam_score >= 90:
+    grade = "A"
+elif exam_score >= 70:
+    grade = "B"
+else:
+    grade = "C"
+
+Indentation determines which statements belong to each branch. Comparison operators include ==, !=, <, >, <=, and >=. Logical operators and, or, and not combine conditions.
+
+Practice goals:
+- Choose meaningful variable names.
+- Convert keyboard input with int() or float() before numeric calculations.
+- Test boundary values such as 69, 70, 89, and 90.
+- Explain which conditional branch runs for each test value.
